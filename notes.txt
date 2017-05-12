@@ -1,0 +1,37 @@
+-------These folders use to-------
+db              数据库存储目录
+models          Ê数据库模型文件目录
+node_modules    node第三方模块目录
+public          公共文件目录
+routers         路由文件目录
+schemas         数据库结构文件目录
+views           模板结构文件目录
+reed.js         启动入口文件
+全局安装 npm install supervisor -g,再使用 supervisor reed.js 启动node服务,这样不用重启node刷新页面观察改变
+-------Some Learn get-------
+1.路由绑定
+    通过app.get()或app.post()等方法可以把一个url路径和一个或n个函数进行绑定
+    app.get('/', function(req, res, next){})
+        req:request对象 保存客户端请求相关的一些数据  http.request
+        res:response对象 服务端输出对象，提供一些服务端输出相关的一些方法 http.response
+        next:方法，用于执行下一个与路径匹配的函数
+2.内容输出
+    通过res.send(string)发送内容至客户端
+3.模板使用
+    后台逻辑与全段页面表现分离
+4.模板配置
+    var swig = require('swig');
+    app.engine('html', swig.renderFile);
+        定义模板引擎,使用swig.renderFile方法解析后缀为html的文件
+    app.set('views', './views');
+        设置模板存放目录
+    app.set('view engine', 'html');
+        注册模板引擎  
+    swig.setDefaults({catch:false});    
+5.设置静态托管文件
+    app.use('/public', express.static(_dirname + '/public'));
+    在public目录下划分并存放好相关的静态资源文件 
+
+用户发送http请求 》url 》解析路由 》找到匹配规则 》执行指定绑定函数，返回对应内容至用户
+访问/public 》静态 》直接读取指定目录下的文件，返回给用户
+》动态 》处理业务罗杰，加载模板，解析模板 》返回数据给用户    

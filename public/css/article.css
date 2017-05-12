@@ -1,0 +1,38 @@
+article{width:100%;position:relative}
+article h2{font-weight:700;font-size:20px;margin:30px 0;}
+article h2 span{margin:0 20px 0 0}
+article h3{font-weight:700;font-size:18px;margin:30px 0;}
+p{margin-bottom:25px;}
+pre{border:none;padding-left:40px;}
+.MainContain{width:800px;margin:auto;}
+.ArclTitle,.ArclTop{text-align:center;}
+.ArclTitle h1{font-weight:700;
+		          font-size:28px;
+              position:relative;
+              display:inline-block;
+              }
+.ArclTop{padding:10px 0 10px 0;font-size:13px;}
+.ArclTop span{margin:0 10px 0 0;}
+.ArclTop span:nth-child(4){margin-right:0;}  
+.ArclSection {border-left:3px solid #ccc;
+	            margin:50px 0;} 
+.ArclSection section{padding:0 0 0 30px;
+                     line-height:26px;
+                     font-size:16px;
+                     text-align:justify;
+                     letter-spacing:1.5px;}
+.DemoImg{padding-left:40px;} 
+.ArclReturn{margin:20px 0 40px 0;height:18px;}
+.ArclReturn a{display:inline-block;line-height:18px;}
+.ArclReturn a span{font-size:18px;margin:0 15px 0 0;}
+.ArclBottom{text-align:right;}
+.ArclBottom a span{font-size:18px;margin:0 15px 0 0;}
+.LikeIt{margin:20px 0;text-align:center;font-size:12px;}
+.LikeIt i{font-size:22px;width:30px;display:block;margin:auto;cursor:pointer;margin-bottom:10px;}
+.Letter{width:100%;}
+.TopTab{border-bottom:1px solid #e0e0e0;margin:20px 0;padding:10px 0;}
+.Answer{width:3%;}
+.LetterContain{width:89.5%;}
+@media screen and (max-width:800px){
+   .MainContain{width:auto}
+}

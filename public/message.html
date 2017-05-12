@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>信笺</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/public.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/message.css">
+</head>
+<body>
+	<aside id="LeftBar">
+        <div id="IsFixBar">
+            <img src="images/nav/nolock.png" class="Islock">
+            <img src="images/nav/lock.png"   class="lock">
+        </div>
+        <div class="TitleLogn">
+            <div class="TitleWord">
+                <span>锦时<i>Jin-when</i></span>
+            </div>
+        </div>
+        <div class="OwnPicture"></div>
+        <div class="TheNav">
+            <a href="home.html" class="NavList">
+                <img src="images/nav/menupic.png" class="MenuCat">
+                <span class="MenuAdd">前端那些事</span>
+            </a>
+            <a href="record.html" class="NavList">
+                <img src="images/nav/menupic.png" class="MenuCat">
+                <span class="MenuAdd">看官往这看</span>
+            </a>
+            <a href="message.html" class="NavList">
+                <img src="images/nav/menupic.png" class="MenuCat">
+                <span class="MenuAdd">留点足印呗</span>
+            </a>
+            <div class="NavList" id="ShowSelfbtn">
+                <img src="images/nav/menupic.png" class="MenuCat">
+                <span class="MenuAdd">瞅瞅这只喵</span>
+            </div>
+        </div>
+        <div class="SelfIntrdct">
+           <ul>
+             <li><span>昵称：</span>素年锦时</li>
+             <li><span>我么：</span>一个偶然闯入前端领域的愣头青，秉着被JS虐千万遍的执着在成为前端大牛的道路上前进。</li>
+             <li><span>锦时：</span>个人博客，用于保存日常学习中的问题，并且分享其解决方法。顺便在搭建过程中学习Node.js。</li>
+             <li><span>Github：</span>Palereed</li>
+             <img src="images/nav/logn.png">
+           </ul>
+        </div>
+    </aside>
+    <header></header>
+    <div class="MainBody">
+        <div class="MainContain">
+             <div class="MainTop">
+                 <!-- 原留言 -->
+                 <div class="ImgContain">
+                    <img src="images/message/owner.jpg" class="LetterImg">
+                 </div>
+                 <div class="LetterContain">
+                         <!-- 留言者信息 -->
+                         <div class="VisitInfo">
+                            <span class="VisitName">
+                                <a href="#">素年锦时</a>
+                            </span>
+                         </div>
+                         <div class="LetterReal">
+                             <p>吾之素年，汝与锦时。与你相见，不甚欣喜。留笔墨一二，互通有无。或有指点，愿闻其详。</p>
+                         </div>
+                 </div>
+                 <div class="clearfix"></div>
+             </div>
+             <!-- 留言 -->
+             <div class="TopTab">
+	        	留言板
+	         </div>
+             <div class="LetterModule">
+                 <!-- 原留言 -->
+                 <div class="LetterOri">
+                     <!-- 头像 -->
+                     <div class="ImgContain">
+                         <img src="images/message/visit1.jpg" class="LetterImg">
+                     </div>
+                     <!-- 留言内容 -->
+                     <div class="LetterContain">
+                         <!-- 留言者信息 -->
+                         <div class="VisitInfo">
+                            <span class="VisitName">
+                                <a href="#">蒹葭</a>
+                            </span>
+                            <span class="TimeContain">
+                                留言于
+                                <b class="VisitTime">03 April,2017</b>
+                            </span>
+                         </div>
+                         <div class="LetterReal">
+                             <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+                         </div>
+                     </div>
+                     <div class="Answer">
+                         <span class="fa fa-comment-o fa-lg"></span>
+                         <i>0</i>
+                     </div>
+                     <div class="clearfix"></div>
+                 </div>
+                 <!-- 留言回复 -->
+                 <div class="AllAnswer">
+                     <!-- 留言回复内容 -->
+                     <div class="AnswerContain">
+                          <div class="ImgContain">
+                             <img src="images/message/owner.jpg" class="LetterImg">
+                          </div>
+                          <div class="LetterContain">
+                              <div class="VisitInfo">
+                                <span class="VisitName">
+                                  <a href="#">蒹葭</a>
+                                </span>
+                                <span class="TimeContain">
+                                   留言于
+                                  <b class="VisitTime">03 April,2017</b>
+                                </span>
+                              </div>
+                              <div class="LetterReal">
+                                <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+                              </div>
+                          </div>
+                          <div class="clearfix"></div>
+                     </div>
+                     <!-- 留言回复表单 -->
+                     <div class="AnswerForm">
+                         <span class="Answerit">我要回复</span>
+                         <form>
+                           <ul class="FormList">
+                             <li><span>昵称：</span><input class="form-control"></input></li>
+                             <li><span>链接：</span><input class="form-control"></input></li>
+                             <li><span>内容：</span><textarea class="form-control"></textarea></li>
+                             <li><button type="submit" class="btn btn-default">回复</button></li>
+                           </ul>
+                         </form> 
+                     </div>
+                 </div>
+             </div>
+             <div class="LetterModule">
+                 <!-- 原留言 -->
+                 <div class="LetterOri">
+                     <!-- 头像 -->
+                     <div class="ImgContain">
+                         <img src="images/message/visit1.jpg" class="LetterImg">
+                     </div>
+                     <!-- 留言内容 -->
+                     <div class="LetterContain">
+                         <!-- 留言者信息 -->
+                         <div class="VisitInfo">
+                            <span class="VisitName">
+                                <a href="#">蒹葭</a>
+                            </span>
+                            <span class="TimeContain">
+                                留言于
+                                <b class="VisitTime">03 April,2017</b>
+                            </span>
+                         </div>
+                         <div class="LetterReal">
+                             <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+                         </div>
+                     </div>
+                     <div class="Answer">
+                         <span class="fa fa-comment-o fa-lg"></span>
+                         <i>0</i>
+                     </div>
+                     <div class="clearfix"></div>
+                 </div>
+                 <!-- 留言回复 -->
+                 <div class="AllAnswer">
+                     <!-- 留言回复内容 -->
+                     <div class="AnswerContain">
+                          <div class="ImgContain">
+                             <img src="images/message/owner.jpg" class="LetterImg">
+                          </div>
+                          <div class="LetterContain">
+                              <div class="VisitInfo">
+                                <span class="VisitName">
+                                  <a href="#">蒹葭</a>
+                                </span>
+                                <span class="TimeContain">
+                                   留言于
+                                  <b class="VisitTime">03 April,2017</b>
+                                </span>
+                              </div>
+                              <div class="LetterReal">
+                                <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+                              </div>
+                          </div>
+                          <div class="clearfix"></div>
+                     </div>
+                     <!-- 留言回复表单 -->
+                     <div class="AnswerForm">
+                         <span class="Answerit">我要回复</span>
+                         <form>
+                           <ul class="FormList">
+                             <li><span>昵称：</span><input class="form-control"></input></li>
+                             <li><span>链接：</span><input class="form-control"></input></li>
+                             <li><span>内容：</span><textarea class="form-control"></textarea></li>
+                             <li><button type="submit" class="btn btn-default">回复</button></li>
+                           </ul>
+                         </form> 
+                     </div>
+                 </div>
+             </div>
+             <div class="LetterModule">
+                 <!-- 原留言 -->
+                 <div class="LetterOri">
+                     <!-- 头像 -->
+                     <div class="ImgContain">
+                         <img src="images/message/visit1.jpg" class="LetterImg">
+                     </div>
+                     <!-- 留言内容 -->
+                     <div class="LetterContain">
+                         <!-- 留言者信息 -->
+                         <div class="VisitInfo">
+                            <span class="VisitName">
+                                <a href="#">蒹葭</a>
+                            </span>
+                            <span class="TimeContain">
+                                留言于
+                                <b class="VisitTime">03 April,2017</b>
+                            </span>
+                         </div>
+                         <div class="LetterReal">
+                             <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+                         </div>
+                     </div>
+                     <div class="Answer">
+                         <span class="fa fa-comment-o fa-lg"></span>
+                         <i>0</i>
+                     </div>
+                     <div class="clearfix"></div>
+                 </div>
+                 <!-- 留言回复 -->
+                 <div class="AllAnswer">
+                     <!-- 留言回复内容 -->
+                     <div class="AnswerContain">
+                          <div class="ImgContain">
+                             <img src="images/message/owner.jpg" class="LetterImg">
+                          </div>
+                          <div class="LetterContain">
+                              <div class="VisitInfo">
+                                <span class="VisitName">
+                                  <a href="#">蒹葭</a>
+                                </span>
+                                <span class="TimeContain">
+                                   留言于
+                                  <b class="VisitTime">03 April,2017</b>
+                                </span>
+                              </div>
+                              <div class="LetterReal">
+                                <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+                              </div>
+                          </div>
+                          <div class="clearfix"></div>
+                     </div>
+                     <!-- 留言回复表单 -->
+                     <div class="AnswerForm">
+                         <span class="Answerit">我要回复</span>
+                         <form>
+                           <ul class="FormList">
+                             <li><span>昵称：</span><input class="form-control"></input></li>
+                             <li><span>链接：</span><input class="form-control"></input></li>
+                             <li><span>内容：</span><textarea class="form-control"></textarea></li>
+                             <li><button type="submit" class="btn btn-default">回复</button></li>
+                           </ul>
+                         </form> 
+                     </div>
+                 </div>
+             </div>
+             <!-- 分页部分 -->
+             <div class="PageNumber">
+                  <span class="CantUse">prev</span>
+                  <span class="Active">1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>...</span>
+                  <span>next</span>
+             </div>
+             <!-- 留言表单 -->
+             <form>
+                <ul class="FormList">
+                    <li><span>昵称：</span><input class="form-control"></input></li>
+                    <li><span>链接：</span><input class="form-control"></input></li>
+                    <li>
+                        <span>头像：</span>
+                        <img src="images/message/visit4.jpg" id="ShowImg">
+                    </li>
+                    <li id="ImgChoose">
+                         <span>选择：</span>
+                         <img src="images/message/visit1.jpg">
+                	     <img src="images/message/visit2.jpg">
+                	     <img src="images/message/visit3.jpg">
+                	     <img src="images/message/visit4.jpg">
+                	     <img src="images/message/visit5.jpg">
+                	     <img src="images/message/visit6.jpg">
+                	     <img src="images/message/visit7.jpg">
+                	     <img src="images/message/visit8.jpg">
+                    </li>
+                    <li><span>内容：</span><textarea class="form-control"></textarea></li>
+                    <li><button type="submit" class="btn btn-default">留言</button></li>
+                </ul>
+             </form>
+        </div>
+        <footer>
+		   <div class="FootContain">
+		      <span>© 2017</span>
+		      <span>锦时</span>
+		      <span class="Touchme"><i class="fa fa-send"></i>联系作者</span><br/>
+		   </div>
+		</footer>
+    </div>
+    <script src="js/reed.js"></script>
+    <script src="js/message.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "jinwhen",
+  "version": "1.0.0",
+  "description": "一个用于保存日常学习中的问题，并且分享其解决方法的个人博客。",
+  "main": "reed.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Palereed/Jin-when.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Palereed/Jin-when/issues"
+  },
+  "homepage": "https://github.com/Palereed/Jin-when#readme"
+}

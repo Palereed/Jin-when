@@ -1,0 +1,133 @@
+.NavList:nth-child(1) .MenuAdd::before
+               {opacity:1;left:-7px;}                 
+.NavList:nth-child(1) .MenuAdd::after
+               {opacity:1;right:-7px;}
+article{width:100%;margin:50px 0 0 0;padding:0 0 20px 0;border-bottom: 1px solid #e0e0e0;position:relative}
+article h2{font-weight:700;font-size:18px;line-height:18px;margin:20px 0;}
+article h2 span{margin:0 20px 0 0;}    
+/* 导航 */
+.MainBody{margin-top:-75px;}
+.KindContain{width:100%;}
+.ChecKind{display:inline-block;
+		      width:14%;
+		      text-align:center;
+		      height:30px;
+		      line-height:30px;
+		      cursor:pointer;
+		      overflow:hidden;
+		      position:relative;
+		      border-radius:3px;
+          margin:10px 2.76% 10px 0;
+          }
+.ChecKind span{width:100%;
+      			   height:30px;
+      			   position:absolute;
+      			   top:0;
+      			   left:0;
+      			   transition:transform .3s;
+               -webkit-transition:transform .3s;
+               -moz-transition:transform .3s;
+               -o-transition:transform .3s; }
+.ChecKind span:nth-child(1){background:#4c4c4c;color:white;}
+.ChecKind span:nth-child(2){ background:#ccc;}
+.ChecKind:hover span:nth-child(2){transform:translateX(100%);
+                                  -webkit-transform:translateX(100%);  
+                                  -moz-transform:translateX(100%);   
+                                  -o-transform:translateX(100%);}	
+.ChecKind:nth-child(6),
+.ChecKind:nth-child(12),
+.ChecKind:nth-child(18){margin-right:0;}                 
+@media screen and (max-width: 810px){
+    .MainBody{margin-top:-81px}
+    .ChecKind{display:inline-block;
+              width:18%;
+              margin:0px 1.84% 0px 0;}
+    .ChecKind:nth-child(5),
+    .ChecKind:nth-child(10),
+    .ChecKind:nth-child(15){margin-right:0;}
+    .ChecKind:nth-child(6),
+    .ChecKind:nth-child(12),
+    .ChecKind:nth-child(18){margin:0px 1.84% 0px 0;}                
+}
+@media screen and (max-width: 545px){
+    .ChecKind{display:inline-block;
+              width:23%;
+              margin:0px 1.5% 0px 0px;}
+    .ChecKind:nth-child(4),
+    .ChecKind:nth-child(8),
+    .ChecKind:nth-child(12){margin-right:0;}
+    .ChecKind:nth-child(5),
+    .ChecKind:nth-child(10),
+    .ChecKind:nth-child(15){margin:0px 1.5% 0px 0px;}
+    .ChecKind:nth-child(6),
+    .ChecKind:nth-child(12),
+    .ChecKind:nth-child(18){margin:0px 1.5% 0px 0px;}
+}
+@media screen and (max-width: 330px){
+    .ChecKind{display:inline-block;
+              width:100%;
+              margin:0;}
+    .ChecKind:nth-child(5),
+    .ChecKind:nth-child(10),
+    .ChecKind:nth-child(15){margin:0;}
+    .ChecKind:nth-child(6),
+    .ChecKind:nth-child(12),
+    .ChecKind:nth-child(18){margin:0;}                
+}
+
+/* 文章 */
+.ArclTitle,.ArclTop{width:95%;}
+.ArclTitle h1{font-weight:700;
+		          font-size:24px;
+              position:relative;
+              display:inline-block;
+              }
+.ArclLink::before{position:absolute;
+		              width:0;
+    			        content:"";
+    			        height:2px;
+    			        bottom:-5px;
+    			        left:0;
+    			        background:#313d4b;
+    			        transition:width 0.6s;
+                  -webkit-transition:width 0.6s;
+                  -moz-transition:width 0.6s;
+                  -o-transition:width 0.6s; 
+    		         }
+.ArclTitle:hover .ArclLink::before{width:100%;}	  
+.ArclTop{padding:10px 0 10px 0;}
+.ArclTop span{margin:0 20px 0 0;}  
+.ArcComment{width:26px;
+            position:absolute;
+            top:70px;
+            right:0;
+            height:80px;
+            text-align:center;}
+.ArcComment span{display:block;
+                 font-size:22px;
+                 cursor:default;}
+.ArcComment span:nth-child(3){margin-top:10px;}                 
+.ArcComment img{width:22px;}
+.ArcComment i{margin-left:-3px;font-size:12px;font-weight:700;}                         
+.ArclSection {border-left:3px solid #ccc;
+	            margin:20px 0 30px 0;
+	            } 
+.ArclSection section{padding:0 0 0 30px;
+                     line-height:26px;
+                     font-size:16px;
+                     text-align:justify;
+                     letter-spacing:1.5px;}
+.ArclBttom{font-size:16px;
+           padding:10px 0 10px 33px;}
+.ArclShow{text-decoration:underline;}
+/* 页码 */
+.PageNumber{padding:20px 0}     
+.PageNumber span{display:inline-block;
+	               margin-right:5px;
+        				 width:30px;
+        				 line-height:30px;
+        				 text-align:center;
+        				 border-radius:2px;
+        				 cursor:pointer;} 
+.Active{background:#c3c3c3;}
+.CantUse{border:1px solid #f3f3f3;color:#aaa}                                                			                  
