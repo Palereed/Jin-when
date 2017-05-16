@@ -283,9 +283,9 @@
              </div>
              <!-- 留言表单 -->
              <form>
-                <ul class="FormList">
-                    <li><span>昵称：</span><input class="form-control"></input></li>
-                    <li><span>链接：</span><input class="form-control"></input></li>
+                <ul class="FormList" id="LeaveBtn">
+                    <li><span>昵称：</span><input class="form-control" name="visitname"></input></li>
+                    <li><span>铭记：</span><input class="form-control" name="visitmark"></input></li>
                     <li>
                         <span>头像：</span>
                         <img src="images/message/visit4.jpg" id="ShowImg">
@@ -302,7 +302,7 @@
                 	     <img src="images/message/visit8.jpg">
                     </li>
                     <li><span>内容：</span><textarea class="form-control"></textarea></li>
-                    <li><button type="submit" class="btn btn-default">留言</button></li>
+                    <li><button type="button" class="btn btn-default">留言</button></li>
                 </ul>
              </form>
         </div>
@@ -314,7 +314,9 @@
 		   </div>
 		</footer>
     </div>
+    <script src="js/jquery.min.js"></script>
     <script src="js/reed.js"></script>
     <script src="js/message.js"></script>
+
 </body>
 </html>

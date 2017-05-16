@@ -44,7 +44,7 @@
 #ImgChoose{display:none;}
 #ImgChoose img{width:80px;height:80px;border-radius:40px;cursor:pointer;}
 textarea.form-control{resize:none;height:200px;}
-button[type='submit']{margin-left:60px;}
+button{margin-left:60px;}
 .form-control{width:55%;display:inline-block;}
 .PageNumber{padding:20px 0}     
 .PageNumber span{display:inline-block;

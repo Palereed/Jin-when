@@ -62,3 +62,20 @@ var ShowImg = document.getElementById('ShowImg'),
 		  IsChoose = true;
 	}
 }   
+
+$(function(){
+	$('#LeaveBtn').find('button').click(function(){
+		$.ajax({
+			type: 'post',
+			url: '/api/visiter/register',
+			data: {
+				visitname :$('#LeaveBtn').find('[name="visitname"]').val(),
+		        visitmark :$('#LeaveBtn').find('[name="visitmark"]').val()
+		    },
+		    dataType: 'json',
+		    success:function(result){
+                console.log(result);
+		    }
+		})
+	})
+})
