@@ -2,6 +2,8 @@
 var express = require('express');
 // 调用模块处理模块
 var swig = require('swig');
+// 加载数据库
+var mongoose= require('mongoose');
 // 创建app应用(即是NodeJs Http.createServer();)
 var app = express();
 //设置静态文件托管
@@ -17,15 +19,29 @@ app.set('views', './views');
 // 注册模板引擎      
 // 参数1：view engine。参数2：app.engine第一个参数一致。 
 app.set('view engine', 'html');
-// 首页
-// req request 对象
-// res response对象
-// next 函数
-app.get('/', function(req, res, next){
-    // res.send('欢迎光临')
-    //读取view目录下的指定文件，解析并返回给客户端
-    //参数1：模板文件，相对于view目录
-    res.render('curtain')
-})
+
+// // req request 对象
+// // res response对象
+// // next 函数
+// app.get('/', function(req, res, next){
+//     // res.send('欢迎光临')
+//     //读取view目录下的指定文件，解析并返回给客户端
+//     //参数1：模板文件，相对于view目录
+//     res.render('curtain');
+// })
+
+//根据不同的功能划分模块
+// app.use('/admin', require('./routers/admin'))
+app.use('/api', require('./routers/api'))
+app.use('/', require('./routers/main')) 
+
 // 监听http请求
-app.listen(8080);
+mongoose.connect('mongodb://localhost:27018/Jin-when', function(err){
+	if(err){
+        console.log('数据库连接失败');
+	} else {
+       console.log('数据库连接成功');
+       app.listen(8080);
+	}
+});
+

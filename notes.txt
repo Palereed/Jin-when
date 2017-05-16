@@ -34,4 +34,21 @@ reed.js         启动入口文件
 
 用户发送http请求 》url 》解析路由 》找到匹配规则 》执行指定绑定函数，返回对应内容至用户
 访问/public 》静态 》直接读取指定目录下的文件，返回给用户
-》动态 》处理业务罗杰，加载模板，解析模板 》返回数据给用户    
+》动态 》处理业务罗杰，加载模板，解析模板 》返回数据给用户 
+6.模块划分
+    app.use('/admin', require('./routers/admin'))  后台模块
+    app.use('/api', require('./routers/api'))      API模块
+    app.use('/', require('./routers/main'))        前台模块
+    1.main模块
+        /        首页
+        /view    内容页
+    2.api模块
+        /               首页
+        /login          管理员登陆
+        /comment        评论
+        /comment/post   评论提交
+    3.admin模块
+        /               首页
+        
+        /article        文章管理
+        /article/add    文章发布
