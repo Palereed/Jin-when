@@ -141,8 +141,6 @@
                          <span class="Answerit">我要回复</span>
                          <form>
                            <ul class="FormList">
-                             <li><span>昵称：</span><input class="form-control"></input></li>
-                             <li><span>链接：</span><input class="form-control"></input></li>
                              <li><span>内容：</span><textarea class="form-control"></textarea></li>
                              <li><button type="submit" class="btn btn-default">回复</button></li>
                            </ul>
@@ -207,8 +205,6 @@
                          <span class="Answerit">我要回复</span>
                          <form>
                            <ul class="FormList">
-                             <li><span>昵称：</span><input class="form-control"></input></li>
-                             <li><span>链接：</span><input class="form-control"></input></li>
                              <li><span>内容：</span><textarea class="form-control"></textarea></li>
                              <li><button type="submit" class="btn btn-default">回复</button></li>
                            </ul>
@@ -217,29 +213,63 @@
                  </div>
             </div>
         </div>
-        <form>
-                <ul class="FormList">
-                    <li><span>昵称：</span><input class="form-control"></input></li>
-                    <li><span>链接：</span><input class="form-control"></input></li>
-                    <li>
-                        <span>头像：</span>
-                        <img src="../../images/message/visit4.jpg" id="ShowImg">
-                    </li>
-                    <li id="ImgChoose">
-                         <span>选择：</span>
-                         <img src="../../images/message/visit1.jpg">
-                	     <img src="../../images/message/visit2.jpg">
-                	     <img src="../../images/message/visit3.jpg">
-                	     <img src="../../images/message/visit4.jpg">
-                	     <img src="../../images/message/visit5.jpg">
-                	     <img src="../../images/message/visit6.jpg">
-                	     <img src="../../images/message/visit7.jpg">
-                	     <img src="../../images/message/visit8.jpg">
-                    </li>
-                    <li><span>内容：</span><textarea class="form-control"></textarea></li>
-                    <li><button type="submit" class="btn btn-default">评论</button></li>
-                </ul>
-        </form>
+        <!-- 评论表单 -->
+        <div class="TopTab">
+                <div class="TabName">评论板</div>
+                <div class="LandInfo">
+                    <span>未登录</span>
+                    <div class="UnLand"></div>
+                    <div class="OnLand">
+                        <img src="../../images/message/visit1.jpg">
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+             </div>
+             <div class="LeaveContain">
+                <div class="VisitLand">
+                    <form>
+                    <ul class="FormList">
+                       <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
+                       <li><span>密码：</span><input class="form-control" name="visitpass"></input></li>
+                    </ul>
+                    </form>
+                    <button type="button" class="btn btn-default">登陆</button>
+                    <button type="button" class="btn btn-default">注册</button>
+                </div>
+                <div class="VisitLogin" id="Login">
+                    <form>
+                    <ul class="FormList">
+                       <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
+                       <li><span>昵称：</span><input class="form-control" name="visitmark"></input></li>
+                       <li><span>密码：</span><input class="form-control" name="visitpass"></input></li>
+                       <li>
+                            <span>头像：</span>
+                            <img src="../../images/message/visit4.jpg" id="ShowImg">
+                       </li>
+                       <li id="ImgChoose">
+                             <span>选择：</span>
+                             <img src="../../images/message/visit1.jpg">
+                             <img src="../../images/message/visit2.jpg">
+                             <img src="../../images/message/visit3.jpg">
+                             <img src="../../images/message/visit4.jpg">
+                             <img src="../../images/message/visit5.jpg">
+                             <img src="../../images/message/visit6.jpg">
+                             <img src="../../images/message/visit7.jpg">
+                             <img src="../../images/message/visit8.jpg">
+                        </li>
+                    </ul>
+                    </form>
+                    <button type="button" class="btn btn-default">注册</button>
+                </div>
+                <div class="VisitLeave">
+                 <form>
+                     <ul class="FormList">
+                        <li><span>内容：</span><textarea class="form-control"></textarea></li>
+                        <li><button type="button" class="btn btn-default">评论</button></li>
+                     </ul>
+                </form>
+                </div>
+             </div>
         <footer>
 		   <div class="FootContain">
 		      <span>© 2017</span>

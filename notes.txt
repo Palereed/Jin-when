@@ -52,3 +52,4 @@ reed.js         启动入口文件
         
         /article        文章管理
         /article/add    文章发布
+7.mongodb开启 mongod --dbpath=C:\Users\Administrator\Desktop\Jin-when\db --port=27019

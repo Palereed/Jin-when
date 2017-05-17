@@ -4,6 +4,8 @@ var express = require('express');
 var swig = require('swig');
 // 加载数据库
 var mongoose= require('mongoose');
+// 加载body-parser,用来处理post提交过来的数据
+var bodyParser = require('body-parser');
 // 创建app应用(即是NodeJs Http.createServer();)
 var app = express();
 //设置静态文件托管
@@ -29,6 +31,9 @@ app.set('view engine', 'html');
 //     //参数1：模板文件，相对于view目录
 //     res.render('curtain');
 // })
+//bodyparser设置
+//在api.js中 req.body 可以直接获得post后提交的数据
+app.use(bodyParser.urlencoded({extended:true}));
 
 //根据不同的功能划分模块
 // app.use('/admin', require('./routers/admin'))
@@ -36,7 +41,8 @@ app.use('/api', require('./routers/api'))
 app.use('/', require('./routers/main')) 
 
 // 监听http请求
-mongoose.connect('mongodb://localhost:27018/Jin-when', function(err){
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27019/Jin-when', function(err){
 	if(err){
         console.log('数据库连接失败');
 	} else {

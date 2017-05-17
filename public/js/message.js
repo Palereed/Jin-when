@@ -64,17 +64,46 @@ var ShowImg = document.getElementById('ShowImg'),
 }   
 
 $(function(){
-	$('#LeaveBtn').find('button').click(function(){
+	$('#Register').find('button').click(function(){
 		$.ajax({
 			type: 'post',
 			url: '/api/visiter/register',
 			data: {
-				visitname :$('#LeaveBtn').find('[name="visitname"]').val(),
-		        visitmark :$('#LeaveBtn').find('[name="visitmark"]').val()
+				visitname :$('#Register').find('[name="visitname"]').val(),
+		        visitmark :$('#Register').find('[name="visitmark"]').val(),
+		        visitpass :$('#Register').find('[name="visitpass"]').val(),
+		        visitsafe :$('#Register').find('[name="visitsafe"]').val()
 		    },
 		    dataType: 'json',
 		    success:function(result){
-                console.log(result);
+		    	var code = result.code;
+		    	switch (code){
+		    		case 0:
+		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-check');
+                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-success');
+		    		break;
+		    		case 1:
+		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
+                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		break;
+		    		case 2:
+		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
+                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		break;
+		    		case 3:
+		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
+                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		break;
+		    		case 4:
+		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
+                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		break;
+		    		case 5:
+		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
+                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		break;
+		    	}
+		    	$('.Registerinfo').find('span').html(result.message);
 		    }
 		})
 	})
