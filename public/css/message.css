@@ -37,17 +37,19 @@
           border-radius:4px;
           margin:0 0 20px 0;
           cursor:pointer;}
+.AnswerForm  button{margin-left:55px !important;}   
+.AnswerForm .alert{margin-left:55px;}       
 .AllAnswer form{margin-top:-20px;display:none;}
 /* 留言板 */ 
 .TopTab{border-bottom: 1px solid #e0e0e0;
         padding:2px 0;
-        margin:0 0 20px 0;
+        margin:10px 0 40px 0;
         position:relative;}          
 .TabName{position:absolute;bottom:10px;}        
 .LandInfo{float:right;position:relative;}        
-.LandInfo span{display:inline-block;width:60px;text-align:right;position:absolute;bottom:10px;right:60px;}   
+.LandInfo span{display:inline-block;width:200px;text-align:right;position:absolute;bottom:10px;right:60px;}   
+.OnLand{width:50px;border-radius:25px;display:none;}  
 .UnLand{width:50px;height:50px;background:#eee;border-radius:25px;cursor:pointer;}  
-.OnLand{display:none;}  
 .LandInfo img{width:50px;border-radius:25px;}  
 .alert{padding:8px 12px;margin:0 0 20px 60px;width:55%;}
 .alert i{margin:-5px 20px 0 0;vertical-align:middle}
@@ -58,7 +60,7 @@
 #ImgChoose{display:none;}
 #ImgChoose img{width:80px;height:80px;border-radius:40px;cursor:pointer;}
 textarea.form-control{resize:none;height:100px;width:93%;}
-button{margin-left:60px;}
+button{margin-left:60px;outline:none !important;}
 .form-control{width:55%;display:inline-block;}
 .PageNumber{padding:20px 0 0 0}     
 .PageNumber span{display:inline-block;
@@ -72,4 +74,6 @@ button{margin-left:60px;}
 .CantUse{border:1px solid #f3f3f3;color:#aaa}     
 @media screen and (max-width: 365px){
     .MainTop p{margin-top:-2px;}
-}        
+}  
+/* 登陆与注册 */     
+#Land,#Register{display:none;}

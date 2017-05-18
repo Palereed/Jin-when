@@ -6,6 +6,8 @@ var swig = require('swig');
 var mongoose= require('mongoose');
 // 加载body-parser,用来处理post提交过来的数据
 var bodyParser = require('body-parser');
+// 引入cookie模块
+var Cookies = require('cookies');
 // 创建app应用(即是NodeJs Http.createServer();)
 var app = express();
 //设置静态文件托管
@@ -34,7 +36,19 @@ app.set('view engine', 'html');
 //bodyparser设置
 //在api.js中 req.body 可以直接获得post后提交的数据
 app.use(bodyParser.urlencoded({extended:true}));
-
+//cookie设置
+app.use(function(req, res, next){
+    req.cookies = new Cookies(req, res);
+    //解析登陆用户的cookie信息
+    req.visitInfo = {}
+    if(req.cookies.get('visitInfo')){
+    	try{
+    		req.visitInfo = JSON.parse(req.cookies.get('visitInfo'));
+    	} catch (e){}
+    }
+    next();
+   
+})
 //根据不同的功能划分模块
 // app.use('/admin', require('./routers/admin'))
 app.use('/api', require('./routers/api'))

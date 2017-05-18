@@ -258,7 +258,13 @@
                          <form>
                            <ul class="FormList">
                              <li><span>内容：</span><textarea class="form-control"></textarea></li>
-                             <li><button type="submit" class="btn btn-default">回复</button></li>
+                             <div class="AnswerBtn">
+                                <div>
+                                  <i></i>
+                                  <span></span>
+                                </div>
+                             </div>
+                             <li><button type="button" class="btn btn-default">回复</button></li>
                            </ul>
                          </form> 
                      </div>
@@ -280,29 +286,42 @@
                     <span>未登录</span>
                     <div class="UnLand"></div>
                     <div class="OnLand">
-                        <img src="images/message/visit1.jpg">
+                        <img src="">
                     </div>
                 </div>
                 <div class="clearfix"></div>
              </div>
              <div class="LeaveContain">
-                <div class="VisitLeave">
+                <div class="VisitLeave" id="Leave">
                     <form>
                        <ul class="FormList">
                           <li><span>内容：</span><textarea class="form-control"></textarea></li>
+                          <div class="LeaveBtn">
+                              <div>
+                                <i></i>
+                                <span></span>
+                              </div>
+                          </div>
                           <li><button type="button" class="btn btn-default">留言</button></li>
                        </ul>
                     </form>
                 </div>
-                <div class="VisitLand">
+                <div class="VisitLand" id="Land">
                     <form>
-                    <ul class="FormList">
-                       <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
-                       <li><span>密码：</span><input class="form-control" name="visitpass"></input></li>
-                    </ul>
+                       <ul class="FormList">
+                          <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
+                          <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
+                          <div class="LandBtn">
+                              <div>
+                                <i></i>
+                                <span></span>
+                              </div>
+                          </div>
+                          <li><button type="button" class="btn btn-default">登陆</button>
+                              <button type="button" class="btn btn-default">注册</button>
+                          </li>
+                       </ul>
                     </form>
-                    <button type="button" class="btn btn-default">登陆</button>
-                    <button type="button" class="btn btn-default">注册</button>
                 </div>
                 <div class="VisitRegister" id="Register">
                     <form>
@@ -325,7 +344,7 @@
                        <li><span>密保：</span><input class="form-control" name="visitsafe"></input></li>
                     </ul>
                     </form>
-                    <div class="Registerinfo">
+                    <div class="RegisterBtn">
                       <div>
                         <i></i>
                         <span></span>

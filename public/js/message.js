@@ -64,6 +64,31 @@ var ShowImg = document.getElementById('ShowImg'),
 }   
 
 $(function(){
+	//回复
+	$('.AnswerForm').find('button').click(function(){
+		var IsLand = $('.LandInfo').find('img').attr('src');
+		 // 如果未登陆
+		 if( IsLand == '') {
+             $('.AnswerBtn').find('i').removeClass().addClass('fa fa-close');
+             $('.AnswerBtn').find('div').removeClass().addClass('alert alert-danger');
+             $('.AnswerBtn').find('span').html('登陆后回复');
+        }
+    })
+	//留言
+	$('#Leave').find('button').click(function(){
+		 var IsLand = $('.LandInfo').find('img').attr('src');
+		 // 如果未登陆
+		 if( IsLand == '') {
+             $('.LeaveBtn').find('i').removeClass().addClass('fa fa-close');
+             $('.LeaveBtn').find('div').removeClass().addClass('alert alert-danger');
+             $('.LeaveBtn').find('span').html('登陆后留言');
+             setTimeout(function(){
+                $('#Leave').hide();
+                $('#Land').show();
+             },1000);
+		 }
+    })
+	//注册
 	$('#Register').find('button').click(function(){
 		$.ajax({
 			type: 'post',
@@ -72,6 +97,7 @@ $(function(){
 				visitname :$('#Register').find('[name="visitname"]').val(),
 		        visitmark :$('#Register').find('[name="visitmark"]').val(),
 		        visitpass :$('#Register').find('[name="visitpass"]').val(),
+		        visitimg  :$('#Register').find('img').attr("src"),
 		        visitsafe :$('#Register').find('[name="visitsafe"]').val()
 		    },
 		    dataType: 'json',
@@ -79,32 +105,91 @@ $(function(){
 		    	var code = result.code;
 		    	switch (code){
 		    		case 0:
-		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-check');
-                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-success');
+		    		   $('.RegisterBtn').find('i').removeClass().addClass('fa fa-check');
+                       $('.RegisterBtn').find('div').removeClass().addClass('alert alert-success');
+                        setTimeout(function(){
+			                $('#Register').hide();
+			                $('#Land').show();
+			             },1000);
 		    		break;
 		    		case 1:
-		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
-                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		   $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
+                       $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger')
 		    		break;
 		    		case 2:
-		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
-                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		   $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
+                       $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger')
 		    		break;
 		    		case 3:
-		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
-                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		   $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
+                       $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger')
 		    		break;
 		    		case 4:
-		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
-                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		   $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
+                       $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger')
 		    		break;
 		    		case 5:
-		    		   $('.Registerinfo').find('i').removeClass().addClass('fa fa-close');
-                       $('.Registerinfo').find('div').removeClass().addClass('alert alert-danger')
+		    		   $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
+                       $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger')
 		    		break;
 		    	}
-		    	$('.Registerinfo').find('span').html(result.message);
+		    	$('.RegisterBtn').find('span').html(result.message);
 		    }
 		})
 	})
+    //登陆
+    $('#Land').find('button').eq(0).click(function(){
+    	$.ajax({
+    		type: 'post',
+    		url:'/api/visiter/land',
+    		data: {
+                visitname :$('#Land').find('[name="visitname"]').val(),
+                visitpass :$('#Land').find('[name="visitpass"]').val()
+    		},
+            dataType: 'json',
+            success:function(result){
+            var code = result.code;
+            switch (code){
+		    		case 0:
+		    		   $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
+                       $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
+                       $('.LandInfo').find('span').html(result.visitInfo.visitmark);
+                       $('.UnLand').hide();
+                       $('.OnLand').show();
+                       $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
+                       setTimeout(function(){
+			              $('#Leave').show();
+                          $('#Land').hide();
+                          $('.AnswerBtn').find('i').removeClass();
+			              $('.AnswerBtn').find('div').removeClass();
+			              $('.AnswerBtn').find('span').html('');
+                          $('.LeaveBtn').find('i').removeClass();
+			              $('.LeaveBtn').find('div').removeClass();
+			              $('.LeaveBtn').find('span').html('');
+			           },1000);
+                    break;
+		    		case 1:
+		    		   $('.LandBtn').find('i').removeClass().addClass('fa fa-close');
+                       $('.LandBtn').find('div').removeClass().addClass('alert alert-danger');
+		    		break;
+		    		case 2:
+		    		   $('.LandBtn').find('i').removeClass().addClass('fa fa-close');
+                       $('.LandBtn').find('div').removeClass().addClass('alert alert-danger');
+		    		break;
+                }
+		    	$('.LandBtn').find('span').html(result.message);
+            }
+    	})
+    })
+    //进入注册界面
+    $('#Land').find('button').eq(1).click(function(){
+    	$('#Land').hide();
+        $('#Register').show();
+    })
+    //进入登陆界面
+    $('.LandInfo').find('.UnLand').click(function(){
+    	 $('#Leave').hide();
+    	 $('#Register').hide();
+         $('#Land').show();
+    });
 })

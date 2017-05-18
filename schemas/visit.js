@@ -7,6 +7,8 @@ module.exports = new mongoose.Schema({
     visitmark:String,
     //密码
     visitpass:String,
+    //头像
+    visitimg:String,
     //密保
     visitsafe:String
 });
