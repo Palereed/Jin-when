@@ -53,8 +53,8 @@ router.post('/visiter/register', function(req, res, next){
       } 
       var visiter = new Visiter({
         visitname:visitname,
-        visitmark:visitmark,
         visitpass:visitpass,
+        visitmark:visitmark,
         visitimg :visitimg,
         visitsafe:visitsafe
       });
@@ -88,16 +88,23 @@ router.post('/visiter/land', function(req, res, next){
       responseData.message = '登陆成功';
       responseData.visitInfo = {
          //此用户的昵称与头像
-         visitname:visitInfo.visitname,
          visitmark:visitInfo.visitmark,
          visitimg:visitInfo.visitimg
       }
       //发送cookie
       req.cookies.set('visitInfo', JSON.stringify({
          visitname:visitInfo.visitname,
+         //cookie无法存储中文- -。
+         visitmark:encodeURI(visitInfo.visitmark),
+         visitimg:visitInfo.visitimg
       }));
       res.json( responseData);
       return;
    })
+})
+//用户退出
+router.get('/visiter/landout',function(req, res){
+    req.cookies.set('visitInfo',null);
+    res.json(responseData);
 })
 module.exports = router;

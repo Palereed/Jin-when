@@ -43,11 +43,10 @@ app.use(function(req, res, next){
     req.visitInfo = {}
     if(req.cookies.get('visitInfo')){
     	try{
-    		req.visitInfo = JSON.parse(req.cookies.get('visitInfo'));
-    	} catch (e){}
+            req.visitInfo = JSON.parse(req.cookies.get('visitInfo'));
+        } catch (e){}
     }
     next();
-   
 })
 //根据不同的功能划分模块
 // app.use('/admin', require('./routers/admin'))

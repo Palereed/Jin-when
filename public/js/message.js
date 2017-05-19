@@ -63,6 +63,7 @@ var ShowImg = document.getElementById('ShowImg'),
 	}
 }   
 
+//ajax登陆注册功能
 $(function(){
 	//回复
 	$('.AnswerForm').find('button').click(function(){
@@ -154,8 +155,6 @@ $(function(){
 		    		   $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
                        $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
                        $('.LandInfo').find('span').html(result.visitInfo.visitmark);
-                       $('.UnLand').hide();
-                       $('.OnLand').show();
                        $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
                        setTimeout(function(){
 			              $('#Leave').show();
@@ -187,9 +186,24 @@ $(function(){
         $('#Register').show();
     })
     //进入登陆界面
-    $('.LandInfo').find('.UnLand').click(function(){
-    	 $('#Leave').hide();
-    	 $('#Register').hide();
-         $('#Land').show();
+    $('.LandInfo').find('.OnLand').click(function(){
+    	 var IsLand = $('.LandInfo').find('img').attr('src');
+		 // 如果未登陆
+		 if( IsLand == '') {
+             $('#Leave').hide();
+    	     $('#Register').hide();
+             $('#Land').show();
+        } else {
+        	 var  IsLandout = confirm('是否退出当前');
+        	 if( IsLandout ){
+        	 	$.ajax({
+        		url:'/api/visiter/landout',
+        		success:function(result){
+        			if(result.code == 0)
+                    window.location.reload();
+                  }
+        	    })
+        	 }
+         }
     });
 })
