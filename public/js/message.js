@@ -166,6 +166,7 @@ $(function(){
 			              $('.LeaveBtn').find('div').removeClass();
 			              $('.LeaveBtn').find('span').html('');
 			           },1000);
+			           window.location.reload();
                     break;
 		    		case 1:
 		    		   $('.LandBtn').find('i').removeClass().addClass('fa fa-close');
@@ -186,6 +187,8 @@ $(function(){
         $('#Register').show();
     })
     //进入登陆界面
+    $('#Landout').click(function(){$('.LandInfo').find('.OnLand').click()});
+    $('#Landon').click(function(){$('.LandInfo').find('.OnLand').click()});
     $('.LandInfo').find('.OnLand').click(function(){
     	 var IsLand = $('.LandInfo').find('img').attr('src');
 		 // 如果未登陆
@@ -194,7 +197,7 @@ $(function(){
     	     $('#Register').hide();
              $('#Land').show();
         } else {
-        	 var  IsLandout = confirm('是否退出当前');
+        	 var  IsLandout = confirm('是否注销用户？');
         	 if( IsLandout ){
         	 	$.ajax({
         		url:'/api/visiter/landout',

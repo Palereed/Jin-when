@@ -8,6 +8,7 @@ var mongoose= require('mongoose');
 var bodyParser = require('body-parser');
 // 引入cookie模块
 var Cookies = require('cookies');
+var Visiter = require('./models/visiter');
 // 创建app应用(即是NodeJs Http.createServer();)
 var app = express();
 //设置静态文件托管
@@ -44,9 +45,18 @@ app.use(function(req, res, next){
     if(req.cookies.get('visitInfo')){
     	try{
             req.visitInfo = JSON.parse(req.cookies.get('visitInfo'));
-        } catch (e){}
-    }
-    next();
+            //获取当前访问者权限
+            Visiter.findOne({visitname:req.visitInfo.visitname}).then(function(visitInfo){
+                req.visitInfo.isAdmin = Boolean(visitInfo.isAdmin);
+                //next()放置位置太重要了,浪费了1个多小时。
+                next();
+            });
+         } catch (e){
+            next();
+         }
+       } else {
+        next();
+    } 
 })
 //根据不同的功能划分模块
 // app.use('/admin', require('./routers/admin'))

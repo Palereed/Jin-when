@@ -10,6 +10,11 @@ module.exports = new mongoose.Schema({
     //头像
     visitimg:String,
     //密保
-    visitsafe:String
+    visitsafe:String,
+    //权限
+    isAdmin:{
+        type:Boolean,
+        default:false
+    }
 });
 

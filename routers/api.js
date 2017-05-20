@@ -96,7 +96,7 @@ router.post('/visiter/land', function(req, res, next){
          visitname:visitInfo.visitname,
          //cookie无法存储中文- -。
          visitmark:encodeURI(visitInfo.visitmark),
-         visitimg:visitInfo.visitimg
+         visitimg:visitInfo.visitimg,
       }));
       res.json( responseData);
       return;

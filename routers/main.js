@@ -13,9 +13,15 @@ router.get('/record', function(req, res, next){
 })
 //信笺模块
 router.get('/message', function(req, res, next){
-   res.render('message',{
-   	visitInfo:req.visitInfo
-   });
-})
+	res.render('message',{
+     	visitInfo:req.visitInfo
+     });
+}) 
+//后台模块
+router.get('/manage', function(req, res, next){
+	res.render('manage',{
+     	visitInfo:req.visitInfo
+     });
+})   
 
 module.exports = router;

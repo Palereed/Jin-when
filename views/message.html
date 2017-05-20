@@ -20,7 +20,7 @@
                 <span>锦时<i>Jin-when</i></span>
             </div>
         </div>
-        <div class="OwnPicture"></div>
+        <div class="OwnPicture"></div>    
         <div class="TheNav">
             <a href="home" class="NavList">
                 <img src="public/images/nav/menupic.png" class="MenuCat">
@@ -283,7 +283,16 @@
              <div class="TopTab">
                 <div class="TabName">留言板</div>
                 <div class="LandInfo">
-                    <span>{{decodeURI(visitInfo.visitmark)}}</span>
+                    <!-- 管理员登陆 -->
+                    {% if visitInfo.isAdmin %}
+                    <span>{{decodeURI(visitInfo.visitmark)}}<i>/</i><a href="manage"><i class="fa fa-sign-in"></i>后台</a></span>
+                    <!-- 普通访问者 -->
+                    {% elseif visitInfo.visitname %}
+                    <span>{{decodeURI(visitInfo.visitmark)}}<i>/</i><b id="Landout"><i class="fa fa-sign-out"></i>退出</b></span>
+                    <!-- 未登录状态 -->
+                    {% else %}
+                    <span><b id="Landon"><i class="fa fa-sign-in"></i>登录</b></span>
+                    {% endif %}
                     <div class="OnLand">
                         <img src={{visitInfo.visitimg}}>
                     </div>
@@ -364,6 +373,5 @@
     <script src="public/js/jquery.min.js"></script>
     <script src="public/js/reed.js"></script>
     <script src="public/js/message.js"></script>
-
 </body>
 </html>
