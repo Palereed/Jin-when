@@ -1,10 +1,6 @@
-.NavList:nth-child(3) .MenuAdd::before
-               {opacity:1;left:-7px;}                 
-.NavList:nth-child(3) .MenuAdd::after
-               {opacity:1;right:-7px;}
-.MainBody{margin-top:-100px;}   
-.MainTop{height:100px;padding:10px 0;}
-.MainTop p{margin:10px 0 0 0;}
+.MessageContain{margin-top:20px;}               
+.Messagetop{height:100px;padding:10px 0;}
+.Messagetop p{margin:10px 0 0 0;}
 /* 留言模块 */  
 .TopLine{border-bottom: 1px solid #e0e0e0;
         margin:10px 0 20px 0;
@@ -55,7 +51,8 @@
                 right:60px;
                 font-size:14px;
                 line-height:14px;}
-.LandInfo b{font-weight:500;cursor:pointer;}                
+.LandInfo b{font-weight:500;cursor:pointer;} 
+.LandInfo a:hover,.LandInfo b:hover{color:red}               
 .LandInfo i{margin:0 5px 0 10px;font-size:16px}
 .OnLand{width:50px;height:50px;border-radius:25px;background:#eee;border-radius:25px;cursor:pointer;}  
 .LandInfo img{width:50px;border-radius:25px;}  
@@ -81,7 +78,7 @@ button{margin-left:60px;outline:none !important;}
 .Active{background:#c3c3c3;}
 .CantUse{border:1px solid #f3f3f3;color:#aaa}     
 @media screen and (max-width: 365px){
-    .MainTop p{margin-top:-2px;}
+    .Messagetop p{margin-top:-2px;}
 }  
 /* 登陆与注册 */     
 #Land,#Register{display:none;}

@@ -1,0 +1,87 @@
+{% extends 'nav.html' %}
+{% block MainBody %}
+    <div class="MainContain">
+       <div class="KindContain">
+	       <div class="ChecKind">
+                <span>全部</span>
+                <span style="transform:translateX(100%);">全部</span>
+           </div>
+           <div class="ChecKind">
+                <span>Css</span>
+                <span>Css</span>
+           </div>
+           <div class="ChecKind">
+                <span>HTML5</span>
+                <span>HTML5</span>
+           </div>
+           <div class="ChecKind">
+                <span>javascript</span>
+                <span>javascript</span>
+           </div>
+           <div class="ChecKind">
+                <span>Node.js</span>
+                <span>Node.js</span>
+           </div>
+           <div class="ChecKind">
+                <span>Canvas</span>
+                <span>Canvas</span>
+           </div>
+       </div>	           
+       <!-- 文章部分 -->
+       <article class="WebLearn">
+           <div class="ArclTitle">
+           	  <h1>
+                <a href="article/css/float.html" class="ArclLink">
+                  解决子元素float引起父元素坍塌
+                </a>
+              </h1>
+           </div>
+           <div class="ArclTop">
+               <span class="ArclKind">标签：Css类</span>
+               <span class="ArclTime">时间：05 April 2017</span>
+               <span class="ArclWrite">作者：蒹葭</span>
+               <span class="ArclMark">备注：原创</span>
+           </div>
+           <div class="ArcComment">
+           	    <span class="fa fa-heart-o fa-lg"></span>
+           	    <i>0</i>
+           	    <span class="fa fa-comment-o fa-lg"></span>
+           	    <i>0</i>
+           </div>
+           <div class="ArclMain">
+               <div class="ArclSection">
+                  <section>
+                     <h2><span class="fa fa-pencil fa-lg"></span>float的历史</h2>
+                      <p>float属性定义元素在哪个方向浮动。在最开始，float用于实现文字环绕图片效果。</p> 
+                      <p>随着html的发展，网站的布局愈来愈多样化，float渐渐被用来实现横向排版，灵活的浮动给开发员带来了更多的布局灵感，它越来越受到青睐。</p>   
+                  </section>
+               </div>
+               <div class="ArclSection">
+                  <section>
+                      <h2><span class="fa fa-pencil fa-lg"></span>float应用中的一些琐碎问题</h2>
+                      <p>事物的发展总有其两面性，float在方便排版的同时也带来了一系列各种各样的问题。</p>
+                      <p>其一，块级元素如果不设置float，它默认会撑满整个屏幕，而如果设置了float，则只会包裹住其内容。</p>
+                      <p>其二，其中一个子元素使用float，其余也必须使用float，否则就会出现遮盖问题。</p>
+                      <p>其三，若子元素全部使用float，而父元素没有设置高度，那么此时父元素高度会坍塌。这个问题也是float最令人烦恼的问题。</p>
+                  </section>
+               </div>
+           </div>
+           <div class="ArclBttom">
+               <a href="article/css/float.html" class="ArclShow">展开全文</a>
+           </div>
+       </article>
+       <!-- 分页部分 -->
+       <div class="PageNumber">
+          <span class="CantUse">prev</span>
+          <span class="Active">1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>...</span>
+          <span>next</span>
+       </div>
+	</div>
+	<style type="text/css">
+        .TheNav a:first-child .MenuAdd::before{opacity:1;left:-7px;} 
+        .TheNav a:first-child .MenuAdd::after{opacity:1;right:-7px;} 
+	</style>
+{% endblock %}

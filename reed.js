@@ -24,16 +24,6 @@ app.set('views', './views');
 // 注册模板引擎      
 // 参数1：view engine。参数2：app.engine第一个参数一致。 
 app.set('view engine', 'html');
-
-// // req request 对象
-// // res response对象
-// // next 函数
-// app.get('/', function(req, res, next){
-//     // res.send('欢迎光临')
-//     //读取view目录下的指定文件，解析并返回给客户端
-//     //参数1：模板文件，相对于view目录
-//     res.render('curtain');
-// })
 //bodyparser设置
 //在api.js中 req.body 可以直接获得post后提交的数据
 app.use(bodyParser.urlencoded({extended:true}));
@@ -59,7 +49,7 @@ app.use(function(req, res, next){
     } 
 })
 //根据不同的功能划分模块
-// app.use('/admin', require('./routers/admin'))
+app.use('/admin', require('./routers/admin'))
 app.use('/api', require('./routers/api'))
 app.use('/', require('./routers/main')) 
 

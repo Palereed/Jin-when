@@ -1,0 +1,34 @@
+{% extends 'nav.html' %}
+{% block index %}
+    <span>锦时</span>
+    <span><i>/</i>独白管理</span>
+    <span><i>/</i>独白发布</span>
+{% endblock %}
+{% block MainBody %}
+    <div class="RecordRelease">
+       <h1>独白发布</h1>
+       <div class="panel">
+    	  <form>
+    		    <h2>标题</h2>
+    			<input class="form-control" type="text"></input>
+    			<h2>心情</h2>
+    			<input class="form-control" type="text"></input>
+    			<h2>天气</h2>
+    			<input class="form-control" type="text"></input>
+    			<h2>编辑文本</h2>
+    			<textarea class="form-control"></textarea>
+    			<button class="btn btn-success" type="submit">发布</button>
+    			<button class="btn btn-danger" type="reset">重置</button>
+    	  </form>
+       </div>
+    </div>
+    <style type="text/css">
+       #Record li:first-child{background:#31383e;}
+       #Record li:first-child a{color:#f2f2f2;}
+    </style>
+    <script>
+        $('#Record').addClass('active');
+        $('#RecordBtn i').addClass('SlideDown').removeClass('SlideUp');
+        $('#Record').slideToggle(0);
+    </script>
+{% endblock %}

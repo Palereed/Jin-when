@@ -1,0 +1,152 @@
+{% extends 'nav.html' %}
+{% block index %}
+    <span>锦时</span>
+    <span><i>/</i>网站管理</span>
+{% endblock %}
+{% block MainBody %}
+    <!-- 网站统计 -->
+    <div class="WebTatal">
+        <h1>网站管理</h1>
+        <div class="Statistical">
+            <div class="panel">
+                <div class="FontAdd">
+                    <span class="VisitNum">100</span>
+                    <b>访问数</b>
+                </div>
+                <div class="panelicon danger">
+                    <span class="fa fa-eye"></span>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="FontAdd">
+                    <span class="VisitNum">100</span>
+                    <b>文章数</b>
+                </div>
+                <div class="panelicon info">
+                    <span class="fa fa-edit"></span>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="FontAdd">
+                    <span class="VisitNum">100</span>
+                    <b>独白数</b>
+                </div>
+                <div class="panelicon success">
+                    <span class="fa fa-star"></span>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="FontAdd">
+                    <span class="VisitNum">100</span>
+                    <b>留言数</b>
+                </div>
+                <div class="panelicon warning">
+                    <span class="fa fa-envelope-o"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel WillDo">
+            <div class="conlimit">
+               <ul class="havedo">
+                   <li>
+                       <label class="bg-yellow">Plan 1</label>
+                       <span></span>
+                       <div class="DoEdit">
+                          <span class="btn btn-info">
+                              <i class="fa fa-edit fa-fw"></i>
+                          </span>
+                          <span class="btn btn-danger">
+                              <i class="fa fa-trash-o fa-fw"></i>
+                          </span>
+                       </div>
+                   </li>
+                   <li>
+                       <label class="bg-green">Plan 2</label>
+                       <span></span>
+                       <div class="DoEdit">
+                          <span class="btn btn-info">
+                              <i class="fa fa-edit fa-fw"></i>
+                          </span>
+                          <span class="btn btn-danger">
+                              <i class="fa fa-trash-o fa-fw"></i>
+                          </span>
+                       </div>
+                   </li>
+                   <li>
+                       <label class="bg-blue">Plan 3</label>
+                       <span></span>
+                       <div class="DoEdit">
+                          <span class="btn btn-info">
+                              <i class="fa fa-edit fa-fw"></i>
+                          </span>
+                          <span class="btn btn-danger">
+                              <i class="fa fa-trash-o fa-fw"></i>
+                          </span>
+                       </div>
+                   </li>
+                   <li>
+                       <label class="bg-pink">Plan 4</label>
+                       <span></span>
+                       <div class="DoEdit">
+                          <span class="btn btn-info">
+                              <i class="fa fa-edit fa-fw"></i>
+                          </span>
+                          <span class="btn btn-danger">
+                              <i class="fa fa-trash-o fa-fw"></i>
+                          </span>
+                       </div>
+                   </li>
+                   <li>
+                       <label class="bg-red">Plan 5</label>
+                       <span></span>
+                       <div class="DoEdit">
+                          <span class="btn btn-info">
+                              <i class="fa fa-edit fa-fw"></i>
+                          </span>
+                          <span class="btn btn-danger">
+                              <i class="fa fa-trash-o fa-fw"></i>
+                          </span>
+                       </div>
+                   </li>
+               </ul>
+               <div class="clock">
+                    <canvas width="200" height="200" id="clock" >
+                    </canvas>
+               </div>
+               <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="panel ManagerList">
+            <table class="table">
+                 <thead>
+                    <th class="InSort">编号</th>
+                    <th class="TheManager">管理员</th>
+                    <th class="UserId">账户</th>
+                    <th class="UserPass">密码</th>
+                    <th class="Options">操作</th>
+                 </thead>
+                 <tbody>
+                    <tr>
+                        <td class="InSort">01</td>
+                        <td class="TheManager">admin</td>
+                        <td class="UserId">admin</td>
+                        <td class="UserPass">13244235072</td>
+                        <td class="Options">
+                          <span class="btn btn-info">
+                              <i class="fa fa-edit fa-fw"></i>
+                          </span>
+                          <span class="btn btn-danger">
+                              <i class="fa fa-trash-o fa-fw"></i>
+                          </span>
+                        </td>
+                    </tr>
+                 </tbody>
+            </table>
+        </div>
+    </div>
+    <style type="text/css">
+       #WebTatalBtn{background:#31383e;}
+       #WebTatalBtn a,#WebTatalBtn span{color:#f2f2f2;}
+    </style>
+{% endblock %}

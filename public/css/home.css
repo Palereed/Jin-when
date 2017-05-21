@@ -1,12 +1,8 @@
-.NavList:nth-child(1) .MenuAdd::before
-               {opacity:1;left:-7px;}                 
-.NavList:nth-child(1) .MenuAdd::after
-               {opacity:1;right:-7px;}
 article{width:100%;margin:50px 0 0 0;padding:0 0 20px 0;border-bottom: 1px solid #e0e0e0;position:relative}
 article h2{font-weight:700;font-size:18px;line-height:18px;margin:20px 0;}
 article h2 span{margin:0 20px 0 0;}    
 /* 导航 */
-.MainBody{margin-top:-75px;}
+.MainBody{margin-top:-100px;}
 .KindContain{width:100%;}
 .ChecKind{display:inline-block;
 		      width:14%;
@@ -17,7 +13,7 @@ article h2 span{margin:0 20px 0 0;}
 		      overflow:hidden;
 		      position:relative;
 		      border-radius:3px;
-          margin:10px 2.76% 10px 0;
+          margin:6px 2.76% 10px 0;
           }
 .ChecKind span{width:100%;
       			   height:30px;

@@ -1,0 +1,49 @@
+{% extends 'nav.html' %}
+{% block index %}
+    <span>锦时</span>
+    <span><i>/</i>留言管理</span>
+    <span><i>/</i>留言列表</span>
+{% endblock %}
+{% block MainBody %}
+    <div class="MessageList">
+       <h1>留言列表</h1>
+       <div class="panel">
+    	  <table class="table table-hover">
+             	 <thead>
+             	 	<th class="InSort">编号</th>
+             	 	<th class="FaData">留言日期</th>
+             	 	<th class="UserId">用户名</th>
+             	 	<th>留言内容</th>
+             	 	<th class="Number">回复数</th>
+             	 	<th class="Options">操作</th>
+             	 </thead>
+             	 <tbody>
+             	 	<tr>
+             	 		<td class="InSort">01</td>
+             	 		<td class="FaData">2017-5-20</td>
+             	 		<td class="UserId">蒹葭</td>
+             	 		<td>吾之素年，汝与锦时。与你相见，不甚欣喜。留笔墨一二，互通有无。或有指点，愿闻其详</td>
+             	 		<td class="Number">10</td>
+             	 		<td class="Options">
+             	 		  <span class="btn btn-info">
+							  <i class="fa fa-edit fa-fw"></i>
+						  </span>
+						  <span class="btn btn-danger">
+							  <i class="fa fa-trash-o fa-fw"></i>
+						  </span>
+					    </td>
+             	 	</tr>
+             	 </tbody>
+          </table>
+       </div>
+    </div>
+    <style type="text/css">
+       #Message li{background:#31383e;}
+       #Message li a{color:#f2f2f2;}
+    </style>
+    <script>
+        $('#Message').addClass('active');
+        $('#MessageBtn i').addClass('SlideDown').removeClass('SlideUp');
+        $('#Message').slideToggle(0);
+    </script>
+{% endblock %}

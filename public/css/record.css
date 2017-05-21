@@ -1,10 +1,6 @@
-.NavList:nth-child(2) .MenuAdd::before
-               {opacity:1;left:-7px;}                 
-.NavList:nth-child(2) .MenuAdd::after
-               {opacity:1;right:-7px;}
 .TopSquare{position:relative;width:100%;margin:50px 0;}               
 /* 时间轴 */
-.MainBody{margin-top:-100px;}
+
 .MainTop{height:100px;width:100%;padding:15px 0;position:relative;}
 .MainTop::after{position:absolute;
                 content:'';

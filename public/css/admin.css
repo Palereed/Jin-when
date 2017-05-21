@@ -12,8 +12,8 @@ header{color:#333;font-size:20px;cursor:default;}
 .WebTitle i{margin:0 12px 0 0;}
 .Wrapage{padding-left:250px;background:#3d464d;}
 .TopFind{padding:0 0 0 30px;float:left;}
-.TopFind span{line-height:60px;font-size:14px;color:#AAB5BC}	
-.OnIndex{color:#676767 !important}
+.TopFind span{line-height:60px;font-size:14px;color:#AAB5BC}
+.TopFind span:last-child{color:#676767}	
 .TopFind i{margin:0 15px 0 10px;color:#AAB5BC !important}  
 .Manager{height:60px;padding:5px 20px;width:90px;float:right;}
 .Manager img{height:50px;border-radius:30px;}
@@ -21,23 +21,22 @@ header{color:#333;font-size:20px;cursor:default;}
 /* 左侧菜单 */	   
 .Leftnav{width:250px;position:absolute;left:0px;z-index:1;}
 .NavContain a{padding:10px 15px;
-			  display:block;
-			  color:#b0bec5;
-			  font-size:14px;}	  
-.NavContain li:first-child span{font-size:18px;margin:0 21px 0 -1px;}
+			        display:block;
+			        color:#b0bec5;
+			        font-size:14px;}	  
+.NavContain li:first-child span{font-size:18px;margin-right:17px;}
 .NavContain li span{color:#b0bec5;font-size:16px;}
 .NavContain a span{margin:0 20px 0 0}	
-.NavContain li:last-child span{margin:0 18px 0 0px;}
-.NavContain li:nth-child(4) span{font-size:17px;}
 .NavContain a i{font-size:12px;float:right;margin:3px 0 0 0;}		  
-.NavContain a:hover{color:#f2f2f2;background: rgba(0, 0, 0, 0.2);}
+.NavContain a:hover{color:#f2f2f2;background:#31383e;}
 .NavContain a:hover span{color:#f2f2f2 !important}
 /* 二级菜单 */
 .DownMenu{display:none;}
-.DownMenu a{padding:10px 0 10px 51px;}
+.DownMenu a{padding:10px 0 10px 55px;}
+#Message a{padding:10px 0 10px 56px;}
 .DownMenu li{border:none !important;}
 /* 菜单active */
-.Onslide{background:rgba(0, 0, 0, 0.2);}
+.Onslide{background:#31383e;}
 .Onslide a,.Onslide span{color:#f2f2f2 !important}
 .SlideDown{transform:rotate(180deg);transition:transform .3s;}
 .SlideUp{transform:rotate(0deg);transition:transform .3s}
@@ -71,13 +70,11 @@ td>.btn{padding:2px 3px}
 .RecordRelease textarea{height:200px;}
 /* 留言管理 */
 .UserName{width:100px;}
-.ArticleList,.RecordRelease,.RecordList,.MessageList,.WebTatal{display:none;}
 /* 网站统计 */
 .Statistical>.panel{width:22.75%;
 					margin:0 3% 0 0;
 					float:left;
 					border-radius:0;
-					
 					}
 .Statistical>.panel:nth-child(4){margin:0;}
 .danger{background:#f36a5a;}

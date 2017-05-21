@@ -1,27 +1,20 @@
 var express = require('express');
 var router = express.Router();
 router.get('/', function(req, res, next){
-   res.render('curtain');
+   res.render('home/curtain');
 })
 //信笺模块
 router.get('/home', function(req, res, next){
-   res.render('home');
+   res.render('home/home');
 })
 //信笺模块
 router.get('/record', function(req, res, next){
-   res.render('record');
+   res.render('home/record');
 })
 //信笺模块
 router.get('/message', function(req, res, next){
-	res.render('message',{
+	res.render('home/message',{
      	visitInfo:req.visitInfo
      });
 }) 
-//后台模块
-router.get('/manage', function(req, res, next){
-	res.render('manage',{
-     	visitInfo:req.visitInfo
-     });
-})   
-
 module.exports = router;
