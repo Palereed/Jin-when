@@ -36,8 +36,6 @@ header{color:#333;font-size:20px;cursor:default;}
 #Message a{padding:10px 0 10px 56px;}
 .DownMenu li{border:none !important;}
 /* 菜单active */
-.Onslide{background:#31383e;}
-.Onslide a,.Onslide span{color:#f2f2f2 !important}
 .SlideDown{transform:rotate(180deg);transition:transform .3s;}
 .SlideUp{transform:rotate(0deg);transition:transform .3s}
 /* 右侧主体 */
@@ -52,20 +50,32 @@ input[type='radio']:focus{outline:none;}
 input[type='text']{width:50%;}
 button{margin:20px 0 0 0;}
 button:focus{outline:none !important;} 
-.table>thead>tr>th{border:none;padding:0 8px 15px 8px;font-size:14px;color:#676767;}
-.table>tbody>tr>td{color:#555;font-size:12px;line-height:30px}
-.table>tbody>tr:nth-child(odd){background:#f3faff}
 .ReprintInfo{display:none;}
 /* 文章管理 */
 .ArticleRelease textarea{height:200px;transition:height 1s} 
 .ArticleRelease textarea:focus{height:600px;}		 
 .KindChoose span,.AddInfo span{display:inline-block;width:40px;}
-.InSort{width:50px;text-align:center;}
-.FaData{width:150px;}
-.KindLable{width:120px;text-align:center;}
-.AddInfor,.Number{width:80px;text-align:center;}
+/* 表格样式 */
+.table>thead>tr>th{border:none;padding:0 8px 15px 8px;font-size:14px;color:#676767;}
+.table>tbody>tr>td{color:#555;font-size:13px;line-height:36px}
+.table>tbody>tr:nth-child(odd){background:#f3faff}
 .Options{width:120px;text-align:center;}
 td>.btn{padding:2px 3px}
+/* 分页 */
+.PageNumber{float:right;margin:0 50px 0 0;padding:20px 0 0 0}     
+.PageNumber a{display:inline-block;
+                 margin-right:5px;
+                 padding:0 10px;
+                 line-height:30px;
+                 text-align:center;
+                 border-radius:2px;
+                 cursor:pointer;
+                 color:#333}     
+.Active{background:#3d464d;color:#fff !important}
+.CantUse{color:#AAB5BC !important;} 
+/* 用户管理 */
+.VisiterId{width:250px;}
+.VisiterImg img{height:36px;border-radius:18px;}
 /* 独白管理 */
 .RecordRelease textarea{height:200px;}
 /* 留言管理 */

@@ -12,11 +12,6 @@ $(function(){
       }
     })
   // 导航栏
-  function WebTatal(){
-      if ($('#WebTatalBtn').prop('className').indexOf('Onslide')>0){
-          $('#WebTatalBtn').removeClass('Onslide');
-       }
-  }
   function Slide(id, par ,pari){
       var Islide = $(id).prop('className').indexOf('active');
              if( Islide > 0){
@@ -35,15 +30,12 @@ $(function(){
   $('.NavContain li').click(function(){
         switch ($(this).prop('id')){
            case 'ArticleBtn':
-             WebTatal();
              Slide('#Article', '#ArticleBtn', '#ArticleBtn i');
            break;
            case 'RecordBtn':
-             WebTatal();
              Slide('#Record', '#RecordBtn', '#RecordBtn i');
            break;
            case 'MessageBtn':
-             WebTatal();
              Slide('#Message', '#MessageBtn', '#MessageBtn i');
            break;
            case 'WebTatalBtn':

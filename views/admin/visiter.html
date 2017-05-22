@@ -17,14 +17,15 @@
                     <th class="Visitsafe">密保</th>
              	 	<th class="Options">操作</th>
              	 </thead>
-             	 <tbody>
+                 <tbody>
+                 {% for visiter in visiters %}
              	 	<tr>
-             	 		<td class="InSort">01</td>
-             	 		<td class="Visitmark">蒹葭</td>
-             	 		<td class="Visitname">1198644337</td>
-             	 		<td class="Visitpass">123456</td>
-             	 		<td class="Visitimg"></td>
-                        <td class="Visitsafe">123456</td>
+             	 		<td class="VisiterId">{{visiter._id.toString()}}</td>
+             	 		<td>{{visiter.visitmark}}</td>
+             	 		<td>{{visiter.visitname}}</td>
+             	 		<td>{{visiter.visitpass}}</td>
+             	 		<td class="VisiterImg"><img src=../{{visiter.visitimg}}></td>
+                        <td>{{visiter.visitsafe}}</td>
              	 		<td class="Options">
              	 		  <span class="btn btn-info">
 							  <i class="fa fa-edit fa-fw"></i>
@@ -34,8 +35,11 @@
 						  </span>
 					    </td>
              	 	</tr>
+                 {% endfor %}
              	 </tbody>
           </table>
+          {% include 'page.html' %}
+          <div class="clearfix"></div>
        </div>
     </div>
     <style type="text/css">

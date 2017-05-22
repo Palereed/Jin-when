@@ -120,18 +120,21 @@
         <div class="panel ManagerList">
             <table class="table">
                  <thead>
-                    <th class="InSort">编号</th>
-                    <th class="TheManager">管理员</th>
-                    <th class="UserId">账户</th>
-                    <th class="UserPass">密码</th>
+                    <th>编号</th>
+                    <th>管理员</th>
+                    <th>账户</th>
+                    <th>密码</th>
+                    <th>头像</th>
                     <th class="Options">操作</th>
                  </thead>
                  <tbody>
+                    {% for visiter in visiters %}
                     <tr>
-                        <td class="InSort">01</td>
-                        <td class="TheManager">admin</td>
-                        <td class="UserId">admin</td>
-                        <td class="UserPass">13244235072</td>
+                        <td class="VisiterId">{{visiter._id.toString()}}</td>
+                        <td>{{visiter.visitmark}}</td>
+                        <td>{{visiter.visitname}}</td>
+                        <td>{{visiter.visitpass}}</td>
+                        <td class="VisiterImg"><img src=../{{visiter.visitimg}}></td>
                         <td class="Options">
                           <span class="btn btn-info">
                               <i class="fa fa-edit fa-fw"></i>
@@ -141,6 +144,7 @@
                           </span>
                         </td>
                     </tr>
+                    {% endfor %}
                  </tbody>
             </table>
         </div>

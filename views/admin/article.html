@@ -6,36 +6,36 @@
 {% endblock %}
 {% block MainBody %}
     <div class="ArticleRelease">
-       <h1>文章发布</h1>
-       <div class="panel">
-          <form>
-		    <h2>标题</h2>
-			<input class="form-control" type="text"></input>
-			<h2>作者</h2>
-			<input class="form-control" type="text"></input>
-			<h2>标签</h2>
-			<div class="form-group KindChoose">
-				<input name="KindChoose"  id='CSS' type="radio" checked="true"><label for="CSS">CSS</label>
-				<input name="KindChoose"  id='H5'  type="radio"><label for="H5">H5</label>
-				<input name="KindChoose"  id='Js'  type="radio"><label for="Js">Js</label>
-				<input name="KindChoose"  id='Node'  type="radio"><label for="Node">Node</label>
-				<input name="KindChoose"  id='Canvas'  type="radio"><label for="Canvas">Canvas</label>
-			</div>
-			<h2>备注</h2>
-			<div class="form-group AddInfo">
-				<input name="AddInfo"  id='OwnWrite' type="radio" checked="true"><label for="OwnWrite">原创</label>
-				<input name="AddInfo"  id="Reprint"  type="radio" ><label for="Reprint">转载</label>
-				<div class="ReprintInfo">
+      <h1>文章发布</h1>
+      <div class="panel">
+         <form>
+		        <h2>标题</h2>
+      			<input class="form-control" type="text"></input>
+      			<h2>作者</h2>
+      			<input class="form-control" type="text"></input>
+      			<h2>标签</h2>
+      			<div class="form-group KindChoose">
+      				 <input name="KindChoose"  id='CSS' type="radio" checked="true"><label for="CSS">CSS</label>
+      				 <input name="KindChoose"  id='H5'  type="radio"><label for="H5">H5</label>
+      				 <input name="KindChoose"  id='Js'  type="radio"><label for="Js">Js</label>
+      				 <input name="KindChoose"  id='Node'  type="radio"><label for="Node">Node</label>
+      				 <input name="KindChoose"  id='Canvas'  type="radio"><label for="Canvas">Canvas</label>
+      			</div>
+			      <h2>备注</h2>
+      			<div class="form-group AddInfo">
+      				 <input name="AddInfo"  id='OwnWrite' type="radio" checked="true"><label for="OwnWrite">原创</label>
+      				 <input name="AddInfo"  id="Reprint"  type="radio" ><label for="Reprint">转载</label>
+      				 <div class="ReprintInfo">
             	   <h2>转载说明</h2>
             	   <input class="form-control" type="text"></input>
-                </div>  
+               </div>  
             </div>		
             <h2>编辑文本</h2>
-			<textarea class="form-control"></textarea>
-			<button class="btn btn-success" type="submit">发布</button>
-			<button class="btn btn-danger" type="reset">重置</button> 
-		  </form>
-       </div>
+      			<textarea class="form-control"></textarea>
+      			<button class="btn btn-success" type="submit">发布</button>
+      			<button class="btn btn-danger" type="reset">重置</button> 
+		     </form>
+      </div>
     </div>
     <style type="text/css">
        #Article li:first-child{background:#31383e;}
