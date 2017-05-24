@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Visiter = require('../models/visiter') 
+var Visiter = require('../models/visiter');
+var Article = require('../models/articles') 
 router.use(function(req, res, next){
 	if (!req.visitInfo.isAdmin) {
          res.send('warning:请使用管理员身份登陆!');
@@ -52,11 +53,90 @@ router.get('/article', function(req, res, next){
      	visitInfo:req.visitInfo
      });
 }) 
-//文章发布
+var articleData;
+router.use(function(req, res, next){
+    articleData = {
+        code:0,
+        message:''
+    }
+    next();
+})
+router.post('/article', function(req, res, next){
+    var title = req.body.title;
+    var writer = req.body.writer;
+    var lable = req.body.lable;
+    var addInfo = req.body.addInfo;
+    var copyInfo = req.body.copyInfo;
+    var content = req.body.content;
+    console.log(req.body);
+    if (title == ''){
+      articleData.code = 1;
+      articleData.message = '文章标题不能为空';
+      res.json(articleData);
+      return;
+   } else if (writer == ''){
+      articleData.code = 2;
+      articleData.message = '作者不能为空';
+      res.json(articleData);
+      return;
+   }  else if ( addInfo == '2' && copyInfo == ''){
+      articleData.code = 3;
+      articleData.message = '转载信息不能为空';
+      res.json(articleData);
+      return;
+   } else if ( content == ''){
+      articleData.code = 4;
+      articleData.message = '内容不能为空';
+      res.json(articleData);
+      return;
+   } 
+   Article.findOne({
+     title:title
+    }).then(function(articleInfo){
+      if (articleInfo) {
+         articleData.code = 5;
+         articleData.message = '此文章已存在';
+         res.json(articleData);
+         return
+      } 
+      var article = new Article({
+         title:title,
+         writer:writer,
+         lable:lable,
+         addInfo:addInfo,
+         copyInfo:copyInfo,
+         content:content
+      })
+      return  article.save();
+    }).then(function(){
+      articleData.message = '发布成功';
+      res.json( articleData);
+   })
+}) 
+//文章列表
 router.get('/articlelist', function(req, res, next){
-    res.render('admin/articlelist',{
-        visitInfo:req.visitInfo
-     });
+    var page = Number(req.query.page || 1);
+    var limit = 8;
+    //数据库中数据条数
+    Article.count().then(function(count){
+        //计算总页数
+        pages = Math.ceil(count / limit);
+        //取值不能超过总页数
+        page = Math.min(page, pages);
+        //取值不能小于1
+        page = Math.max(page, 1);
+        var skip = (page - 1) * limit;
+        //从数据库中读取非管理者数据
+        //sort 1升序,-1降序
+        Article.find().sort({_id:-1}).limit(limit).skip(skip).then(function(articles){
+            res.render('admin/articlelist',{
+            visitInfo:req.visitInfo,
+            articles:articles,
+            page:page,
+            pages:pages
+           });
+        })
+    })
 })
 //独白发布
 router.get('/record', function(req, res, next){

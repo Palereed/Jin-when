@@ -8,35 +8,35 @@
        <h1>用户列表</h1>
        <div class="panel">
     	  <table class="table table-hover">
-             	 <thead>
+            <thead>
              	 	<th class="InSort">编号</th>
              	 	<th class="Visitmark">昵称</th>
              	 	<th class="Visitname">账户</th>
              	 	<th class="Visitpass">密码</th>
              	 	<th class="Visitimg">头像</th>
-                    <th class="Visitsafe">密保</th>
+                <th class="Visitsafe">密保</th>
              	 	<th class="Options">操作</th>
-             	 </thead>
-                 <tbody>
-                 {% for visiter in visiters %}
+            </thead>
+            <tbody>
+                {% for visiter in visiters %}
              	 	<tr>
-             	 		<td class="VisiterId">{{visiter._id.toString()}}</td>
+             	 		<td class="TableId">{{visiter._id.toString()}}</td>
              	 		<td>{{visiter.visitmark}}</td>
              	 		<td>{{visiter.visitname}}</td>
              	 		<td>{{visiter.visitpass}}</td>
              	 		<td class="VisiterImg"><img src=../{{visiter.visitimg}}></td>
-                        <td>{{visiter.visitsafe}}</td>
+                  <td>{{visiter.visitsafe}}</td>
              	 		<td class="Options">
              	 		  <span class="btn btn-info">
-							  <i class="fa fa-edit fa-fw"></i>
-						  </span>
-						  <span class="btn btn-danger">
-							  <i class="fa fa-trash-o fa-fw"></i>
-						  </span>
-					    </td>
+							        <i class="fa fa-edit fa-fw"></i>
+						        </span>
+						        <span class="btn btn-danger">
+							        <i class="fa fa-trash-o fa-fw"></i>
+						       </span>
+					        </td>
              	 	</tr>
-                 {% endfor %}
-             	 </tbody>
+                {% endfor %}
+             </tbody>
           </table>
           {% include 'page.html' %}
           <div class="clearfix"></div>

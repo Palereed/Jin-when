@@ -1,18 +1,4 @@
 {% extends 'nav.html' %}
-{% block nav %}
-    <a href="home" class="NavList">
-        <img src="public/images/nav/menupic.png" class="MenuCat">
-        <span class="MenuAdd">前端那些事</span>
-    </a>
-    <a href="record" class="NavList">
-        <img src="public/images/nav/menupic.png" class="MenuCat">
-        <span class="MenuAdd">看官往这看</span>
-    </a>
-    <a href="message" class="NavList linknow">
-        <img src="public/images/nav/menupic.png" class="MenuCat">
-        <span class="MenuAdd">留点足印呗</span>
-    </a>
-{% endblock %}
 {% block MainBody %}
     <div class="MessageContain">
        <div class="MessageTop">
@@ -326,6 +312,133 @@
           </div>
        </div>
     </div>
+    <script>
+        //回复
+        $('.AnswerForm').find('button').click(function(){
+           var IsLand = $('.LandInfo').find('img').attr('src');
+           // 如果未登陆
+           if( IsLand == '') {
+                   $('.AnswerBtn').find('i').removeClass().addClass('fa fa-close');
+                   $('.AnswerBtn').find('div').removeClass().addClass('alert alert-danger');
+                   $('.AnswerBtn').find('span').html('登陆后回复');
+              }
+         })
+        //留言
+        $('#Leave').find('button').click(function(){
+           var IsLand = $('.LandInfo').find('img').attr('src');
+           // 如果未登陆
+           if( IsLand == '') {
+                 $('.LeaveBtn').find('i').removeClass().addClass('fa fa-close');
+                 $('.LeaveBtn').find('div').removeClass().addClass('alert alert-danger');
+                 $('.LeaveBtn').find('span').html('登陆后留言');
+                 setTimeout(function(){
+                    $('#Leave').hide();
+                    $('#Land').show();
+                 },1000);
+            }
+        })
+        //注册
+        $('#Register').find('button').click(function(){
+          $.ajax({
+            type: 'post',
+            url: '/api/visiter/register',
+            data: {
+              visitname :$('#Register').find('[name="visitname"]').val(),
+                  visitmark :$('#Register').find('[name="visitmark"]').val(),
+                  visitpass :$('#Register').find('[name="visitpass"]').val(),
+                  visitimg  :$('#Register').find('img').attr("src"),
+                  visitsafe :$('#Register').find('[name="visitsafe"]').val()
+              },
+              dataType: 'json',
+              success:function(result){
+                var code = result.code;
+                switch (code){
+                  case 0:
+                     $('.RegisterBtn').find('i').removeClass().addClass('fa fa-check');
+                             $('.RegisterBtn').find('div').removeClass().addClass('alert alert-success');
+                              setTimeout(function(){
+                            $('#Register').hide();
+                            $('#Land').show();
+                         },1000);
+                  break;
+                  default:
+                      $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
+                              $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger')
+                  break;
+                }
+                $('.RegisterBtn').find('span').html(result.message);
+              }
+          })
+        })
+        //登陆
+        $('#Land').find('button').eq(0).click(function(){
+          $.ajax({
+            type: 'post',
+            url:'/api/visiter/land',
+            data: {
+                    visitname :$('#Land').find('[name="visitname"]').val(),
+                    visitpass :$('#Land').find('[name="visitpass"]').val()
+            },
+                dataType: 'json',
+                success:function(result){
+                var code = result.code;
+                switch (code){
+                case 0:
+                   $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
+                           $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
+                           $('.LandInfo').find('span').html(result.visitInfo.visitmark);
+                           $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
+                           setTimeout(function(){
+                        $('#Leave').show();
+                              $('#Land').hide();
+                              $('.AnswerBtn').find('i').removeClass();
+                        $('.AnswerBtn').find('div').removeClass();
+                        $('.AnswerBtn').find('span').html('');
+                              $('.LeaveBtn').find('i').removeClass();
+                        $('.LeaveBtn').find('div').removeClass();
+                        $('.LeaveBtn').find('span').html('');
+                     },1000);
+                     window.location.reload();
+                        break;
+                        default:
+                           $('.LandBtn').find('i').removeClass().addClass('fa fa-close');
+                           $('.LandBtn').find('div').removeClass().addClass('alert alert-danger');
+                        break;
+               }
+              $('.LandBtn').find('span').html(result.message);
+                }
+          })
+        })
+        //进入注册界面
+        $('#Land').find('button').eq(1).click(function(){
+          $('#Land').hide();
+            $('#Register').show();
+        })
+        //进入登陆界面
+        $('#Landout').click(function(){$('.LandInfo').find('.OnLand').click()});
+        $('#Landon').click(function(){$('.LandInfo').find('.OnLand').click()});
+        $('.LandInfo').find('.OnLand').click(function(){
+         var IsLand = $('.LandInfo').find('img').attr('src');
+         // 如果未登陆
+         if( IsLand == '') {
+                 $('#Leave').hide();
+               $('#Register').hide();
+                 $('#Land').show();
+            } else {
+               var  IsLandout = confirm('是否注销用户？');
+               if( IsLandout ){
+                $.ajax({
+                url:'/api/visiter/landout',
+                success:function(result){
+                  if(result.code == 0)
+                        window.location.reload();
+                      }
+                  })
+               }
+             }
+        });
+    </script>
+    <script src="public/js/message.js"></script>
     <style type="text/css">
         .TheNav a:nth-child(3) .MenuAdd::before{opacity:1;left:-7px;} 
         .TheNav a:nth-child(3) .MenuAdd::after{opacity:1;right:-7px;} 

@@ -4,7 +4,7 @@ $(function(){
         minHeight:SetMin
       })
   // 转载信息框
-  $('input[name=AddInfo]').click(function(){
+  $('input[name=addInfo]').click(function(){
       if ($(this).prop('id')=='Reprint'){
         $('.ReprintInfo').slideDown(300);
       } else {

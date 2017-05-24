@@ -8,31 +8,37 @@
     <div class="ArticleRelease">
       <h1>文章发布</h1>
       <div class="panel">
-         <form>
+         <form id="ArticleEdit">
 		        <h2>标题</h2>
-      			<input class="form-control" type="text"></input>
+      			<input class="form-control" type="text" name="title"></input>
       			<h2>作者</h2>
-      			<input class="form-control" type="text"></input>
+      			<input class="form-control" type="text" name="writer"></input>
       			<h2>标签</h2>
       			<div class="form-group KindChoose">
-      				 <input name="KindChoose"  id='CSS' type="radio" checked="true"><label for="CSS">CSS</label>
-      				 <input name="KindChoose"  id='H5'  type="radio"><label for="H5">H5</label>
-      				 <input name="KindChoose"  id='Js'  type="radio"><label for="Js">Js</label>
-      				 <input name="KindChoose"  id='Node'  type="radio"><label for="Node">Node</label>
-      				 <input name="KindChoose"  id='Canvas'  type="radio"><label for="Canvas">Canvas</label>
+      				 <input name="lable"  id='CSS' type="radio" value="1"><label for="CSS">CSS</label>
+      				 <input name="lable"  id='H5'  type="radio" value="2"><label for="H5">H5</label>
+      				 <input name="lable"  id='Js'  type="radio" value="3"><label for="Js">Js</label>
+      				 <input name="lable"  id='Node'  type="radio" value="4"><label for="Node">Node</label>
+      				 <input name="lable"  id='Canvas'  type="radio" value="5"><label for="Canvas">Canvas</label>
       			</div>
 			      <h2>备注</h2>
       			<div class="form-group AddInfo">
-      				 <input name="AddInfo"  id='OwnWrite' type="radio" checked="true"><label for="OwnWrite">原创</label>
-      				 <input name="AddInfo"  id="Reprint"  type="radio" ><label for="Reprint">转载</label>
+      				 <input name="addInfo" id='OwnWrite' type="radio" value="1"><label for="OwnWrite">原创</label>
+      				 <input name="addInfo" id="Reprint"  type="radio" value="2"><label for="Reprint">转载</label>
       				 <div class="ReprintInfo">
             	   <h2>转载说明</h2>
-            	   <input class="form-control" type="text"></input>
+            	   <input class="form-control" type="text" name="copyInfo"></input>
                </div>  
             </div>		
             <h2>编辑文本</h2>
-      			<textarea class="form-control"></textarea>
-      			<button class="btn btn-success" type="submit">发布</button>
+      			<textarea class="form-control" name="content"></textarea>
+            <div class="ArticleEditBtn">
+                <div>
+                   <i></i>
+                   <span></span>
+                </div>
+            </div>
+      			<button class="btn btn-success" type="button">发布</button>
       			<button class="btn btn-danger" type="reset">重置</button> 
 		     </form>
       </div>
@@ -45,5 +51,35 @@
         $('#Article').addClass('active');
         $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#Article').slideToggle(0);
+        //注册
+        $('#ArticleEdit').find('button').eq(0).click(function(){
+        $.ajax({
+            type: 'post',
+            url: '/admin/article',
+            data: {
+                  title:$('#ArticleEdit').find('[name="title"]').val(),
+                  writer:$('#ArticleEdit').find('[name="writer"]').val(),
+                  lable:$('#ArticleEdit').find('[name="lable"]').val(),
+                  addInfo:$('#ArticleEdit').find('[name="addInfo"]').val(),
+                  copyInfo:$('#ArticleEdit').find('[name="copyInfo"]').val(),
+                  content:$('#ArticleEdit').find('[name="content"]').val()
+              },
+            dataType: 'json',
+            success:function(result){
+              var code = result.code;
+              switch (code){
+                case 0:
+                    $('.ArticleEditBtn').find('i').removeClass().addClass('fa fa-check');
+                    $('.ArticleEditBtn').find('div').removeClass().addClass('alert alert-success')
+                break;
+                default:
+                    $('.ArticleEditBtn').find('i').removeClass().addClass('fa fa-close');
+                    $('.ArticleEditBtn').find('div').removeClass().addClass('alert alert-danger')
+                break;
+              }
+              $('.ArticleEditBtn').find('span').html(result.message);
+            }
+         })
+      })
     </script>
 {% endblock %}

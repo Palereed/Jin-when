@@ -9,55 +9,33 @@
        <h1>文章列表</h1>
        <div class="panel">
           <table class="table">
-             	 <thead>
-             	 	<th class="InSort">编号</th>
-             	 	<th class="FaData">发表日期</th>
-             	 	<th>文章标题</th>
-             	 	<th class="KindLable">标签</th>
-             	 	<th class="AddInfor">备注</th>
-             	 	<th class="Number">浏览量</th>
-             	 	<th class="Number">评论数</th>
-             	 	<th class="Number">赞同数</th>
-             	 	<th class="Options">操作</th>
-             	 </thead>
-             	 <tbody>
-             	 	<tr>
-             	 		<td class="InSort">01</td>
-             	 		<td class="FaData">2017-5-20</td>
-             	 		<td>Float父层浮动引起父层坍塌解决方法</td>
-             	 		<td class="Number">Css</td>
-             	 		<td class="AddInfor">原创</td>
-             	 		<td class="Number">10</td>
-             	 		<td class="Number">2</td>
-             	 		<td class="Number">2</td>
-             	 		<td class="Options">
-             	 		  <span class="btn btn-info">
-							  <i class="fa fa-edit fa-fw"></i>
-						  </span>
-						  <span class="btn btn-danger">
-							  <i class="fa fa-trash-o fa-fw"></i>
-						  </span>
-					    </td>
-             	 	</tr>
-             	 	<tr>
-             	 		<td class="InSort">01</td>
-             	 		<td class="FaData">2017-5-20</td>
-             	 		<td>Float父层浮动引起父层坍塌解决方法</td>
-             	 		<td class="Number">Css</td>
-             	 		<td class="AddInfor">原创</td>
-             	 		<td class="Number">10</td>
-             	 		<td class="Number">2</td>
-             	 		<td class="Number">2</td>
-             	 		<td class="Options">
-             	 		  <span class="btn btn-info">
-							  <i class="fa fa-edit fa-fw"></i>
-						  </span>
-						  <span class="btn btn-danger">
-							  <i class="fa fa-trash-o fa-fw"></i>
-						  </span>
-					    </td>
-             	 	</tr>
-             	 </tbody>
+             <thead>
+                    <th class="InSort">编号</th>
+                    <th class="title">标题</th>
+                    <th class="lable">标签</th>
+                    <th class="addInfo">备注</th>
+                    <th class="content">内容</th>
+                    <th class="Options">操作</th>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td class="TableId">{{article._id.toString()}}</td>
+                        <td>{{article.title}}</td>
+                        <td>{{article.lable}}</td>
+                        <td>{{article.addInfo}}</td>
+                        <td>{{article.content}}</td>
+                        <td class="Options">
+                          <span class="btn btn-info">
+                                    <i class="fa fa-edit fa-fw"></i>
+                                </span>
+                                <span class="btn btn-danger">
+                                    <i class="fa fa-trash-o fa-fw"></i>
+                               </span>
+                            </td>
+                    </tr>
+                {% endfor %}
+             </tbody>
           </table>
        </div>
     </div>

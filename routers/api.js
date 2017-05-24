@@ -59,7 +59,7 @@ router.post('/visiter/register', function(req, res, next){
         visitsafe:visitsafe
       });
       return visiter.save();
-   }).then(function(newVisiterInfo){
+   }).then(function(){
       responseData.message = '注册成功';
       res.json( responseData);
    })
