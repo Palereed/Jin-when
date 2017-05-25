@@ -9,18 +9,23 @@
        <div class="panel">
     	  <table class="table">
              	 <thead>
-             	 	<th class="InSort">编号</th>
-             	 	<th class="FaData">发表日期</th>
+             	 	<th class="TableId">编号</th>
+             	 	<th>发表日期</th>
              	 	<th>独白标题</th>
-             	 	<th class="KindLable">天气</th>
+                    <th class='mood'>心情</th>
+             	 	<th class='weather'>天气</th>
+                    <th>内容</th>
              	 	<th class="Options">操作</th>
              	 </thead>
              	 <tbody>
+                    {% for record in records %}
              	 	<tr>
-             	 		<td class="InSort">01</td>
-             	 		<td class="FaData">2017-5-20</td>
-             	 		<td>庆祝锦时今日开启</td>
-             	 		<td class="KindLable">晴</td>
+             	 		<td class="TableId">{{record._id.toString()}}</td>
+             	 		<td>{{record.addTime|date('Y-m-d')}}</td>
+             	 		<td>{{record.title}}</td>
+             	 		<td class='mood'>{{record.mood}}</td>
+                        <td class='weather'>{{record.weather}}</td>
+                        <td>{{record.content.slice(0,25)}}..</td>
              	 		<td class="Options">
              	 		  <span class="btn btn-info">
 							  <i class="fa fa-edit fa-fw"></i>
@@ -30,8 +35,23 @@
 						  </span>
 					    </td>
              	 	</tr>
+                    {% endfor %}
              	 </tbody>
           </table>
+          <div class="PageNumber">
+              {% if page <=1 %}
+              <a href="javascript:;" class="CantUse">前页</a>
+              {% else %}
+              <a href="/admin/recordlist?page={{page-1}}">前页</a>
+              {% endif %}
+              <a class="Active">{{page}}</a>
+              {% if page >= pages %}
+              <a href="javascript:;" class="CantUse">后页</a>
+              {% else %}
+              <a href="/admin/recordlist?page={{page+1}}">后页</a>
+              {% endif %}
+          </div>
+          <div class="clearfix"></div>
        </div>
     </div>
     <style type="text/css">

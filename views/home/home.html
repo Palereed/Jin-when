@@ -28,25 +28,30 @@
            </div>
        </div>	           
        <!-- 文章部分 -->
+       {% for article in articles %}
        <article class="WebLearn">
            <div class="ArclTitle">
            	  <h1>
                 <a href="article/css/float.html" class="ArclLink">
-                  解决子元素float引起父元素坍塌
+                  {{article.title}}
                 </a>
               </h1>
            </div>
            <div class="ArclTop">
-               <span class="ArclKind">标签：Css类</span>
-               <span class="ArclTime">时间：05 April 2017</span>
-               <span class="ArclWrite">作者：蒹葭</span>
-               <span class="ArclMark">备注：原创</span>
+               <span class="ArclKind">标签：{{article.lable}}</span>
+               <span class="ArclTime">时间：{{article.addTime|date('Y-m-d')}}</span>
+               <span class="ArclWrite">作者：{{article.writer}}</span>
+               {% if article.copyInfo %}
+               <span class="ArclMark">备注：{{article.addInfo}}自<i>{{article.copyInfo}}</i></span>
+               {% else %}
+               <span>备注：{{article.addInfo}}</span>
+               {% endif %}
            </div>
            <div class="ArcComment">
-           	    <span class="fa fa-heart-o fa-lg"></span>
-           	    <i>0</i>
-           	    <span class="fa fa-comment-o fa-lg"></span>
-           	    <i>0</i>
+                <span class="fa fa-comment-o fa-lg"></span>
+                <i>{{article.comments}}</i>
+           	    <span class="fa fa-eye fa-lg"></span>
+           	    <i>{{article.views}}</i>
            </div>
            <div class="ArclMain">
                <div class="ArclSection">
@@ -70,17 +75,24 @@
                <a href="article/css/float.html" class="ArclShow">展开全文</a>
            </div>
        </article>
+       {% endfor %}
        <!-- 分页部分 -->
        <div class="PageNumber">
-          <span class="CantUse">前页</span>
-          <span class="Active">1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>...</span>
-          <span>后页</span>
+              {% if page <=1 %}
+              <a href="javascript:;" class="CantUse">前页</a>
+              {% else %}
+              <a href="/home?page={{page-1}}">前页</a>
+              {% endif %}
+              <a class="Active">{{page}}</a>
+              {% if page >= pages %}
+              <a href="javascript:;" class="CantUse">后页</a>
+              {% else %}
+              <a href="/home?page={{page+1}}">后页</a>
+              {% endif %}
        </div>
 	</div>
 	<style type="text/css">
+        footer{margin:20px 0 0 0;}
         .TheNav a:first-child .MenuAdd::before{opacity:1;left:-7px;} 
         .TheNav a:first-child .MenuAdd::after{opacity:1;right:-7px;} 
 	</style>

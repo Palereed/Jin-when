@@ -61,7 +61,7 @@ button:focus{outline:none !important;}
 .table>tbody>tr:nth-child(odd){background:#f3faff}
 .Options{width:120px;text-align:center;}
 td>.btn{padding:2px 3px}
-.TableId{width:250px;}
+.TableId{width:200px;}
 /* 分页 */
 .PageNumber{float:right;margin:0 50px 0 0;padding:20px 0 0 0}     
 .PageNumber a{display:inline-block;
@@ -76,11 +76,15 @@ td>.btn{padding:2px 3px}
 .CantUse{color:#AAB5BC !important;} 
 /* 用户管理 */
 .VisiterImg img{height:36px;border-radius:18px;}
+/* 文章管理 */
+.views,.comments{text-align:center;}
 /* 独白管理 */
 .RecordRelease textarea{height:200px;}
+.mood,.weather{width:60px;text-align:center;}
 /* 留言管理 */
 .UserName{width:100px;}
-/* 网站统计 */
+
+/* 网站管理 */
 .Statistical>.panel{width:22.75%;
 					margin:0 3% 0 0;
 					float:left;

@@ -38,7 +38,19 @@
                 {% endfor %}
              </tbody>
           </table>
-          {% include 'page.html' %}
+          <div class="PageNumber">
+              {% if page <=1 %}
+              <a href="javascript:;" class="CantUse">前页</a>
+              {% else %}
+              <a href="/admin/visiter?page={{page-1}}">前页</a>
+              {% endif %}
+              <a class="Active">{{page}}</a>
+              {% if page >= pages %}
+              <a href="javascript:;" class="CantUse">后页</a>
+              {% else %}
+              <a href="/admin/visiter?page={{page+1}}">后页</a>
+              {% endif %}
+          </div>
           <div class="clearfix"></div>
        </div>
     </div>

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Visiter = require('../models/visiter');
+var Article = require('../models/articles') 
 //统一返回格式
 var responseData;
 router.use(function(req, res, next){

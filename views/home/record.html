@@ -44,102 +44,23 @@
           <div class="Middle">
           	<div class="TimeLine"></div>
           </div>
+          {% for record in records %}
           <div class="RecordModule">
           	<div class="RecordTime">
           	    <span class="anchor"></span>
           	    <span class="line"></span>
-          	    <span class="weather">晴</span>
+          	    <span class="weather">{{record.weather}}</span>
           	    <span class="separated">|</span>
-          	    <span class="spirit">开心</span>
+          	    <span class="spirit">{{record.mood}}</span>
           	    <span class="separated">|</span>
-          		<span class="time">05 April 2017</span>
+          		<span class="time">{{record.addTime|date('Y-m-d')}}</span>
           	</div>
           	<div class="RecordBody">
-          		<h3>庆祝锦时开启</h3>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了。这是迈向前端大牛的第一步,加油！</p>
+          		<h3>{{record.title}}</h3>
+              <p>{{record.content}}</p>
             </div>
           </div>
-          <div class="RecordModule">
-          	<div class="RecordTime">
-          	    <span class="anchor"></span>
-          	    <span class="line"></span>
-          	    <span class="weather">晴</span>
-          	    <span class="separated">|</span>
-          	    <span class="spirit">开心</span>
-          	    <span class="separated">|</span>
-          		<span class="time">05 April 2017</span>
-          	</div>
-          	<div class="RecordBody">
-          		<h3>庆祝锦时开启</h3>
-          		<p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了这是迈向前端大牛的第一步,加油！</p>
-          	</div>
-          </div>
-          <div class="RecordModule">
-            <div class="RecordTime">
-                <span class="anchor"></span>
-                <span class="line"></span>
-                <span class="weather">晴</span>
-                <span class="separated">|</span>
-                <span class="spirit">开心</span>
-                <span class="separated">|</span>
-              <span class="time">05 April 2017</span>
-            </div>
-            <div class="RecordBody">
-              <h3>庆祝锦时开启</h3>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了这是迈向前端大牛的第一步,加油！</p>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了这是迈向前端大牛的第一步,加油！</p>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了这是迈向前端大牛的第一步,加油！</p>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了这是迈向前端大牛的第一步,加油！</p>
-            </div>
-          </div>
-          <div class="RecordModule">
-            <div class="RecordTime">
-                <span class="anchor"></span>
-                <span class="line"></span>
-                <span class="weather">晴</span>
-                <span class="separated">|</span>
-                <span class="spirit">开心</span>
-                <span class="separated">|</span>
-              <span class="time">05 April 2017</span>
-            </div>
-            <div class="RecordBody">
-              <h3>庆祝锦时开启</h3>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了。这是迈向前端大牛的第一步,加油！</p>
-            </div>
-          </div>
-          <div class="RecordModule">
-            <div class="RecordTime">
-                <span class="anchor"></span>
-                <span class="line"></span>
-                <span class="weather">晴</span>
-                <span class="separated">|</span>
-                <span class="spirit">开心</span>
-                <span class="separated">|</span>
-              <span class="time">05 April 2017</span>
-            </div>
-            <div class="RecordBody">
-              <h3>庆祝锦时开启</h3>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了。这是迈向前端大牛的第一步,加油！</p>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了。这是迈向前端大牛的第一步,加油！</p>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了。这是迈向前端大牛的第一步,加油！</p>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了。这是迈向前端大牛的第一步,加油！</p>
-            </div>
-          </div>
-          <div class="RecordModule">
-            <div class="RecordTime">
-                <span class="anchor"></span>
-                <span class="line"></span>
-                <span class="weather">晴</span>
-                <span class="separated">|</span>
-                <span class="spirit">开心</span>
-                <span class="separated">|</span>
-                <span class="time">05 April 2017</span>
-            </div>
-            <div class="RecordBody">
-              <h3>庆祝锦时开启</h3>
-              <p>经过五个多月的努力,边学习边搭建的个人博客锦时终于建成了。这是迈向前端大牛的第一步,加油！</p>
-            </div>
-          </div>
+          {% endfor %}
           <!--  未完待续 -->
           <div class="RecordModule">
             <div class="RecordTime">

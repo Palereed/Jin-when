@@ -15,7 +15,7 @@
       			<input class="form-control" type="text" name="writer"></input>
       			<h2>标签</h2>
       			<div class="form-group KindChoose">
-      				 <input name="lable"  id='CSS' type="radio" value="1"><label for="CSS">CSS</label>
+      				 <input name="lable"  id='CSS' type="radio" value="1" checked="true"><label for="CSS">CSS</label>
       				 <input name="lable"  id='H5'  type="radio" value="2"><label for="H5">H5</label>
       				 <input name="lable"  id='Js'  type="radio" value="3"><label for="Js">Js</label>
       				 <input name="lable"  id='Node'  type="radio" value="4"><label for="Node">Node</label>
@@ -23,7 +23,7 @@
       			</div>
 			      <h2>备注</h2>
       			<div class="form-group AddInfo">
-      				 <input name="addInfo" id='OwnWrite' type="radio" value="1"><label for="OwnWrite">原创</label>
+      				 <input name="addInfo" id='OwnWrite' type="radio" value="1" checked="true"><label for="OwnWrite">原创</label>
       				 <input name="addInfo" id="Reprint"  type="radio" value="2"><label for="Reprint">转载</label>
       				 <div class="ReprintInfo">
             	   <h2>转载说明</h2>
@@ -51,35 +51,37 @@
         $('#Article').addClass('active');
         $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#Article').slideToggle(0);
-        //注册
         $('#ArticleEdit').find('button').eq(0).click(function(){
-        $.ajax({
-            type: 'post',
-            url: '/admin/article',
-            data: {
-                  title:$('#ArticleEdit').find('[name="title"]').val(),
-                  writer:$('#ArticleEdit').find('[name="writer"]').val(),
-                  lable:$('#ArticleEdit').find('[name="lable"]').val(),
-                  addInfo:$('#ArticleEdit').find('[name="addInfo"]').val(),
-                  copyInfo:$('#ArticleEdit').find('[name="copyInfo"]').val(),
-                  content:$('#ArticleEdit').find('[name="content"]').val()
-              },
-            dataType: 'json',
-            success:function(result){
-              var code = result.code;
-              switch (code){
-                case 0:
-                    $('.ArticleEditBtn').find('i').removeClass().addClass('fa fa-check');
-                    $('.ArticleEditBtn').find('div').removeClass().addClass('alert alert-success')
-                break;
-                default:
-                    $('.ArticleEditBtn').find('i').removeClass().addClass('fa fa-close');
-                    $('.ArticleEditBtn').find('div').removeClass().addClass('alert alert-danger')
-                break;
-              }
-              $('.ArticleEditBtn').find('span').html(result.message);
-            }
-         })
+            var  IsEditEnd = confirm('是否编辑完成？');
+            if (IsEditEnd){
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/article',
+                    data: {
+                          title:$('#ArticleEdit').find('[name="title"]').val(),
+                          writer:$('#ArticleEdit').find('[name="writer"]').val(),
+                          lable:$('#ArticleEdit').find('[name="lable"]:checked').next('label').html(),
+                          addInfo:$('#ArticleEdit').find('[name="addInfo"]:checked').next('label').html(),
+                          copyInfo:$('#ArticleEdit').find('[name="copyInfo"]').val(),
+                          content:$('#ArticleEdit').find('[name="content"]').val()
+                      },
+                    dataType: 'json',
+                    success:function(result){
+                      var code = result.code;
+                      switch (code){
+                        case 0:
+                            $('.ArticleEditBtn').find('i').removeClass().addClass('fa fa-check');
+                            $('.ArticleEditBtn').find('div').removeClass().addClass('alert alert-success')
+                        break;
+                        default:
+                            $('.ArticleEditBtn').find('i').removeClass().addClass('fa fa-close');
+                            $('.ArticleEditBtn').find('div').removeClass().addClass('alert alert-danger')
+                        break;
+                      }
+                      $('.ArticleEditBtn').find('span').html(result.message);
+                   }
+              })
+          }
       })
     </script>
 {% endblock %}

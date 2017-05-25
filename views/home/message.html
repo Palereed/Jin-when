@@ -221,12 +221,17 @@
        </div>
        <!-- 分页部分 -->
        <div class="PageNumber">
-            <span class="CantUse">prev</span>
-            <span class="Active">1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>...</span>
-            <span>next</span>
+              {% if page <=1 %}
+              <a href="javascript:;" class="CantUse">前页</a>
+              {% else %}
+              <a href="/message?page={{page-1}}">前页</a>
+              {% endif %}
+              <a class="Active">{{page}}</a>
+              {% if page >= pages %}
+              <a href="javascript:;" class="CantUse">后页</a>
+              {% else %}
+              <a href="/message?page={{page+1}}">后页</a>
+              {% endif %}
        </div>
        <!-- 留言表单 -->
        <div class="TopTab">

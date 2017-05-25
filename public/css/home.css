@@ -93,6 +93,11 @@ article h2 span{margin:0 20px 0 0;}
 .ArclTitle:hover .ArclLink::before{width:100%;}	  
 .ArclTop{padding:10px 0 10px 0;}
 .ArclTop span{margin:0 20px 0 0;}  
+.ArclMark i{-webkit-user-select:text;
+            -moz-user-select:text;
+            -ms-user-select:text;
+            user-select:text;
+            margin:0 0 0 10px;}
 .ArcComment{width:26px;
             position:absolute;
             top:70px;
@@ -115,15 +120,4 @@ article h2 span{margin:0 20px 0 0;}
                      letter-spacing:1.5px;}
 .ArclBttom{font-size:16px;
            padding:10px 0 10px 33px;}
-.ArclShow{text-decoration:underline;}
-/* 页码 */
-.PageNumber{padding:20px 0}     
-.PageNumber span{display:inline-block;
-	               margin-right:5px;
-        				 width:30px;
-        				 line-height:30px;
-        				 text-align:center;
-        				 border-radius:2px;
-        				 cursor:pointer;} 
-.Active{background:#c3c3c3;}
-.CantUse{color:#aaa}                                                			                  
+.ArclShow{text-decoration:underline;}                                  			                  

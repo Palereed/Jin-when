@@ -10,11 +10,15 @@
        <div class="panel">
           <table class="table">
              <thead>
-                    <th class="InSort">编号</th>
-                    <th class="title">标题</th>
-                    <th class="lable">标签</th>
-                    <th class="addInfo">备注</th>
-                    <th class="content">内容</th>
+                    <th class="TableId">编号</th>
+                    <th>标题</th>
+                    <th>作者</th>
+                    <th>标签</th>
+                    <th>发布时间</th>
+                    <th>备注</th>
+                    <th>转载信息</th>
+                    <th class="views">浏览量</th>
+                    <th class="comments">评论数</th>
                     <th class="Options">操作</th>
             </thead>
             <tbody>
@@ -22,9 +26,17 @@
                     <tr>
                         <td class="TableId">{{article._id.toString()}}</td>
                         <td>{{article.title}}</td>
+                        <td>{{article.writer}}</td>
                         <td>{{article.lable}}</td>
+                        <td>{{article.addTime|date('Y-m-d')}}</td>
                         <td>{{article.addInfo}}</td>
-                        <td>{{article.content}}</td>
+                        {% if article.copyInfo %}
+                        <td>{{article.copyInfo}}</td>
+                        {% else %}
+                        <td>null</td>
+                        {% endif %}
+                        <td class="views">{{article.views}}</td>
+                        <td class="comments">{{article.comments}}</td>
                         <td class="Options">
                           <span class="btn btn-info">
                                     <i class="fa fa-edit fa-fw"></i>
@@ -37,6 +49,20 @@
                 {% endfor %}
              </tbody>
           </table>
+          <div class="PageNumber">
+              {% if page <=1 %}
+              <a href="javascript:;" class="CantUse">前页</a>
+              {% else %}
+              <a href="/admin/articlelist?page={{page-1}}">前页</a>
+              {% endif %}
+              <a class="Active">{{page}}</a>
+              {% if page >= pages %}
+              <a href="javascript:;" class="CantUse">后页</a>
+              {% else %}
+              <a href="/admin/articlelist?page={{page+1}}">后页</a>
+              {% endif %}
+          </div>
+          <div class="clearfix"></div>
        </div>
     </div>
     <style type="text/css">

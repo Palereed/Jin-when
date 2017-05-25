@@ -1,16 +1,40 @@
 var express = require('express');
 var router = express.Router();
+var Article = require('../models/articles');
+var Record = require('../models/records')
 router.get('/', function(req, res, next){
    res.render('home/curtain');
 })
-//信笺模块
+//主页模块
 router.get('/home', function(req, res, next){
-   res.render('home/home');
+    var page = Number(req.query.page || 1);
+    var limit = 5;
+    Article.count().then(function(count){
+        pages = Math.ceil(count / limit);
+        page = Math.min(page, pages);
+        page = Math.max(page, 1);
+        var skip = (page - 1) * limit;
+        Article.find().sort({_id:-1}).limit(limit).skip(skip).then(function(articles){
+            res.render('home/home',{
+            visitInfo:req.visitInfo,
+            articles:articles,
+            page:page,
+            pages:pages
+           });
+        })
+    })
 })
-//信笺模块
+
+//独白模块
 router.get('/record', function(req, res, next){
-   res.render('home/record');
+    Record.find().sort({_id:-1}).then(function(records){
+        res.render('home/record',{
+        visitInfo:req.visitInfo,
+        records:records,
+       });
+    })
 })
+
 //信笺模块
 router.get('/message', function(req, res, next){
 	res.render('home/message',{

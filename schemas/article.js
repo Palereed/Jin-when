@@ -1,10 +1,15 @@
 //表结构对象
-var mongoose= require('mongoose');
+var mongoose = require('mongoose');
 module.exports = new mongoose.Schema({
     //标题
     title:String,
     //作者
     writer:String,
+    //发布时间
+    addTime:{
+        type:Date,
+        default:new Date()
+    },
     //标签
     lable:String,
     //备注
@@ -12,5 +17,15 @@ module.exports = new mongoose.Schema({
     //转载信息
     copyInfo:String,
     //内容
-    content:String
+    content:String,
+    //阅读量
+    views:{
+        type:Number,
+        default:0
+    },
+    //评论数目
+   comments:{
+        type:Number,
+        default:0
+   }
 });

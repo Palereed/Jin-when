@@ -1,5 +1,5 @@
 //表结构对象
-var mongoose= require('mongoose');
+var mongoose = require('mongoose');
 module.exports = new mongoose.Schema({
     //账户
     visitname:String,
