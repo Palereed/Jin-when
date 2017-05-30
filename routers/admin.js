@@ -71,7 +71,6 @@ router.post('/article', function(req, res, next){
     var addInfo = req.body.addInfo;
     var copyInfo = req.body.copyInfo;
     var content = req.body.content;
-    console.log(req.body);
     if (title == ''){
       articleData.code = 1;
       articleData.message = '文章标题不能为空';
@@ -135,6 +134,66 @@ router.get('/articlelist', function(req, res, next){
         })
     })
 })
+//文章修改
+router.get('/articledit', function(req, res, next){
+   var id = req.query.id || '';
+   Article.findOne({
+     _id: id
+   }).then(function(article){
+      if(!article){
+         res.render('admin/error',{
+            visitInfo:req.visitInfo,
+            message:'文章不存在'
+         })
+      } else {
+         res.render('admin/articledit',{
+            visitInfo:req.visitInfo,
+            article:article
+         })  
+      }
+   })
+})
+router.post('/articledit', function(req, res, next){
+    var id = req.query.id || '';
+    var title = req.body.title;
+    var writer = req.body.writer;
+    var lable = req.body.lable;
+    var addInfo = req.body.addInfo;
+    var copyInfo = req.body.copyInfo;
+    var content = req.body.content;
+    Article.findOne({
+      _id:id
+    }).then(function(){
+      return Article.update({
+          _id:id
+      },{
+          title:title,
+          writer:writer,
+          lable:lable,
+          addInfo:addInfo,
+          copyInfo:copyInfo,
+          content:content
+      })
+      //为何用ajax不起作用？必须仔细研究研究
+    }).then(function(){
+      res.render('admin/success',{
+         message:'修改成功'
+      })
+    })
+})
+// 文章删除
+router.get('/articledelete', function(req, res, next){
+  var id = req.query.id || '';
+   Article.remove({
+     _id: id
+   }).then(function(){
+      res.render('admin/success',{
+         message:'删除成功'
+      })
+   })
+})
+
+
 
 //独白发布
 router.get('/record', function(req, res, next){
@@ -155,7 +214,6 @@ router.post('/record', function(req, res, next){
     var mood = req.body.mood;
     var weather = req.body.weather;
     var content = req.body.content;
-    console.log(req.body);
     if ( title == '' ){
       recordData.code = 1;
       recordData.message = '读白标题不能为空';

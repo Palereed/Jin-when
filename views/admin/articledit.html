@@ -1,0 +1,45 @@
+{% extends 'nav.html' %}
+{% block index %}
+    <span>锦时</span>
+    <span><i>/</i>文章管理</span>
+    <span><i>/</i><a href='articlelist'>文章列表</a></span>
+    <span><i>/</i>文章修改</span>
+{% endblock %}
+{% block MainBody %}
+    <div class="ArticleRelease">
+      <h1>文章修改</h1>
+      <div class="panel">
+         <form method="post">
+		        <h2>标题</h2>
+      			<input class="form-control" type="text" name="title" value="{{article.title}}"></input>
+      			<h2>作者</h2>
+      			<input class="form-control" type="text" name="writer" value="{{article.writer}}"></input>
+      			<h2>标签</h2>
+      			<input class="form-control" type="text" name="lable" value="{{article.lable}}"></input>
+			      <h2>备注</h2>
+      			<input class="form-control" type="text" name="addInfo" value="{{article.addInfo}}"></input>
+      			<h2>转载说明</h2>
+            <input class="form-control" type="text" name="copyInfo" value="{{article.copyInfo}}"></input>
+             <h2>编辑文本</h2>
+      			<textarea class="form-control" name="content">{{article.content}}</textarea>
+	            <div class="ArticleEditBtn">
+	                <div>
+	                   <i></i>
+	                   <span></span>
+	                </div>
+	            </div>
+      			<button class="btn btn-success" type="submit">保存</button>
+      			<button class="btn btn-danger" type="reset">重置</button> 
+		 </form>
+      </div>
+    </div>
+    <style type="text/css">
+       #Article li:last-child{background:#31383e;}
+       #Article li:last-child a{color:#f2f2f2;}
+    </style>
+    <script>
+        $('#Article').addClass('active');
+        $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
+        $('#Article').slideToggle(0);
+    </script>
+{% endblock %}

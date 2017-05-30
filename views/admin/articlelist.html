@@ -38,13 +38,17 @@
                         <td class="views">{{article.views}}</td>
                         <td class="comments">{{article.comments}}</td>
                         <td class="Options">
-                          <span class="btn btn-info">
-                                    <i class="fa fa-edit fa-fw"></i>
-                                </span>
-                                <span class="btn btn-danger">
-                                    <i class="fa fa-trash-o fa-fw"></i>
-                               </span>
-                            </td>
+                           <span class="btn btn-info">
+                               <a href="/admin/articledit?id={{article._id.toString()}}">
+                                 <i class="fa fa-edit fa-fw"></i>
+                               </a>
+                           </span>
+                           <span class="btn btn-danger">
+                               <a href="/admin/articledelete?id={{article._id.toString()}}">
+                                  <i class="fa fa-trash-o fa-fw"></i>
+                               </a>
+                           </span>
+                        </td>
                     </tr>
                 {% endfor %}
              </tbody>

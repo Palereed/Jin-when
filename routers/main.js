@@ -27,7 +27,7 @@ router.get('/home', function(req, res, next){
 
 //独白模块
 router.get('/record', function(req, res, next){
-    Record.find().sort({_id:-1}).then(function(records){
+    Record.find().sort({_id:1}).then(function(records){
         res.render('home/record',{
         visitInfo:req.visitInfo,
         records:records,
