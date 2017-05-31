@@ -49,6 +49,86 @@ router.get('/visiter', function(req, res, next){
         })
     })
 }) 
+//用户修改
+router.get('/visiter/edit', function(req, res, next){
+   var id = req.query.id || '';
+   Visiter.findOne({
+     _id: id
+   }).then(function(visiter){
+      res.render('admin/visiteredit',{
+            visitInfo:req.visitInfo,
+            visiter:visiter
+      })  
+   })
+})
+var visiterData;
+router.use(function(req, res, next){
+    visiterData = {
+        code:0,
+        message:''
+    } 
+    next();
+})
+router.post('/visiter/edit', function(req, res, next){
+    var id = req.query.id || '';
+    var visitmark = req.body.visitmark;
+    var visitimg = req.body.visitimg;
+    var visitname = req.body.visitname;
+    var visitpass = req.body.visitpass;
+    var visitsafe = req.body.visitsafe;
+    Visiter.findOne({
+      _id:id
+    }).then(function(){
+      return Visiter.update({
+          _id:id
+      },{
+          visitmark:visitmark,
+          visitimg:visitimg,
+          visitname:visitname,
+          visitpass:visitpass,
+          visitsafe:visitsafe,
+      })
+    }).then(function(){
+       visiterData.message = '修改成功';
+       res.json(visiterData);
+       return;
+     })
+})
+//用户删除
+router.get('/visiter/delete', function(req, res, next){
+   var id = req.query.id || '';
+   Visiter.findOne({
+     _id: id
+   }).then(function(visiter){
+      res.render('admin/visiterdelete',{
+            visitInfo:req.visitInfo,
+            visiter:visiter
+      })  
+   })
+})
+var visiterdeleteData;
+router.use(function(req, res, next){
+    visiterdeleteData = {
+        code:0,
+        message:''
+    } 
+    next();
+})
+router.post('/visiter/delete', function(req, res, next){
+    var id = req.query.id || '';
+    Visiter.findOne({
+      _id:id
+    }).then(function(){
+       return Visiter.remove({
+          _id:id
+       })
+    }).then(function(){
+       visiterdeleteData.message = '删除成功';
+       res.json(visiterdeleteData);
+       return;
+     })
+})
+
 
 //文章发布
 router.get('/article', function(req, res, next){
@@ -58,6 +138,7 @@ router.get('/article', function(req, res, next){
 }) 
 var articleData;
 router.use(function(req, res, next){
+   //json传递数组是否只用一个就行?待项目完成后再进行尝试
     articleData = {
         code:0,
         message:''
@@ -135,25 +216,26 @@ router.get('/articlelist', function(req, res, next){
     })
 })
 //文章修改
-router.get('/articledit', function(req, res, next){
+router.get('/article/edit', function(req, res, next){
    var id = req.query.id || '';
    Article.findOne({
      _id: id
    }).then(function(article){
-      if(!article){
-         res.render('admin/error',{
-            visitInfo:req.visitInfo,
-            message:'文章不存在'
-         })
-      } else {
-         res.render('admin/articledit',{
+      res.render('admin/articledit',{
             visitInfo:req.visitInfo,
             article:article
-         })  
-      }
+      })  
    })
 })
-router.post('/articledit', function(req, res, next){
+var editData;
+router.use(function(req, res, next){
+    editData = {
+        code:0,
+        message:''
+    } 
+    next();
+})
+router.post('/article/edit', function(req, res, next){
     var id = req.query.id || '';
     var title = req.body.title;
     var writer = req.body.writer;
@@ -175,24 +257,48 @@ router.post('/articledit', function(req, res, next){
           content:content
       })
       //为何用ajax不起作用？必须仔细研究研究
+      //原因是传递了id参数admin/article/edit?id=...,但是ajax的url仅为admin/article/edit
+      //含参url如何写?还是直接删除url?默认指向当前页,也就解决此问题
     }).then(function(){
-      res.render('admin/success',{
-         message:'修改成功'
-      })
-    })
+       editData.message = '修改成功';
+       res.json(editData);
+       return;
+     })
 })
 // 文章删除
-router.get('/articledelete', function(req, res, next){
-  var id = req.query.id || '';
-   Article.remove({
+router.get('/article/delete', function(req, res, next){
+   var id = req.query.id || '';
+   Article.findOne({
      _id: id
-   }).then(function(){
-      res.render('admin/success',{
-         message:'删除成功'
-      })
+   }).then(function(article){
+      res.render('admin/articledelete',{
+            visitInfo:req.visitInfo,
+            article:article
+      })  
    })
 })
-
+var deleteData;
+router.use(function(req, res, next){
+    deleteData = {
+        code:0,
+        message:''
+    } 
+    next();
+})
+router.post('/article/delete', function(req, res, next){
+    var id = req.query.id || '';
+    Article.findOne({
+      _id:id
+    }).then(function(){
+       return Article.remove({
+          _id:id
+       })
+    }).then(function(){
+       editData.message = '删除成功';
+       res.json(editData);
+       return;
+     })
+})
 
 
 //独白发布
@@ -275,6 +381,85 @@ router.get('/recordlist', function(req, res, next){
         })
     })
 })
+//独白修改
+router.get('/record/edit', function(req, res, next){
+   var id = req.query.id || '';
+   Record.findOne({
+     _id: id
+   }).then(function(record){
+      res.render('admin/recordedit',{
+            visitInfo:req.visitInfo,
+            record:record
+      })  
+   })
+})
+var neweditData;
+router.use(function(req, res, next){
+    neweditData = {
+        code:0,
+        message:''
+    } 
+    next();
+})
+router.post('/record/edit', function(req, res, next){
+    var id = req.query.id || '';
+    var title = req.body.title;
+    var mood = req.body.mood;
+    var weather = req.body.weather;
+    var content = req.body.content;
+    Record.findOne({
+      _id:id
+    }).then(function(){
+      return Record.update({
+          _id:id
+      },{
+          title:title,
+          mood:mood,
+          weather:weather,
+          content:content
+      })
+    }).then(function(){
+       neweditData.message = '修改成功';
+       res.json(neweditData);
+       return;
+     })
+})
+//独白删除
+router.get('/record/delete', function(req, res, next){
+   var id = req.query.id || '';
+   Record.findOne({
+     _id: id
+   }).then(function(record){
+      res.render('admin/recordelete',{
+            visitInfo:req.visitInfo,
+            record:record
+      })  
+   })
+})
+var newdeleteData;
+router.use(function(req, res, next){
+    newdeleteData = {
+        code:0,
+        message:''
+    } 
+    next();
+})
+router.post('/record/delete', function(req, res, next){
+    var id = req.query.id || '';
+    Record.findOne({
+      _id:id
+    }).then(function(){
+       return Record.remove({
+          _id:id
+       })
+    }).then(function(){
+       newdeleteData.message = '删除成功';
+       res.json(newdeleteData);
+       return;
+     })
+})
+
+
 
 //留言管理
 router.get('/message', function(req, res, next){

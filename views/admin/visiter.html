@@ -1,6 +1,5 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span>锦时</span>
     <span><i>/</i>用户管理</span>
 {% endblock %}
 {% block MainBody %}
@@ -24,16 +23,20 @@
              	 		<td>{{visiter.visitmark}}</td>
              	 		<td>{{visiter.visitname}}</td>
              	 		<td>{{visiter.visitpass}}</td>
-             	 		<td class="VisiterImg"><img src=../{{visiter.visitimg}}></td>
+             	 		<td class="VisiterImg"><img src={{visiter.visitimg}}></td>
                   <td>{{visiter.visitsafe}}</td>
              	 		<td class="Options">
-             	 		  <span class="btn btn-info">
-							        <i class="fa fa-edit fa-fw"></i>
-						        </span>
-						        <span class="btn btn-danger">
-							        <i class="fa fa-trash-o fa-fw"></i>
-						       </span>
-					        </td>
+                      <a href="/admin/visiter/edit?id={{visiter._id.toString()}}">
+                        <span class="btn btn-info">
+                          <i class="fa fa-edit fa-fw"></i>
+                        </span>
+                      </a>
+                      <a href="/admin/visiter/delete?id={{visiter._id.toString()}}">
+                        <span class="btn btn-danger">
+                          <i class="fa fa-trash-o fa-fw"></i>
+                        </span>
+                      </a>
+                  </td>
              	 	</tr>
                 {% endfor %}
              </tbody>

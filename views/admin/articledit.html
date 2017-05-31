@@ -1,15 +1,14 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span>锦时</span>
     <span><i>/</i>文章管理</span>
-    <span><i>/</i><a href='articlelist'>文章列表</a></span>
+    <span><i>/</i><a href='/admin/articlelist'>文章列表</a></span>
     <span><i>/</i>文章修改</span>
 {% endblock %}
 {% block MainBody %}
     <div class="ArticleRelease">
       <h1>文章修改</h1>
       <div class="panel">
-         <form method="post">
+         <form method="post" id="ArticleUpdate">
 		        <h2>标题</h2>
       			<input class="form-control" type="text" name="title" value="{{article.title}}"></input>
       			<h2>作者</h2>
@@ -20,17 +19,18 @@
       			<input class="form-control" type="text" name="addInfo" value="{{article.addInfo}}"></input>
       			<h2>转载说明</h2>
             <input class="form-control" type="text" name="copyInfo" value="{{article.copyInfo}}"></input>
-             <h2>编辑文本</h2>
+            <h2>编辑文本</h2>
       			<textarea class="form-control" name="content">{{article.content}}</textarea>
-	            <div class="ArticleEditBtn">
-	                <div>
-	                   <i></i>
-	                   <span></span>
-	                </div>
-	            </div>
-      			<button class="btn btn-success" type="submit">保存</button>
+            <div class="ArticleUpdateBtn">
+                <div>
+                   <i></i>
+                   <span></span>
+                </div>
+            </div>
+      			<button class="btn btn-success" type="button">保存</button>
       			<button class="btn btn-danger" type="reset">重置</button> 
-		 </form>
+            <a href = '/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
+		    </form>
       </div>
     </div>
     <style type="text/css">
@@ -41,5 +41,36 @@
         $('#Article').addClass('active');
         $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#Article').slideToggle(0);
+        $('#ArticleUpdate').find('button').eq(0).click(function(){
+            var  IsEditEnd = confirm('是否编辑完成？');
+            if (IsEditEnd){
+                $.ajax({
+                    type: 'post',
+                    data: {
+                          title:$('#ArticleUpdate').find('[name="title"]').val(),
+                          writer:$('#ArticleUpdate').find('[name="writer"]').val(),
+                          lable:$('#ArticleUpdate').find('[name="lable"]').val(),
+                          addInfo:$('#ArticleUpdate').find('[name="addInfo"]').val(),
+                          copyInfo:$('#ArticleUpdate').find('[name="copyInfo"]').val(),
+                          content:$('#ArticleUpdate').find('[name="content"]').val()
+                      },
+                    dataType: 'json',
+                    success:function(result){
+                      var code = result.code;
+                      switch (code){
+                        case 0:
+                            $('.ArticleUpdateBtn').find('i').removeClass().addClass('fa fa-check');
+                            $('.ArticleUpdateBtn').find('div').removeClass().addClass('alert alert-success')
+                        break;
+                        default:
+                            $('.ArticleUpdateBtn').find('i').removeClass().addClass('fa fa-close');
+                            $('.ArticleUpdateBtn').find('div').removeClass().addClass('alert alert-danger')
+                        break;
+                      }
+                      $('.ArticleUpdateBtn').find('span').html(result.message);
+                   }
+              })
+          }
+      })
     </script>
 {% endblock %}

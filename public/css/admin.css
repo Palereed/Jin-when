@@ -18,7 +18,7 @@ header{color:#333;font-size:20px;cursor:default;}
 .TopFind a{color:#AAB5BC}
 .TopFind i{margin:0 15px 0 10px;color:#AAB5BC !important}  
 .Manager{height:60px;padding:5px 20px;width:90px;float:right;}
-.Manager img{height:50px;border-radius:30px;}
+.Manager img{height:50px;border-radius:25px;}
 .clearfix{clear:both} 
 /* 左侧菜单 */	   
 .Leftnav{width:250px;position:absolute;left:0px;z-index:1;}
@@ -40,7 +40,7 @@ header{color:#333;font-size:20px;cursor:default;}
 /* 菜单active */
 .SlideDown{transform:rotate(180deg);transition:transform .3s;}
 .SlideUp{transform:rotate(0deg);transition:transform .3s}
-/* 右侧主体 */
+/* 表单 */
 .MainContain{background:#F5F5F5;
 			 margin:0 0 0 0 250px;
 			 border-top: 1px solid #e5e5e5;
@@ -51,8 +51,16 @@ header{color:#333;font-size:20px;cursor:default;}
 input[type='radio']:focus{outline:none;}  
 input[type='text']{width:50%;}
 button{margin:20px 0 0 0;}
+form a{margin:20px 0 0 20px;}
+form p{text-indent:62px;}
+form h2 span{padding:0 20px}
+form h2 img{height:50px;border-radius:25px;}
 button:focus{outline:none !important;} 
 .ReprintInfo{display:none;}
+/* 用户修改 */
+#ShowImg{width:100px;height:100px;border-radius:50px;cursor:pointer;border: 2px solid rgba(10,10,10,0.1);}
+#ImgChoose{display:none;}
+#ImgChoose img{width:80px;height:80px;border-radius:40px;cursor:pointer;}
 /* 文章管理 */
 .ArticleRelease textarea{height:400px;} 
 .KindChoose span,.AddInfo span{display:inline-block;width:40px;}
@@ -61,9 +69,8 @@ button:focus{outline:none !important;}
 .table>tbody>tr>td{color:#555;font-size:13px;line-height:36px}
 .table>tbody>tr:nth-child(odd){background:#f3faff}
 .Options{width:120px;text-align:center;}
-td>.btn{padding:2px 3px}
+td a>.btn{padding:2px 3px !important}
 .TableId{width:200px;}
-.Options a{color:#fff}
 /* 分页 */
 .PageNumber{float:right;margin:0 50px 0 0;padding:20px 0 0 0}     
 .PageNumber a{display:inline-block;

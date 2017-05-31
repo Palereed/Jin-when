@@ -292,17 +292,17 @@
                  <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
                  <li><span>昵称：</span><input class="form-control" name="visitmark"></input></li>
                  <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
-                 <li><span>头像：</span><img src="public/images/message/visit4.jpg" id="ShowImg"></li>
+                 <li><span>头像：</span><img src="/public/images/message/visit4.jpg" id="ShowImg"></li>
                  <li id="ImgChoose">
                        <span>选择：</span>
-                       <img src="public/images/message/visit1.jpg">
-                       <img src="public/images/message/visit2.jpg">
-                       <img src="public/images/message/visit3.jpg">
-                       <img src="public/images/message/visit4.jpg">
-                       <img src="public/images/message/visit5.jpg">
-                       <img src="public/images/message/visit6.jpg">
-                       <img src="public/images/message/visit7.jpg">
-                       <img src="public/images/message/visit8.jpg">
+                       <img src="/public/images/message/visit1.jpg">
+                       <img src="/public/images/message/visit2.jpg">
+                       <img src="/public/images/message/visit3.jpg">
+                       <img src="/public/images/message/visit4.jpg">
+                       <img src="/public/images/message/visit5.jpg">
+                       <img src="/public/images/message/visit6.jpg">
+                       <img src="/public/images/message/visit7.jpg">
+                       <img src="/public/images/message/visit8.jpg">
                  </li>
                  <li><span>密保：</span><input class="form-control" name="visitsafe"></input></li>
               </ul>
@@ -390,16 +390,16 @@
                 switch (code){
                 case 0:
                    $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
-                           $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
-                           $('.LandInfo').find('span').html(result.visitInfo.visitmark);
-                           $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
-                           setTimeout(function(){
+                        $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
+                        $('.LandInfo').find('span').html(result.visitInfo.visitmark);
+                        $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
+                      setTimeout(function(){
                         $('#Leave').show();
-                              $('#Land').hide();
-                              $('.AnswerBtn').find('i').removeClass();
+                        $('#Land').hide();
+                        $('.AnswerBtn').find('i').removeClass();
                         $('.AnswerBtn').find('div').removeClass();
                         $('.AnswerBtn').find('span').html('');
-                              $('.LeaveBtn').find('i').removeClass();
+                        $('.LeaveBtn').find('i').removeClass();
                         $('.LeaveBtn').find('div').removeClass();
                         $('.LeaveBtn').find('span').html('');
                      },1000);

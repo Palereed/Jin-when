@@ -1,6 +1,5 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span>锦时</span>
     <span><i>/</i>文章管理</span>
     <span><i>/</i>文章列表</span>
 {% endblock %}
@@ -38,16 +37,16 @@
                         <td class="views">{{article.views}}</td>
                         <td class="comments">{{article.comments}}</td>
                         <td class="Options">
-                           <span class="btn btn-info">
-                               <a href="/admin/articledit?id={{article._id.toString()}}">
+                          <a href="/admin/article/edit?id={{article._id.toString()}}">
+                             <span class="btn btn-info">
                                  <i class="fa fa-edit fa-fw"></i>
-                               </a>
-                           </span>
-                           <span class="btn btn-danger">
-                               <a href="/admin/articledelete?id={{article._id.toString()}}">
-                                  <i class="fa fa-trash-o fa-fw"></i>
-                               </a>
-                           </span>
+                             </span>
+                          </a>
+                          <a href="/admin/article/delete?id={{article._id.toString()}}">
+                             <span class="btn btn-danger">
+                                 <i class="fa fa-trash-o fa-fw"></i>
+                             </span>
+                          </a>
                         </td>
                     </tr>
                 {% endfor %}

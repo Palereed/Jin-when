@@ -1,0 +1,70 @@
+{% extends 'nav.html' %}
+{% block index %}
+    <span><i>/</i>独白管理</span>
+    <span><i>/</i><a href='/admin/recordlist'>独白列表</a></span>
+    <span><i>/</i>独白修改</span>
+{% endblock %}
+{% block MainBody %}
+    <div class="RecordRelease">
+       <h1>独白修改</h1>
+       <div class="panel">
+    	  <form id="RecordUpdate">
+    		  <h2>标题</h2>
+    			<input class="form-control" type="text" name="title" value="{{record.title}}"></input>
+    			<h2>心情</h2>
+    			<input class="form-control" type="text" name="mood" value="{{record.mood}}"></input>
+    			<h2>天气</h2>
+    			<input class="form-control" type="text" name="weather" value="{{record.weather}}"></input>
+    			<h2>编辑文本</h2>
+    			<textarea class="form-control" name="content">{{record.content}}</textarea>
+          <div class="RecordUpdateBtn">
+              <div>
+                 <i></i>
+                 <span></span>
+              </div>
+          </div>
+    			<button class="btn btn-success" type="button">修改</button>
+    			<button class="btn btn-danger" type="reset">重置</button>
+          <a href = '/admin/recordlist'><button class="btn btn-info" type="button">返回查看</button></a>
+    	  </form>
+       </div>
+    </div>
+    <style type="text/css">
+       #Record li:last-child{background:#31383e;}
+       #Record li:last-child a{color:#f2f2f2;}
+    </style>
+    <script>
+        $('#Record').addClass('active');
+        $('#RecordBtn i').addClass('SlideDown').removeClass('SlideUp');
+        $('#Record').slideToggle(0);
+        $('#RecordUpdate').find('button').eq(0).click(function(){
+            var  IsEditEnd = confirm('是否编辑完成？');
+            if (IsEditEnd){
+                $.ajax({
+                    type: 'post',
+                    data: {
+                          title:$('#RecordUpdate').find('[name="title"]').val(),
+                          mood:$('#RecordUpdate').find('[name="mood"]').val(),
+                          weather:$('#RecordUpdate').find('[name="weather"]').val(),
+                          content:$('#RecordUpdate').find('[name="content"]').val()
+                      },
+                    dataType: 'json',
+                    success:function(result){
+                      var code = result.code;
+                      switch (code){
+                        case 0:
+                            $('.RecordUpdateBtn').find('i').removeClass().addClass('fa fa-check');
+                            $('.RecordUpdateBtn').find('div').removeClass().addClass('alert alert-success')
+                        break;
+                        default:
+                            $('.RecordUpdateBtn').find('i').removeClass().addClass('fa fa-close');
+                            $('.RecordUpdateBtn').find('div').removeClass().addClass('alert alert-danger')
+                        break;
+                      }
+                      $('.RecordUpdateBtn').find('span').html(result.message);
+                   }
+              })
+          }
+      })
+    </script>
+{% endblock %}

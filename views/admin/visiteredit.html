@@ -1,0 +1,101 @@
+{% extends 'nav.html' %}
+{% block index %}
+    <span><i>/</i><a href='/admin/visiter'>用户管理</a></span>
+    <span><i>/</i>用户修改</span>
+{% endblock %}
+{% block MainBody %}
+    <div class="VisiterRelease">
+       <h1>用户修改</h1>
+       <div class="panel">
+    	  <form id="VisiterUpdate">
+    		  <h2>昵称</h2>
+    			<input class="form-control" type="text" name="visitmark" value="{{visiter.visitmark}}"></input>
+          <h2>头像：</span><img src="/public/images/message/visit4.jpg" id="ShowImg"></h2>
+          <li id="ImgChoose">
+              <span>选择：</span>
+              <img src="/public/images/message/visit1.jpg">
+              <img src="/public/images/message/visit2.jpg">
+              <img src="/public/images/message/visit3.jpg">
+              <img src="/public/images/message/visit4.jpg">
+              <img src="/public/images/message/visit5.jpg">
+              <img src="/public/images/message/visit6.jpg">
+              <img src="/public/images/message/visit7.jpg">
+              <img src="/public/images/message/visit8.jpg">
+          </li>
+    			<h2>账户</h2>
+    			<input class="form-control" type="text" name="visitname" value="{{visiter.visitname}}"></input>
+    			<h2>密码</h2>
+    			<input class="form-control" type="text" name="visitpass" value="{{visiter.visitpass}}"></input>
+    			<h2>密保</h2>
+          <input class="form-control" type="text" name="visitsafe" value="{{visiter.visitsafe}}"></input>
+    			<div class="VisiterUpdateBtn">
+              <div>
+                 <i></i>
+                 <span></span>
+              </div>
+          </div>
+    			<button class="btn btn-success" type="button">修改</button>
+    			<button class="btn btn-danger" type="reset">重置</button>
+          <a href = '/admin/visiter'><button class="btn btn-info" type="button">返回查看</button></a>
+    	  </form>
+       </div>
+    </div>
+    <style type="text/css">
+       #VisiterBtn{background:#31383e;}
+       #VisiterBtn a,#VisiterBtn span{color:#f2f2f2;}
+    </style>
+    <script>
+        // 头像选择  
+        var ShowImg = document.getElementById('ShowImg'),
+            ImgChoose = document.getElementById('ImgChoose'),
+            WhichImg = ImgChoose.getElementsByTagName('img'),
+            IsChoose = true;
+            ShowImg.onclick = function(){
+             if(IsChoose){
+              ImgChoose.style.display = 'block';
+              IsChoose = false;
+             } else {
+              ImgChoose.style.display = 'none';
+              IsChoose = true;
+              }
+            }
+            for (var j=0 ;j<WhichImg.length;j++){
+            WhichImg[j].onclick = function(){
+              var Imgsrc = this.getAttribute('src');
+              ShowImg.setAttribute('src',Imgsrc);
+              ImgChoose.style.display = 'none';
+              IsChoose = true;
+          }
+        }
+        $('#VisiterUpdate').find('button').eq(0).click(function(){
+            var  IsEditEnd = confirm('是否编辑完成？');
+            if (IsEditEnd){
+                $.ajax({
+                    type: 'post',
+                    data: {
+                          visitmark:$('#VisiterUpdate').find('[name="visitmark"]').val(),
+                          visitimg :$('#VisiterUpdate').find('img').attr("src"),
+                          visitname:$('#VisiterUpdate').find('[name="visitname"]').val(),
+                          visitpass:$('#VisiterUpdate').find('[name="visitpass"]').val(),
+                          visitsafe:$('#VisiterUpdate').find('[name="visitsafe"]').val()
+                      },
+                    dataType: 'json',
+                    success:function(result){
+                      var code = result.code;
+                      switch (code){
+                        case 0:
+                            $('.VisiterUpdateBtn').find('i').removeClass().addClass('fa fa-check');
+                            $('.VisiterUpdateBtn').find('div').removeClass().addClass('alert alert-success')
+                        break;
+                        default:
+                            $('.VisiterUpdateBtn').find('i').removeClass().addClass('fa fa-close');
+                            $('.VisiterUpdateBtn').find('div').removeClass().addClass('alert alert-danger')
+                        break;
+                      }
+                      $('.VisiterUpdateBtn').find('span').html(result.message);
+                   }
+              })
+          }
+      })
+    </script>
+{% endblock %}
