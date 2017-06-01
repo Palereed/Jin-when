@@ -14,11 +14,10 @@
       			<input class="form-control" type="text" name="writer"></input>
       			<h2>标签</h2>
       			<div class="form-group KindChoose">
-      				 <input name="lable"  id='CSS' type="radio" value="1" checked="true"><label for="CSS">CSS</label>
-      				 <input name="lable"  id='H5'  type="radio" value="2"><label for="H5">H5</label>
-      				 <input name="lable"  id='Js'  type="radio" value="3"><label for="Js">Js</label>
-      				 <input name="lable"  id='Node'  type="radio" value="4"><label for="Node">Node</label>
-      				 <input name="lable"  id='Canvas'  type="radio" value="5"><label for="Canvas">Canvas</label>
+               {% for kind in kinds %}
+      				 <input name="lable"  id='{{kind.title}}' type="radio" value="{{kind.id}}">
+               <label for="{{kind.title}}">{{kind.title}}</label>
+      				 {% endfor %}
       			</div>
 			      <h2>备注</h2>
       			<div class="form-group AddInfo">
@@ -48,6 +47,7 @@
        #Article li:first-child a{color:#f2f2f2}
     </style>
     <script>
+        $("input[name='lable']:eq(0)").attr("checked",'checked'); 
         $('#Article').addClass('active');
         $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#Article').slideToggle(0);
@@ -60,7 +60,7 @@
                     data: {
                           title:$('#ArticleEdit').find('[name="title"]').val(),
                           writer:$('#ArticleEdit').find('[name="writer"]').val(),
-                          lable:$('#ArticleEdit').find('[name="lable"]:checked').next('label').html(),
+                          lable:$('#ArticleEdit').find('[name="lable"]:checked').val(),
                           addInfo:$('#ArticleEdit').find('[name="addInfo"]:checked').next('label').html(),
                           copyInfo:$('#ArticleEdit').find('[name="copyInfo"]').val(),
                           content:$('#ArticleEdit').find('[name="content"]').val()
@@ -82,8 +82,6 @@
                    }
               })
           }
-          $('#ArticleEdit').find('button').eq(1).click();
-          $('#ArticleEdit').find('[name="addInfo"]').eq(0).click();
       })
     </script>
 {% endblock %}

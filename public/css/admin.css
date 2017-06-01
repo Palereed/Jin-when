@@ -83,14 +83,11 @@ td a>.btn{padding:2px 3px !important}
                  color:#333}     
 .Active{background:#3d464d;color:#fff !important}
 .CantUse{color:#AAB5BC !important;} 
-/* 用户管理 */
+/* 列表样式 */
 .VisiterImg img{height:36px;border-radius:18px;}
-/* 文章管理 */
-.views,.comments{text-align:center;}
-/* 独白管理 */
+.number,.views,.comments{text-align:center;}
 .RecordRelease textarea{height:200px;}
 .mood,.weather{width:60px;text-align:center;}
-/* 留言管理 */
 .UserName{width:100px;}
 
 /* 网站管理 */

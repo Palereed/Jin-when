@@ -29,6 +29,9 @@ $(function(){
   }
   $('.NavContain li').click(function(){
         switch ($(this).prop('id')){
+           case 'WebTatalBtn':
+             Slide('#WebTatal', '#WebTatalBtn', '#WebTatalBtn i');
+           break;
            case 'ArticleBtn':
              Slide('#Article', '#ArticleBtn', '#ArticleBtn i');
            break;
@@ -37,10 +40,6 @@ $(function(){
            break;
            case 'MessageBtn':
              Slide('#Message', '#MessageBtn', '#MessageBtn i');
-           break;
-           case 'WebTatalBtn':
-            $('.NavContain').find('.Onslide').click();
-            $('#WebTatalBtn').addClass('Onslide');
            break;
         }
     })

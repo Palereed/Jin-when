@@ -93,3 +93,15 @@ EventUtil.addHandler(window,"resize",function (){
          MainBody.style.cssText= 'transform:translateX(140px);transition:transform 0s;';
      }
 })
+
+//分类数量布局变化
+var ChecKind = document.getElementsByClassName('ChecKind');
+var MainContain = document.getElementsByClassName('MainContain')[0];
+var Article = document.getElementsByTagName('article');
+if (ChecKind.length > 6){
+	for (var i = 0; i<ChecKind.length; i ++){
+		ChecKind[i].style.marginBottom = '0'
+	}
+	Article[0].style.marginTop = '40px'
+	MainContain.style.marginTop = '10px'
+}

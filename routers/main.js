@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Kind = require('../models/kinds');
 var Article = require('../models/articles');
 var Record = require('../models/records')
 router.get('/', function(req, res, next){
@@ -7,23 +8,38 @@ router.get('/', function(req, res, next){
 })
 //主页模块
 router.get('/home', function(req, res, next){
-    var page = Number(req.query.page || 1);
-    var limit = 5;
-    Article.count().then(function(count){
-        pages = Math.ceil(count / limit);
-        page = Math.min(page, pages);
-        page = Math.max(page, 1);
-        var skip = (page - 1) * limit;
-        Article.find().sort({_id:-1}).limit(limit).skip(skip).then(function(articles){
-            res.render('home/home',{
-            visitInfo:req.visitInfo,
-            articles:articles,
-            page:page,
-            pages:pages
-           });
-        })
+    var data = {
+        visitInfo:req.visitInfo,
+        kinds:[],
+        //传过来的分类ID
+        kindId:req.query.kindId || '',
+        count:0,
+        page:Number(req.query.page || 1),
+        limit:5,
+        pages:0
+    }
+    // 分类展示条件
+    var where = {};
+    if (data.kindId) {
+        where.kindId = data.kindId
+    }
+    Kind.find().sort().then(function(kinds){
+        data.kinds = kinds;
+        return Article.count(); 
+    }).then(function(count){
+        data.count = count;
+        data.pages = Math.ceil( data.count / data.limit);
+        data.page = Math.min(data.page, data.pages);
+        data.page = Math.max(data.page, 1);
+        var skip = (data.page - 1) * data.limit;
+        return Article.where(where).find().sort({_id:-1}).limit(data.limit).skip(skip)
+    }).then(function(articles){
+        data.articles = articles;
+        res.render('home/home',data);
     })
 })
+
+
 
 //独白模块
 router.get('/record', function(req, res, next){

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Kind = require('../models/kinds');
 var Visiter = require('../models/visiter');
 var Article = require('../models/articles');
 var Record = require('../models/records')  
@@ -10,7 +11,7 @@ router.use(function(req, res, next){
 	}
 	next();
 })
-//网站管理
+//网站统计
 router.get('/home', function(req, res, next){
     // 从数据库中读取管理者数据
     // 小bug,为何使用'isAdmin':'true'查询为空？
@@ -21,6 +22,132 @@ router.get('/home', function(req, res, next){
      });
    })
 })  
+//分类管理
+router.get('/kindlist', function(req, res, next){
+    var page = Number(req.query.page || 1);
+    var limit = 5;
+    Kind.count().then(function(count){
+        pages = Math.ceil(count / limit);
+        page = Math.min(page, pages);
+        page = Math.max(page, 1);
+        var skip = (page - 1) * limit;
+        Kind.find().sort({_id:-1}).limit(limit).skip(skip).then(function(kinds){
+            res.render('admin/kindlist',{
+            visitInfo:req.visitInfo,
+            kinds:kinds,
+            page:page,
+            pages:pages
+           });
+        })
+   })
+}) 
+//分类添加
+var kindData;
+router.use(function(req, res, next){
+    kindData = {
+        code:0,
+        message:''
+    }
+    next();
+})
+router.post('/kindlist', function(req, res, next){
+    var title = req.body.title;
+    if ( title == '' ){
+      kindData.code = 1;
+      kindData.message = '分类标题不能为空';
+      res.json(kindData);
+      return;
+   }
+   Kind.findOne({
+      title:title
+    }).then(function(kindInfo){
+      if (kindInfo) {
+         kindData.code = 2;
+         kindData.message = '此分类已存在';
+         res.json(kindData);
+         return
+      } 
+      var kind = new Kind({
+         title:title,
+      })
+      return  kind.save();
+    }).then(function(){
+      kindData.message = '添加成功';
+      res.json(kindData);
+   })
+})
+//分类修改
+router.get('/kindlist/edit', function(req, res, next){
+   var id = req.query.id || '';
+   Kind.findOne({
+     _id: id
+   }).then(function(kind){
+      res.render('admin/kindedit',{
+            visitInfo:req.visitInfo,
+            kind:kind
+      })  
+   })
+})
+var kindeditData;
+router.use(function(req, res, next){
+    kindeditData = {
+        code:0,
+        message:''
+    } 
+    next();
+})
+router.post('/kindlist/edit', function(req, res, next){
+    var id = req.query.id || '';
+    var title = req.body.title;
+    Kind.findOne({
+      _id:id
+    }).then(function(){
+      return Kind.update({
+          _id:id
+      },{
+          title:title,
+      })
+    }).then(function(){
+       kindeditData.message = '修改成功';
+       res.json(kindeditData);
+       return;
+     })
+})
+//分类删除
+router.get('/kindlist/delete', function(req, res, next){
+   var id = req.query.id || '';
+   Kind.findOne({
+     _id: id
+   }).then(function(kind){
+      res.render('admin/kindelete',{
+            visitInfo:req.visitInfo,
+            kind:kind
+      })  
+   })
+})
+var kinddeleteData;
+router.use(function(req, res, next){
+    kinddeleteData = {
+        code:0,
+        message:''
+    } 
+    next();
+})
+router.post('/kindlist/delete', function(req, res, next){
+    var id = req.query.id || '';
+    Kind.findOne({
+      _id:id
+    }).then(function(){
+       return Kind.remove({
+          _id:id
+       })
+    }).then(function(){
+       kinddeleteData.message = '删除成功';
+       res.json(kinddeleteData);
+       return;
+     })
+})
+
 
 //用户管理
 router.get('/visiter', function(req, res, next){
@@ -132,9 +259,12 @@ router.post('/visiter/delete', function(req, res, next){
 
 //文章发布
 router.get('/article', function(req, res, next){
-	res.render('admin/article',{
-     	visitInfo:req.visitInfo
-     });
+  Kind.find().then(function(kinds){
+    res.render('admin/article',{
+      visitInfo:req.visitInfo,
+      kinds:kinds
+      });
+   })
 }) 
 var articleData;
 router.use(function(req, res, next){

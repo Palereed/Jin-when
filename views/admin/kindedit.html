@@ -1,0 +1,61 @@
+{% extends 'nav.html' %}
+{% block index %}
+    <span><i>/</i>网站管理</span>
+    <span><i>/</i><a href='/admin/kindlist'>分类管理</a></span>
+    <span><i>/</i>分类修改</span>
+{% endblock %}
+{% block MainBody %}
+    <div class="KindRelease">
+      <h1>分类修改</h1>
+      <div class="panel">
+         <form method="post" id="KindUpdate">
+		        <h2>标题</h2>
+      			<input class="form-control" type="text" name="title" value="{{kind.title}}"></input>
+      			<div class="KindUpdateBtn">
+                <div>
+                   <i></i>
+                   <span></span>
+                </div>
+            </div>
+      			<button class="btn btn-success" type="button">保存</button>
+      			<button class="btn btn-danger" type="reset">重置</button> 
+            <a href = '/admin/kindlist'><button class="btn btn-info" type="button">返回查看</button></a>
+		    </form>
+      </div>
+    </div>
+    <style type="text/css">
+        #WebTatal li:last-child{background:#31383e;}
+        #WebTatal li:last-child a{color:#f2f2f2;}
+    </style>
+    <script>
+        $('#WebTatal').addClass('active');
+        $('#WebTatalBtn i').addClass('SlideDown').removeClass('SlideUp');
+        $('#WebTatal').slideToggle(0);
+        $('#KindUpdate').find('button').eq(0).click(function(){
+            var  IsEditEnd = confirm('是否编辑完成？');
+            if (IsEditEnd){
+                $.ajax({
+                    type: 'post',
+                    data: {
+                          title:$('#KindUpdate').find('[name="title"]').val(),
+                       },
+                    dataType: 'json',
+                    success:function(result){
+                      var code = result.code;
+                      switch (code){
+                        case 0:
+                            $('.KindUpdateBtn').find('i').removeClass().addClass('fa fa-check');
+                            $('.KindUpdateBtn').find('div').removeClass().addClass('alert alert-success')
+                        break;
+                        default:
+                            $('.KindUpdateBtn').find('i').removeClass().addClass('fa fa-close');
+                            $('.KindUpdateBtn').find('div').removeClass().addClass('alert alert-danger')
+                        break;
+                      }
+                      $('.KindUpdateBtn').find('span').html(result.message);
+                   }
+              })
+          }
+      })
+    </script>
+{% endblock %}

@@ -2,30 +2,21 @@
 {% block MainBody %}
     <div class="MainContain">
        <div class="KindContain">
-	       <div class="ChecKind">
-                <span>全部</span>
-                <span style="transform:translateX(100%);">全部</span>
-           </div>
            <div class="ChecKind">
-                <span>Css</span>
-                <span>Css</span>
+                <a href="/home">
+                  <span>全部</span>
+                  <span>全部</span>
+                </a>
            </div>
-           <div class="ChecKind">
-                <span>HTML5</span>
-                <span>HTML5</span>
+           {% for kind in kinds %}
+	         <div class="ChecKind">
+                <a href="?kindId={{kind.id}}">
+                <span>{{kind.title}}</span>
+                <!-- style="transform:translateX(100%);" -->
+                <span>{{kind.title}}</span>
+                </a>
            </div>
-           <div class="ChecKind">
-                <span>javascript</span>
-                <span>javascript</span>
-           </div>
-           <div class="ChecKind">
-                <span>Node.js</span>
-                <span>Node.js</span>
-           </div>
-           <div class="ChecKind">
-                <span>Canvas</span>
-                <span>Canvas</span>
-           </div>
+           {% endfor %}
        </div>	           
        <!-- 文章部分 -->
        {% for article in articles %}
@@ -91,7 +82,8 @@
               {% endif %}
        </div>
 	</div>
-	<style type="text/css">
+  <link rel="stylesheet" type="text/css" href="public/css/home.css">
+  <style type="text/css">
         footer{margin:20px 0 0 0;}
         .TheNav a:first-child .MenuAdd::before{opacity:1;left:-7px;} 
         .TheNav a:first-child .MenuAdd::after{opacity:1;right:-7px;} 
