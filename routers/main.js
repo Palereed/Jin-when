@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var Kind = require('../models/kinds');
+var Lable = require('../models/lables');
 var Article = require('../models/articles');
-var Record = require('../models/records')
+var Record = require('../models/records');
+var Message = require('../models/messages')
 router.get('/', function(req, res, next){
    res.render('home/curtain');
 })
@@ -10,9 +11,9 @@ router.get('/', function(req, res, next){
 router.get('/home', function(req, res, next){
     var data = {
         visitInfo:req.visitInfo,
-        kinds:[],
+        lables:[],
         //传过来的分类ID
-        kindId:req.query.kindId || '',
+        lableId:req.query.lableId || '',
         count:0,
         page:Number(req.query.page || 1),
         limit:5,
@@ -20,11 +21,11 @@ router.get('/home', function(req, res, next){
     }
     // 分类展示条件
     var where = {};
-    if (data.kindId) {
-        where.kindId = data.kindId
+    if (data.lableId) {
+        where.lableId = data.lableId
     }
-    Kind.find().sort().then(function(kinds){
-        data.kinds = kinds;
+    Lable.find().sort().then(function(lables){
+        data.lables = lables;
         return Article.count(); 
     }).then(function(count){
         data.count = count;
@@ -38,7 +39,21 @@ router.get('/home', function(req, res, next){
         res.render('home/home',data);
     })
 })
-
+//文章展示模块
+router.get('/home/read', function(req, res, next){
+    var articleId = req.query.articleId || '';
+    Article.findOne({
+        _id:articleId
+    }).then(function(article){
+        //阅读数增加
+        article.views++;
+        article.save();
+        res.render('home/read',{
+        visitInfo:req.visitInfo,
+        article:article
+       });
+    })
+})
 
 
 //独白模块
@@ -53,8 +68,22 @@ router.get('/record', function(req, res, next){
 
 //信笺模块
 router.get('/message', function(req, res, next){
-	res.render('home/message',{
-     	visitInfo:req.visitInfo
-     });
-}) 
+    var page = Number(req.query.page || 1);
+    var limit = 8;
+    //数据库中数据条数
+    Message.count().then(function(count){
+        pages = Math.ceil(count / limit);
+        page = Math.min(page, pages);
+        page = Math.max(page, 1);
+        var skip = (page - 1) * limit;
+        Message.find().sort({_id:-1}).limit(limit).skip(skip).then(function(messages){
+            res.render('home/message',{
+            visitInfo:req.visitInfo,
+            messages:messages,
+            page:page,
+            pages:pages
+           });
+        })
+    })
+})
 module.exports = router;

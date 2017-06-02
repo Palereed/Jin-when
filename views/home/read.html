@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>关于float引起父层元素坍塌</title>
+	<link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/public/css/public.css">
+	<link rel="stylesheet" type="text/css" href="/public/css/message.css">
+	<link rel="stylesheet" type="text/css" href="/public/css/read.css">
+	<script src="/public/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="MainContain">
+		<article class="WebLearn">
+		   <div class="ArclReturn">
+		       <a href="/home"><span class="fa fa-angle-double-left"></span>返回</a>
+	       </div>
+	       <div class="ArclTitle">
+	       	  <h1>{{article.title}}</h1>
+	       </div>
+	       <div class="ArclTop">
+	           <span class="ArclKind">标签：{{article.lable}}类</span>
+	           <span class="ArclTime">时间：{{article.addTime|date('Y-m-d')}}</span>
+	           <span class="ArclWrite">作者：{{article.writer}}</span>
+	           {% if article.copyInfo %}
+               <span class="ArclMark">备注：{{article.addInfo}}自<i>{{article.copyInfo}}</i></span>
+               {% else %}
+               <span>备注：{{article.addInfo}}</span>
+               {% endif %}
+	       </div>
+	       <!-- 文章内容 -->
+	       <div class="ArclMain">
+	           <div class="ArclSection">
+	              <section>
+	                 <h2><span class="fa fa-pencil fa-lg"></span>float的历史</h2>
+	                  <p>float属性定义元素在哪个方向浮动。在最开始，float用于实现文字环绕图片效果。</p> 
+	                  <p>随着html的发展，网站的布局愈来愈多样化，float渐渐被用来实现横向排版，灵活的浮动给开发员带来了更多的布局灵感，它越来越受到青睐。</p>   
+	              </section>
+	           </div>
+	           <div class="ArclSection">
+	              <section>
+	                  <h2><span class="fa fa-pencil fa-lg"></span>float应用中的一些琐碎问题</h2>
+	                  <p>事物的发展总有其两面性，float在方便排版的同时也带来了一系列各种各样的问题。</p>
+	                  <p>其一，块级元素如果不设置float，它默认会撑满整个屏幕，而如果设置了float，则只会包裹住其内容。</p>
+	                  <p>其二，其中一个子元素使用float，其余也必须使用float，否则就会出现遮盖问题。</p>
+	                  <p>其三，若子元素全部使用float，而父元素没有设置高度，那么此时父元素高度会坍塌。这个问题也是float最令人烦恼的问题。</p>
+	              </section>
+	           </div>
+	           <div class="ArclSection">
+	              <section>
+	                  <h2><span class="fa fa-pencil fa-lg"></span>float的最大危机，父层元素坍塌</h2>
+	                  <p>下面我们来讨论float应用中的最大问题，即若一父层元素中子元素全部运用float，而父层没有设置高度，则此时父层高度便会坍塌，不再拥有高度。</p>
+	                  <h3>HTML</h3>
+	                  <pre><code>&lt;div class="Cotain"&gt;<br/>&lt;div class="CotainInner1"&gt;&lt;/div&gt;<br/>&lt;div class="CotainInner2"&gt;&lt;/div&gt;<br/>&lt;/div&gt;</code></pre>
+	                  <h3>CSS</h3>
+	                  <pre><code>.Cotain{border:1px solid #313d4b;width:220px;padding:5px;}<br/>.CotainInner1,.CotainInner2{width:100px;height:50px;float:left; border:1px solid  #313d4b;margin-left:5px;}<br/></code></pre>
+	                  <h3>效果图</h3>
+	                  <div class="DemoImg">
+	                      <img src="../../images/article/css/floatdemo1.png">
+	                  </div>
+	                  <p>如上图所示，父层仅拥有自身的padding高度。这是非常令人恼怒的事情，在网站布局中会引起巨大灾难。</p>
+	              </section>
+	           </div>
+	           <div class="ArclSection">
+	              <section>
+	                  <h2><span class="fa fa-pencil fa-lg"></span>避免父层坍塌方法</h2>
+	                  <p>方法一，为父层加上overflow:hidden属性。</p>
+	                  <p>方法二，再为父元素添加一子元素，赋予其clear:both属性</p>
+	                  <h3>HTML</h3>
+	                  <pre><code>&lt;div class="Cotain"&gt;<br/>&lt;div class="CotainInner1"&gt;&lt;/div&gt;<br/>&lt;div class="CotainInner2"&gt;&lt;/div&gt;<br/>&lt;div class="CotainInner3"&gt;&lt;/div&gt;<br/>&lt;/div&gt;</code></pre>
+	                  <h3>CSS</h3>
+	                  <pre><code>.Cotain{border:1px solid #313d4b;width:220px;padding:5px;}<br/>.CotainInner1,.CotainInner2{width:100px;height:50px;float:left; border:1px solid  #313d4b;margin-left:5px;}<br/>.CotainInner3{clear:both;}</code></pre>
+	                  <h3>效果图</h3>
+	                  <div class="DemoImg">
+	                     <img src="../../images/article/css/floatdemo2.png">
+	                  </div>
+	              </section>
+	           </div>
+	       </div>
+	    </article>
+	    <div class="Letter">
+	        <div class="TopTab">
+	        	<div class="TabName">评论区</div>
+	        </div>
+	        <!-- 留言 -->
+	        <div class="LetterModule">
+	           <!-- 原留言 -->
+	           <div class="LetterOri">
+	               <!-- 头像 -->
+	               <div class="ImgContain">
+	                   <img src="/public/images/message/visit1.jpg" class="LetterImg">
+	               </div>
+	               <!-- 留言内容 -->
+	               <div class="LetterContain">
+	                   <!-- 留言者信息 -->
+	                   <div class="VisitInfo">
+	                      <span class="VisitName">
+	                          <a href="#">蒹葭</a>
+	                      </span>
+	                      <span class="TimeContain">
+	                          留言于
+	                          <b class="VisitTime">03 April,2017</b>
+	                      </span>
+	                   </div>
+	                   <div class="LetterReal">
+	                       <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+	                   </div>
+	               </div>
+	               <div class="Answer">
+	                   <span class="fa fa-comment-o fa-lg"></span>
+	                   <i>0</i>
+	               </div>
+	               <div class="clearfix"></div>
+	           </div>
+	           <!-- 留言回复 -->
+	           <div class="AllAnswer">
+	               <!-- 留言回复内容 -->
+	               <div class="AnswerContain">
+	                    <div class="ImgContain">
+	                       <img src="/public/images/message/owner.jpg" class="LetterImg">
+	                    </div>
+	                    <div class="LetterContain">
+	                        <div class="VisitInfo">
+	                          <span class="VisitName">
+	                            <a href="#">蒹葭</a>
+	                          </span>
+	                          <span class="TimeContain">
+	                             留言于
+	                            <b class="VisitTime">03 April,2017</b>
+	                          </span>
+	                        </div>
+	                        <div class="LetterReal">
+	                          <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+	                        </div>
+	                    </div>
+	                    <div class="clearfix"></div>
+	               </div>
+	               <!-- 留言回复表单 -->
+	               <div class="AnswerForm">
+	                   {% if visitInfo.visitname %}
+	                   <span class="Answerit">我要回复</span>
+	                   {% else %}
+	                   {% endif %}
+	                   <form>
+	                     <ul class="FormList">
+	                       <li><span>内容：</span><textarea class="form-control"></textarea></li>
+	                       <li><button type="submit" class="btn btn-default">回复</button></li>
+	                     </ul>
+	                   </form> 
+	               </div>
+	           </div>
+	        </div>
+	        <!-- 分页部分 -->
+	        <div class="PageNumber">
+	              {% if page <=1 %}
+	              <a href="javascript:;" class="CantUse">前页</a>
+	              {% else %}
+	              <a href="/message?page={{page-1}}">前页</a>
+	              {% endif %}
+	              <a class="Active">{{page}}</a>
+	              {% if page >= pages %}
+	              <a href="javascript:;" class="CantUse">后页</a>
+	              {% else %}
+	              <a href="/message?page={{page+1}}">后页</a>
+	              {% endif %}
+	        </div>
+	        <!-- 留言表单 -->
+	        <div class="TopTab">
+	          <div class="TabName">留言板</div>
+	          <div class="LandInfo">
+	              <!-- 管理员登陆 -->
+	              {% if visitInfo.isAdmin %}
+	              <span>
+	              {{decodeURI(visitInfo.visitmark)}}<i>/</i><a href="/admin/home"><i class="fa fa-sign-in"></i>后台</a></span>
+	              <!-- 普通访问者 -->
+	              {% elseif visitInfo.visitname %}
+	              <span>{{decodeURI(visitInfo.visitmark)}}<i>/</i><b id="Landout"><i class="fa fa-sign-out"></i>退出</b></span>
+	              <!-- 未登录状态 -->
+	              {% else %}
+	              <span><b id="Landon"><i class="fa fa-sign-in"></i>登录后评论</b></span>
+	              {% endif %}
+	              <div class="OnLand">
+	                  <img src={{visitInfo.visitimg}}>
+	              </div>
+	          </div>
+	          <div class="clearfix"></div>
+	        </div>
+	        <div class="LeaveContain">
+	          <!-- 留言框 -->
+	          {% if visitInfo.visitname %}
+	          <div class="VisitLeave" id="Leave">
+	              <form>
+	                 <ul class="FormList">
+	                    <li><span>内容：</span><textarea class="form-control"></textarea></li>
+	                    <div class="LeaveBtn">
+	                        <div>
+	                          <i></i>
+	                          <span></span>
+	                        </div>
+	                    </div>
+	                    <li><button type="button" class="btn btn-default">留言</button></li>
+	                 </ul>
+	              </form>
+	          </div>
+	          {% else %}
+	          <!-- 访客登陆 -->
+	          <div class="VisitLand" id="Land">
+	              <form>
+	                 <ul class="FormList">
+	                    <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
+	                    <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
+	                    <div class="LandBtn">
+	                        <div>
+	                          <i></i>
+	                          <span></span>
+	                        </div>
+	                    </div>
+	                    <li><button type="button" class="btn btn-default">登录</button>
+	                        <button type="button" class="btn btn-default">注册</button>
+	                    </li>
+	                 </ul>
+	              </form>
+	          </div>
+	          <!-- 访客注册 -->
+	          <div class="VisitRegister" id="Register">
+	              <form>
+	              <ul class="FormList">
+	                 <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
+	                 <li><span>昵称：</span><input class="form-control" name="visitmark"></input></li>
+	                 <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
+	                 <li><span>头像：</span><img src="/public/images/message/visit4.jpg" id="ShowImg"></li>
+	                 <li id="ImgChoose">
+	                       <span>选择：</span>
+	                       <img src="/public/images/message/visit1.jpg">
+	                       <img src="/public/images/message/visit2.jpg">
+	                       <img src="/public/images/message/visit3.jpg">
+	                       <img src="/public/images/message/visit4.jpg">
+	                       <img src="/public/images/message/visit5.jpg">
+	                       <img src="/public/images/message/visit6.jpg">
+	                       <img src="/public/images/message/visit7.jpg">
+	                       <img src="/public/images/message/visit8.jpg">
+	                 </li>
+	                 <li><span>密保：</span><input class="form-control" name="visitsafe"></input></li>
+	              </ul>
+	              </form>
+	              <div class="RegisterBtn">
+	                <div>
+	                  <i></i>
+	                  <span></span>
+	                </div>
+	              </div>
+	              <button type="button" class="btn btn-default">注册</button>
+	          </div>
+	          {% endif %}
+	        </div>
+		</div>
+        <footer>
+		   <div class="FootContain">
+		      <span>© 2017</span>
+		      <span>锦时</span>
+		      <span class="Touchme"><i class="fa fa-send"></i>联系作者</span><br/>
+		   </div>
+		</footer>
+    </div>
+    <script>
+        //注册
+        $('#Register').find('button').click(function(){
+          $.ajax({
+            type: 'post',
+            url: '/api/visiter/register',
+            data: {
+                  visitname :$('#Register').find('[name="visitname"]').val(),
+                  visitmark :$('#Register').find('[name="visitmark"]').val(),
+                  visitpass :$('#Register').find('[name="visitpass"]').val(),
+                  visitimg  :$('#Register').find('img').attr("src"),
+                  visitsafe :$('#Register').find('[name="visitsafe"]').val()
+              },
+              dataType: 'json',
+              success:function(result){
+                var code = result.code;
+                switch (code){
+                  case 0:
+                     $('.RegisterBtn').find('i').removeClass().addClass('fa fa-check');
+                     $('.RegisterBtn').find('div').removeClass().addClass('alert alert-success');
+                     setTimeout(function(){
+                        $('#Register').hide();
+                        $('#Land').show();
+                     },1000);
+                  break;
+                  default:
+                      $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
+                      $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger');
+                  break;
+                }
+                $('.RegisterBtn').find('span').html(result.message);
+              }
+          })
+        })
+        //登陆
+        $('#Land').find('button').eq(0).click(function(){
+          $.ajax({
+            type: 'post',
+            url:'/api/visiter/land',
+            data: {
+                    visitname :$('#Land').find('[name="visitname"]').val(),
+                    visitpass :$('#Land').find('[name="visitpass"]').val()
+            },
+                dataType: 'json',
+                success:function(result){
+                var code = result.code;
+                switch (code){
+                case 0:
+                    $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
+	                $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
+	                $('.LandInfo').find('span').html(result.visitInfo.visitmark);
+	                $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
+	                window.location.reload();
+	            break;
+	            default:
+                    $('.LandBtn').find('i').removeClass().addClass('fa fa-close');
+                    $('.LandBtn').find('div').removeClass().addClass('alert alert-danger');
+	            break;
+               }
+              $('.LandBtn').find('span').html(result.message);
+             }
+           })
+        })
+        //进入注册界面
+        $('#Land').find('button').eq(1).click(function(){
+            $('#Land').hide();
+            $('#Register').show();
+        })
+        //进入登陆界面
+        $('#Landout').click(function(){$('.LandInfo').find('.OnLand').click()});
+        $('#Landon').click(function(){$('.LandInfo').find('.OnLand').click()});
+        $('.LandInfo').find('.OnLand').click(function(){
+          var IsLand = $('.LandInfo').find('img').attr('src');
+          // 如果未登陆
+          if( IsLand == '') {
+                 $('#Register').hide();
+                 $('#Land').show();
+            } else {
+               var  IsLandout = confirm('是否注销用户？');
+               if( IsLandout ){
+                $.ajax({
+                url:'/api/visiter/landout',
+                success:function(result){
+                  if(result.code == 0)
+                        window.location.reload();
+                      }
+                  })
+               }
+             }
+        });
+    </script>
+    <script src="/public/js/message.js"></script>
+</body>
+</html>

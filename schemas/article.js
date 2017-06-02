@@ -12,6 +12,8 @@ module.exports = new mongoose.Schema({
     },
     //标签
     lable:String,
+    //分类
+    lableId:String,
     //备注
     addInfo:String,
     //转载信息

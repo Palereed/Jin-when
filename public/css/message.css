@@ -40,7 +40,11 @@
 .TopTab{border-bottom: 1px solid #e0e0e0;
         padding:2px 0;
         margin:10px 0 40px 0;
-        position:relative;}          
+        position:relative;} 
+.TopTab:nth-child(1){
+         margin:10px 0 20px 0;
+         border-bottom: 1px solid #e0e0e0;
+}                 
 .TabName{position:absolute;bottom:10px;}        
 .LandInfo{float:right;position:relative;}        
 .LandInfo span{display:inline-block;
@@ -66,9 +70,10 @@
 #ImgChoose img{width:80px;height:80px;border-radius:40px;cursor:pointer;}
 textarea.form-control{resize:none;height:100px;width:93%;}
 button{margin-left:60px;outline:none !important;}
+form button:nth-child(2){margin-left:0px;}
 .form-control{width:55%;display:inline-block;}
 @media screen and (max-width: 365px){
     .Messagetop p{margin-top:-2px;}
 }  
 /* 登陆与注册 */     
-#Land,#Register{display:none;}
+#Register{display:none;}

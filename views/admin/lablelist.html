@@ -4,13 +4,13 @@
     <span><i>/</i>分类管理</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="KindRelease">
+    <div class="LableRelease">
        <h1>分类添加</h1>
        <div class="panel">
-    	  <form id="KindEdit">
+    	  <form id="LableEdit">
     		  <h2>分类名称</h2>
     		  <input class="form-control" type="text" name="title"></input>
-    	      <div class="KindEditBtn">
+    	      <div class="LableEditBtn">
 	              <div>
 	                 <i></i>
 	                 <span></span>
@@ -18,11 +18,11 @@
               </div>
     		  <button class="btn btn-success" type="button">发布</button>
     		  <button class="btn btn-danger" type="reset">重置</button>
-              <a href = '/admin/kindlist'><button class="btn btn-info" type="button">返回查看</button></a>
+          <a href = '/admin/lablelist'><button class="btn btn-info" type="button">返回查看</button></a>
     	  </form>
        </div>
     </div>
-    <div class="KindList">
+    <div class="LableList">
        <h1>分类列表</h1>
        <div class="panel">
           <table class="table">
@@ -34,19 +34,19 @@
                     <th class="Options">操作</th>
             </thead>
             <tbody>
-                {% for kind in kinds %}
+                {% for lable in lables %}
                     <tr>
-                        <td class="TableId">{{kind._id.toString()}}</td>
-                        <td>{{kind.title}}</td>
-                        <td>{{kind.addTime|date('Y-m-d')}}</td>
-                        <td class="number">{{kind.number}}</td>
+                        <td class="TableId">{{lable._id.toString()}}</td>
+                        <td>{{lable.title}}</td>
+                        <td>{{lable.addTime|date('Y-m-d')}}</td>
+                        <td class="number">{{lable.number}}</td>
                         <td class="Options">
-                          <a href="/admin/kindlist/edit?id={{kind._id.toString()}}">
+                          <a href="/admin/lablelist/edit?id={{lable._id.toString()}}">
                              <span class="btn btn-info">
                                  <i class="fa fa-edit fa-fw"></i>
                              </span>
                           </a>
-                          <a href="/admin/kindlist/delete?id={{kind._id.toString()}}">
+                          <a href="/admin/lablelist/delete?id={{lable._id.toString()}}">
                              <span class="btn btn-danger">
                                  <i class="fa fa-trash-o fa-fw"></i>
                              </span>
@@ -60,13 +60,13 @@
               {% if page <=1 %}
               <a href="javascript:;" class="CantUse">前页</a>
               {% else %}
-              <a href="/admin/kindlist?page={{page-1}}">前页</a>
+              <a href="/admin/lablelist?page={{page-1}}">前页</a>
               {% endif %}
               <a class="Active">{{page}}</a>
               {% if page >= pages %}
               <a href="javascript:;" class="CantUse">后页</a>
               {% else %}
-              <a href="/admin/kindlist?page={{page+1}}">后页</a>
+              <a href="/admin/lablelist?page={{page+1}}">后页</a>
               {% endif %}
           </div>
           <div class="clearfix"></div>
@@ -80,29 +80,29 @@
        $('#WebTatal').addClass('active');
        $('#WebTatalBtn i').addClass('SlideDown').removeClass('SlideUp');
        $('#WebTatal').slideToggle(0);
-       $('#KindEdit').find('button').eq(0).click(function(){
+       $('#LableEdit').find('button').eq(0).click(function(){
             var  IsEditEnd = confirm('是否编辑完成？');
             if (IsEditEnd){
                 $.ajax({
                     type: 'post',
-                    url: '/admin/kindlist',
+                    url: '/admin/lablelist',
                     data: {
-                          title:$('#KindEdit').find('[name="title"]').val(),
+                          title:$('#LableEdit').find('[name="title"]').val(),
                       },
                     dataType: 'json',
                     success:function(result){
                       var code = result.code;
                       switch (code){
                         case 0:
-                            $('.KindEditBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.KindEditBtn').find('div').removeClass().addClass('alert alert-success')
+                            $('.LableEditBtn').find('i').removeClass().addClass('fa fa-check');
+                            $('.LableEditBtn').find('div').removeClass().addClass('alert alert-success')
                         break;
                         default:
-                            $('.KindEditBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.KindEditBtn').find('div').removeClass().addClass('alert alert-danger')
+                            $('.LableEditBtn').find('i').removeClass().addClass('fa fa-close');
+                            $('.LableEditBtn').find('div').removeClass().addClass('alert alert-danger')
                         break;
                       }
-                      $('.KindEditBtn').find('span').html(result.message);
+                      $('.LableEditBtn').find('span').html(result.message);
                    }
               })
           }

@@ -4,7 +4,7 @@
        <div class="MessageTop">
            <!-- 原留言 -->
            <div class="ImgContain">
-              <img src="public/images/message/owner.jpg" class="LetterImg">
+              <img src="/public/images/message/owner.jpg" class="LetterImg">
            </div>
            <div class="LetterContain">
                    <!-- 留言者信息 -->
@@ -21,27 +21,27 @@
        </div>
        <div class="TopLine"></div>
        <!-- 留言 -->
+       {% for message in messages %}
        <div class="LetterModule">
            <!-- 原留言 -->
            <div class="LetterOri">
                <!-- 头像 -->
                <div class="ImgContain">
-                   <img src="public/images/message/visit1.jpg" class="LetterImg">
+                   <img src="{{message.visiterImg}}" class="LetterImg">
                </div>
                <!-- 留言内容 -->
                <div class="LetterContain">
                    <!-- 留言者信息 -->
                    <div class="VisitInfo">
                       <span class="VisitName">
-                          <a href="#">蒹葭</a>
+                          <a href="#">{{decodeURI(message.visiter)}}</a>
                       </span>
                       <span class="TimeContain">
-                          留言于
-                          <b class="VisitTime">03 April,2017</b>
+                          留言于<b class="VisitTime">{{message.leaveTime|date('Y-m-d')}}</b>
                       </span>
                    </div>
                    <div class="LetterReal">
-                       <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+                       <p>{{message.content}}</p>
                    </div>
                </div>
                <div class="Answer">
@@ -55,7 +55,7 @@
                <!-- 留言回复内容 -->
                <div class="AnswerContain">
                     <div class="ImgContain">
-                       <img src="public/images/message/owner.jpg" class="LetterImg">
+                       <img src="/public/images/message/owner.jpg" class="LetterImg">
                     </div>
                     <div class="LetterContain">
                         <div class="VisitInfo">
@@ -75,7 +75,10 @@
                </div>
                <!-- 留言回复表单 -->
                <div class="AnswerForm">
+                   {% if visitInfo.visitname %}
                    <span class="Answerit">我要回复</span>
+                   {% else %}
+                   {% endif %}
                    <form>
                      <ul class="FormList">
                        <li><span>内容：</span><textarea class="form-control"></textarea></li>
@@ -85,140 +88,7 @@
                </div>
            </div>
        </div>
-       <div class="LetterModule">
-           <!-- 原留言 -->
-           <div class="LetterOri">
-               <!-- 头像 -->
-               <div class="ImgContain">
-                   <img src="public/images/message/visit1.jpg" class="LetterImg">
-               </div>
-               <!-- 留言内容 -->
-               <div class="LetterContain">
-                   <!-- 留言者信息 -->
-                   <div class="VisitInfo">
-                      <span class="VisitName">
-                          <a href="#">蒹葭</a>
-                      </span>
-                      <span class="TimeContain">
-                          留言于
-                          <b class="VisitTime">03 April,2017</b>
-                      </span>
-                   </div>
-                   <div class="LetterReal">
-                       <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
-                   </div>
-               </div>
-               <div class="Answer">
-                   <span class="fa fa-comment-o fa-lg"></span>
-                   <i>0</i>
-               </div>
-               <div class="clearfix"></div>
-           </div>
-           <!-- 留言回复 -->
-           <div class="AllAnswer">
-               <!-- 留言回复内容 -->
-               <div class="AnswerContain">
-                    <div class="ImgContain">
-                       <img src="public/images/message/owner.jpg" class="LetterImg">
-                    </div>
-                    <div class="LetterContain">
-                        <div class="VisitInfo">
-                          <span class="VisitName">
-                            <a href="#">蒹葭</a>
-                          </span>
-                          <span class="TimeContain">
-                             留言于
-                            <b class="VisitTime">03 April,2017</b>
-                          </span>
-                        </div>
-                        <div class="LetterReal">
-                          <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-               </div>
-               <!-- 留言回复表单 -->
-               <div class="AnswerForm">
-                   <span class="Answerit">我要回复</span>
-                   <form>
-                     <ul class="FormList">
-                       <li><span>内容：</span><textarea class="form-control"></textarea></li>
-                       <li><button type="submit" class="btn btn-default">回复</button></li>
-                     </ul>
-                   </form> 
-               </div>
-           </div>
-       </div>
-       <div class="LetterModule">
-           <!-- 原留言 -->
-           <div class="LetterOri">
-               <!-- 头像 -->
-               <div class="ImgContain">
-                   <img src="public/images/message/visit1.jpg" class="LetterImg">
-               </div>
-               <!-- 留言内容 -->
-               <div class="LetterContain">
-                   <!-- 留言者信息 -->
-                   <div class="VisitInfo">
-                      <span class="VisitName">
-                          <a href="#">蒹葭</a>
-                      </span>
-                      <span class="TimeContain">
-                          留言于
-                          <b class="VisitTime">03 April,2017</b>
-                      </span>
-                   </div>
-                   <div class="LetterReal">
-                       <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
-                   </div>
-               </div>
-               <div class="Answer">
-                   <span class="fa fa-comment-o fa-lg"></span>
-                   <i>0</i>
-               </div>
-               <div class="clearfix"></div>
-           </div>
-           <!-- 留言回复 -->
-           <div class="AllAnswer">
-               <!-- 留言回复内容 -->
-               <div class="AnswerContain">
-                    <div class="ImgContain">
-                       <img src="public/images/message/owner.jpg" class="LetterImg">
-                    </div>
-                    <div class="LetterContain">
-                        <div class="VisitInfo">
-                          <span class="VisitName">
-                            <a href="#">蒹葭</a>
-                          </span>
-                          <span class="TimeContain">
-                             留言于
-                            <b class="VisitTime">03 April,2017</b>
-                          </span>
-                        </div>
-                        <div class="LetterReal">
-                          <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-               </div>
-               <!-- 留言回复表单 -->
-               <div class="AnswerForm">
-                   <span class="Answerit">我要回复</span>
-                   <form>
-                     <ul class="FormList">
-                       <li><span>内容：</span><textarea class="form-control"></textarea></li>
-                       <div class="AnswerBtn">
-                          <div>
-                            <i></i>
-                            <span></span>
-                          </div>
-                       </div>
-                       <li><button type="button" class="btn btn-default">回复</button></li>
-                     </ul>
-                   </form> 
-               </div>
-           </div>
-       </div>
+       {% endfor %}
        <!-- 分页部分 -->
        <div class="PageNumber">
               {% if page <=1 %}
@@ -246,7 +116,7 @@
               <span>{{decodeURI(visitInfo.visitmark)}}<i>/</i><b id="Landout"><i class="fa fa-sign-out"></i>退出</b></span>
               <!-- 未登录状态 -->
               {% else %}
-              <span><b id="Landon"><i class="fa fa-sign-in"></i>登录</b></span>
+              <span><b id="Landon"><i class="fa fa-sign-in"></i>登录后留言</b></span>
               {% endif %}
               <div class="OnLand">
                   <img src={{visitInfo.visitimg}}>
@@ -255,10 +125,11 @@
           <div class="clearfix"></div>
        </div>
        <div class="LeaveContain">
-          <div class="VisitLeave" id="Leave">
-              <form>
+          {% if visitInfo.visitname %}
+          <div class="VisitLeave">
+              <form id="Leave">
                  <ul class="FormList">
-                    <li><span>内容：</span><textarea class="form-control"></textarea></li>
+                    <li><span>内容：</span><textarea class="form-control" name="content"></textarea></li>
                     <div class="LeaveBtn">
                         <div>
                           <i></i>
@@ -269,6 +140,7 @@
                  </ul>
               </form>
           </div>
+          {% else %}
           <div class="VisitLand" id="Land">
               <form>
                  <ul class="FormList">
@@ -315,33 +187,39 @@
               </div>
               <button type="button" class="btn btn-default">注册</button>
           </div>
+          {% endif %}
        </div>
     </div>
-    <link rel="stylesheet" type="text/css" href="public/css/message.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/message.css">
     <script>
-        //回复
-        $('.AnswerForm').find('button').click(function(){
-           var IsLand = $('.LandInfo').find('img').attr('src');
-           // 如果未登陆
-           if( IsLand == '') {
-                   $('.AnswerBtn').find('i').removeClass().addClass('fa fa-close');
-                   $('.AnswerBtn').find('div').removeClass().addClass('alert alert-danger');
-                   $('.AnswerBtn').find('span').html('登陆后回复');
-              }
-         })
         //留言
         $('#Leave').find('button').click(function(){
-           var IsLand = $('.LandInfo').find('img').attr('src');
-           // 如果未登陆
-           if( IsLand == '') {
-                 $('.LeaveBtn').find('i').removeClass().addClass('fa fa-close');
-                 $('.LeaveBtn').find('div').removeClass().addClass('alert alert-danger');
-                 $('.LeaveBtn').find('span').html('登陆后留言');
-                 setTimeout(function(){
-                    $('#Leave').hide();
-                    $('#Land').show();
-                 },1000);
-            }
+          $.ajax({
+            type: 'post',
+            url: '/api/visiter/message',
+            data: {
+                  content :$('#Leave').find('[name="content"]').val(),
+              },
+              dataType: 'json',
+              success:function(result){
+                var code = result.code;
+                switch (code){
+                  case 0:
+                     $('.LeaveBtn').find('i').removeClass().addClass('fa fa-check');
+                     $('.LeaveBtn').find('div').removeClass().addClass('alert alert-success');
+                     setTimeout(function(){
+                       window.location.reload();
+                       $('#Leave').find('[name="content"]').val() == '';
+                     },1000);
+                  break;
+                  default:
+                      $('.LeaveBtn').find('i').removeClass().addClass('fa fa-close');
+                      $('.LeaveBtn').find('div').removeClass().addClass('alert alert-danger');
+                  break;
+                }
+                $('.LeaveBtn').find('span').html(result.message);
+              }
+          })
         })
         //注册
         $('#Register').find('button').click(function(){
@@ -349,7 +227,7 @@
             type: 'post',
             url: '/api/visiter/register',
             data: {
-              visitname :$('#Register').find('[name="visitname"]').val(),
+                  visitname :$('#Register').find('[name="visitname"]').val(),
                   visitmark :$('#Register').find('[name="visitmark"]').val(),
                   visitpass :$('#Register').find('[name="visitpass"]').val(),
                   visitimg  :$('#Register').find('img').attr("src"),
@@ -361,15 +239,15 @@
                 switch (code){
                   case 0:
                      $('.RegisterBtn').find('i').removeClass().addClass('fa fa-check');
-                             $('.RegisterBtn').find('div').removeClass().addClass('alert alert-success');
-                              setTimeout(function(){
-                            $('#Register').hide();
-                            $('#Land').show();
-                         },1000);
+                     $('.RegisterBtn').find('div').removeClass().addClass('alert alert-success');
+                     setTimeout(function(){
+                        $('#Register').hide();
+                        $('#Land').show();
+                     },1000);
                   break;
                   default:
                       $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
-                              $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger')
+                      $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger');
                   break;
                 }
                 $('.RegisterBtn').find('span').html(result.message);
@@ -390,45 +268,34 @@
                 var code = result.code;
                 switch (code){
                 case 0:
-                   $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
-                        $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
-                        $('.LandInfo').find('span').html(result.visitInfo.visitmark);
-                        $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
-                      setTimeout(function(){
-                        $('#Leave').show();
-                        $('#Land').hide();
-                        $('.AnswerBtn').find('i').removeClass();
-                        $('.AnswerBtn').find('div').removeClass();
-                        $('.AnswerBtn').find('span').html('');
-                        $('.LeaveBtn').find('i').removeClass();
-                        $('.LeaveBtn').find('div').removeClass();
-                        $('.LeaveBtn').find('span').html('');
-                     },1000);
-                     window.location.reload();
-                        break;
-                        default:
-                           $('.LandBtn').find('i').removeClass().addClass('fa fa-close');
-                           $('.LandBtn').find('div').removeClass().addClass('alert alert-danger');
-                        break;
+                  $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
+                  $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
+                  $('.LandInfo').find('span').html(result.visitInfo.visitmark);
+                  $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
+                  window.location.reload();
+              break;
+              default:
+                    $('.LandBtn').find('i').removeClass().addClass('fa fa-close');
+                    $('.LandBtn').find('div').removeClass().addClass('alert alert-danger');
+              break;
                }
               $('.LandBtn').find('span').html(result.message);
-                }
-          })
+             }
+           })
         })
         //进入注册界面
         $('#Land').find('button').eq(1).click(function(){
-          $('#Land').hide();
+            $('#Land').hide();
             $('#Register').show();
         })
         //进入登陆界面
         $('#Landout').click(function(){$('.LandInfo').find('.OnLand').click()});
         $('#Landon').click(function(){$('.LandInfo').find('.OnLand').click()});
         $('.LandInfo').find('.OnLand').click(function(){
-         var IsLand = $('.LandInfo').find('img').attr('src');
-         // 如果未登陆
-         if( IsLand == '') {
-                 $('#Leave').hide();
-               $('#Register').hide();
+          var IsLand = $('.LandInfo').find('img').attr('src');
+          // 如果未登陆
+          if( IsLand == '') {
+                 $('#Register').hide();
                  $('#Land').show();
             } else {
                var  IsLandout = confirm('是否注销用户？');
@@ -444,7 +311,7 @@
              }
         });
     </script>
-    <script src="public/js/message.js"></script>
+    <script src="/public/js/message.js"></script>
     <style type="text/css">
         .TheNav a:nth-child(3) .MenuAdd::before{opacity:1;left:-7px;} 
         .TheNav a:nth-child(3) .MenuAdd::after{opacity:1;right:-7px;} 

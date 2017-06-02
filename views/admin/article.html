@@ -14,9 +14,9 @@
       			<input class="form-control" type="text" name="writer"></input>
       			<h2>标签</h2>
       			<div class="form-group KindChoose">
-               {% for kind in kinds %}
-      				 <input name="lable"  id='{{kind.title}}' type="radio" value="{{kind.id}}">
-               <label for="{{kind.title}}">{{kind.title}}</label>
+               {% for lable in lables %}
+      				 <input name="lable"  id='{{lable.title}}' type="radio" value="{{lable.id}}">
+               <label for="{{lable.title}}">{{lable.title}}</label>
       				 {% endfor %}
       			</div>
 			      <h2>备注</h2>
@@ -60,7 +60,8 @@
                     data: {
                           title:$('#ArticleEdit').find('[name="title"]').val(),
                           writer:$('#ArticleEdit').find('[name="writer"]').val(),
-                          lable:$('#ArticleEdit').find('[name="lable"]:checked').val(),
+                          lable:$('#ArticleEdit').find('[name="lable"]:checked').next('label').html(),
+                          lableId:$('#ArticleEdit').find('[name="lable"]:checked').val(),
                           addInfo:$('#ArticleEdit').find('[name="addInfo"]:checked').next('label').html(),
                           copyInfo:$('#ArticleEdit').find('[name="copyInfo"]').val(),
                           content:$('#ArticleEdit').find('[name="content"]').val()

@@ -8,12 +8,12 @@
                   <span>全部</span>
                 </a>
            </div>
-           {% for kind in kinds %}
+           {% for lable in lables %}
 	         <div class="ChecKind">
-                <a href="?kindId={{kind.id}}">
-                <span>{{kind.title}}</span>
+                <a href="?lableId={{lable.id}}">
+                <span>{{lable.title}}</span>
                 <!-- style="transform:translateX(100%);" -->
-                <span>{{kind.title}}</span>
+                <span>{{lable.title}}</span>
                 </a>
            </div>
            {% endfor %}
@@ -23,7 +23,7 @@
        <article class="WebLearn">
            <div class="ArclTitle">
            	  <h1>
-                <a href="article/css/float.html" class="ArclLink">
+                <a href="/home/read?articleId={{article.id}}" class="ArclLink">
                   {{article.title}}
                 </a>
               </h1>
@@ -63,7 +63,7 @@
                </div>
            </div>
            <div class="ArclBttom">
-               <a href="article/css/float.html" class="ArclShow">展开全文</a>
+               <a href="/home/read?articleId={{article.id}}" class="ArclShow">展开全文</a>
            </div>
        </article>
        {% endfor %}
@@ -82,7 +82,7 @@
               {% endif %}
        </div>
 	</div>
-  <link rel="stylesheet" type="text/css" href="public/css/home.css">
+  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
   <style type="text/css">
         footer{margin:20px 0 0 0;}
         .TheNav a:first-child .MenuAdd::before{opacity:1;left:-7px;} 

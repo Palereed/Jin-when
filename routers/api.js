@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Visiter = require('../models/visiter');
-var Article = require('../models/articles') 
+var Article = require('../models/articles');
+var Message = require('../models/messages');
 //统一返回格式
 var responseData;
 router.use(function(req, res, next){
@@ -108,4 +109,27 @@ router.get('/visiter/landout',function(req, res){
     req.cookies.set('visitInfo',null);
     res.json(responseData);
 })
+//用户评论
+router.post('/visiter/message', function(req, res, next){
+     var visiter = req.visitInfo.visitmark;
+     var visiterImg = req.visitInfo.visitimg;
+     console.log(req.cookies);
+     var content = req.body.content;
+     if (content == ''){
+        responseData.code = 1;
+        responseData.message = '内容不能为空';
+        res.json( responseData);
+        return;
+     }
+     var message = new Message({
+        visiter:visiter,
+        visiterImg:visiterImg,
+        content:content,
+      });
+      message.save();
+      responseData.message = '留言成功';
+      res.json( responseData);
+})
+ 
+
 module.exports = router;

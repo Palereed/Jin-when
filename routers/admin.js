@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Kind = require('../models/kinds');
+var Lable = require('../models/lables');
 var Visiter = require('../models/visiter');
 var Article = require('../models/articles');
 var Record = require('../models/records')  
@@ -23,127 +23,111 @@ router.get('/home', function(req, res, next){
    })
 })  
 //分类管理
-router.get('/kindlist', function(req, res, next){
+router.get('/lablelist', function(req, res, next){
     var page = Number(req.query.page || 1);
     var limit = 5;
-    Kind.count().then(function(count){
+    Lable.count().then(function(count){
         pages = Math.ceil(count / limit);
         page = Math.min(page, pages);
         page = Math.max(page, 1);
         var skip = (page - 1) * limit;
-        Kind.find().sort({_id:-1}).limit(limit).skip(skip).then(function(kinds){
-            res.render('admin/kindlist',{
+        Lable.find().sort({_id:-1}).limit(limit).skip(skip).then(function(lables){
+            res.render('admin/lablelist',{
             visitInfo:req.visitInfo,
-            kinds:kinds,
+            lables:lables,
             page:page,
             pages:pages
            });
         })
    })
 }) 
-//分类添加
-var kindData;
+var responseData;
 router.use(function(req, res, next){
-    kindData = {
-        code:0,
-        message:''
-    }
-    next();
+  responseData = {
+    code:0,
+    message:''
+  }
+  next();
 })
-router.post('/kindlist', function(req, res, next){
+//分类添加
+router.post('/lablelist', function(req, res, next){
     var title = req.body.title;
     if ( title == '' ){
-      kindData.code = 1;
-      kindData.message = '分类标题不能为空';
-      res.json(kindData);
+      responseData.code = 1;
+      responseData.message = '分类标题不能为空';
+      res.json(responseData);
       return;
    }
-   Kind.findOne({
+   Lable.findOne({
       title:title
-    }).then(function(kindInfo){
-      if (kindInfo) {
-         kindData.code = 2;
-         kindData.message = '此分类已存在';
-         res.json(kindData);
+    }).then(function(lableInfo){
+      if (lableInfo) {
+         responseData.code = 2;
+         responseData.message = '此分类已存在';
+         res.json(responseData);
          return
       } 
-      var kind = new Kind({
+      var lable = new Lable({
          title:title,
       })
-      return  kind.save();
+      return  lable.save();
     }).then(function(){
-      kindData.message = '添加成功';
-      res.json(kindData);
+      responseData.message = '添加成功';
+      res.json(responseData);
    })
 })
 //分类修改
-router.get('/kindlist/edit', function(req, res, next){
+router.get('/lablelist/edit', function(req, res, next){
    var id = req.query.id || '';
-   Kind.findOne({
+   Lable.findOne({
      _id: id
-   }).then(function(kind){
-      res.render('admin/kindedit',{
+   }).then(function(lable){
+      res.render('admin/labledit',{
             visitInfo:req.visitInfo,
-            kind:kind
+            lable:lable
       })  
    })
 })
-var kindeditData;
-router.use(function(req, res, next){
-    kindeditData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
-router.post('/kindlist/edit', function(req, res, next){
+router.post('/lablelist/edit', function(req, res, next){
     var id = req.query.id || '';
     var title = req.body.title;
-    Kind.findOne({
+    Lable.findOne({
       _id:id
     }).then(function(){
-      return Kind.update({
+      return Lable.update({
           _id:id
       },{
           title:title,
       })
     }).then(function(){
-       kindeditData.message = '修改成功';
-       res.json(kindeditData);
+       responseData.message = '修改成功';
+       res.json(responseData);
        return;
      })
 })
 //分类删除
-router.get('/kindlist/delete', function(req, res, next){
+router.get('/lablelist/delete', function(req, res, next){
    var id = req.query.id || '';
-   Kind.findOne({
+   Lable.findOne({
      _id: id
-   }).then(function(kind){
-      res.render('admin/kindelete',{
+   }).then(function(lable){
+      res.render('admin/labledelete',{
             visitInfo:req.visitInfo,
-            kind:kind
+            lable:lable
       })  
    })
 })
-var kinddeleteData;
-router.use(function(req, res, next){
-    kinddeleteData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
-router.post('/kindlist/delete', function(req, res, next){
+router.post('/lablelist/delete', function(req, res, next){
     var id = req.query.id || '';
-    Kind.findOne({
+    Lable.findOne({
       _id:id
     }).then(function(){
-       return Kind.remove({
+       return Lable.remove({
           _id:id
        })
     }).then(function(){
-       kinddeleteData.message = '删除成功';
-       res.json(kinddeleteData);
+       responseData.message = '删除成功';
+       res.json(responseData);
        return;
      })
 })
@@ -188,14 +172,6 @@ router.get('/visiter/edit', function(req, res, next){
       })  
    })
 })
-var visiterData;
-router.use(function(req, res, next){
-    visiterData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
 router.post('/visiter/edit', function(req, res, next){
     var id = req.query.id || '';
     var visitmark = req.body.visitmark;
@@ -216,8 +192,8 @@ router.post('/visiter/edit', function(req, res, next){
           visitsafe:visitsafe,
       })
     }).then(function(){
-       visiterData.message = '修改成功';
-       res.json(visiterData);
+       responseData.message = '修改成功';
+       res.json(responseData);
        return;
      })
 })
@@ -233,14 +209,6 @@ router.get('/visiter/delete', function(req, res, next){
       })  
    })
 })
-var visiterdeleteData;
-router.use(function(req, res, next){
-    visiterdeleteData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
 router.post('/visiter/delete', function(req, res, next){
     var id = req.query.id || '';
     Visiter.findOne({
@@ -250,8 +218,8 @@ router.post('/visiter/delete', function(req, res, next){
           _id:id
        })
     }).then(function(){
-       visiterdeleteData.message = '删除成功';
-       res.json(visiterdeleteData);
+       responseData.message = '删除成功';
+       res.json(responseData);
        return;
      })
 })
@@ -259,71 +227,64 @@ router.post('/visiter/delete', function(req, res, next){
 
 //文章发布
 router.get('/article', function(req, res, next){
-  Kind.find().then(function(kinds){
+  Lable.find().then(function(lables){
     res.render('admin/article',{
       visitInfo:req.visitInfo,
-      kinds:kinds
+      lables:lables
       });
    })
 }) 
-var articleData;
-router.use(function(req, res, next){
-   //json传递数组是否只用一个就行?待项目完成后再进行尝试
-    articleData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
 router.post('/article', function(req, res, next){
     var title = req.body.title;
     var writer = req.body.writer;
     var lable = req.body.lable;
+    var lableId = req.body.lableId;
     var addInfo = req.body.addInfo;
     var copyInfo = req.body.copyInfo;
     var content = req.body.content;
     if (title == ''){
-      articleData.code = 1;
-      articleData.message = '文章标题不能为空';
-      res.json(articleData);
+      responseData.code = 1;
+      responseData.message = '文章标题不能为空';
+      res.json(responseData);
       return;
    } else if (writer == ''){
-      articleData.code = 2;
-      articleData.message = '作者不能为空';
-      res.json(articleData);
+      responseData.code = 2;
+      responseData.message = '作者不能为空';
+      res.json(responseData);
       return;
    }  else if ( addInfo == '转载' && copyInfo == ''){
-      articleData.code = 3;
-      articleData.message = '转载信息不能为空';
-      res.json(articleData);
+      responseData.code = 3;
+      responseData.message = '转载信息不能为空';
+      res.json(responseData);
       return;
    } else if ( content == ''){
-      articleData.code = 4;
-      articleData.message = '内容不能为空';
-      res.json(articleData);
+      responseData.code = 4;
+      responseData.message = '内容不能为空';
+      res.json(responseData);
       return;
    } 
    Article.findOne({
      title:title
     }).then(function(articleInfo){
       if (articleInfo) {
-         articleData.code = 5;
-         articleData.message = '此文章已存在';
-         res.json(articleData);
+         responseData.code = 5;
+         responseData.message = '此文章已存在';
+         res.json(responseData);
          return
       } 
       var article = new Article({
          title:title,
          writer:writer,
          lable:lable,
+         lableId:lableId,
          addInfo:addInfo,
          copyInfo:copyInfo,
          content:content
       })
       return  article.save();
     }).then(function(){
-      articleData.message = '发布成功';
-      res.json( articleData);
+      responseData.message = '发布成功';
+      res.json( responseData);
    })
 }) 
 //文章列表
@@ -357,14 +318,6 @@ router.get('/article/edit', function(req, res, next){
       })  
    })
 })
-var editData;
-router.use(function(req, res, next){
-    editData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
 router.post('/article/edit', function(req, res, next){
     var id = req.query.id || '';
     var title = req.body.title;
@@ -390,8 +343,8 @@ router.post('/article/edit', function(req, res, next){
       //原因是传递了id参数admin/article/edit?id=...,但是ajax的url仅为admin/article/edit
       //含参url如何写?还是直接删除url?默认指向当前页,也就解决此问题
     }).then(function(){
-       editData.message = '修改成功';
-       res.json(editData);
+       responseData.message = '修改成功';
+       res.json(responseData);
        return;
      })
 })
@@ -407,14 +360,6 @@ router.get('/article/delete', function(req, res, next){
       })  
    })
 })
-var deleteData;
-router.use(function(req, res, next){
-    deleteData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
 router.post('/article/delete', function(req, res, next){
     var id = req.query.id || '';
     Article.findOne({
@@ -424,8 +369,8 @@ router.post('/article/delete', function(req, res, next){
           _id:id
        })
     }).then(function(){
-       editData.message = '删除成功';
-       res.json(editData);
+       responseData.message = '删除成功';
+       res.json(responseData);
        return;
      })
 })
@@ -437,47 +382,39 @@ router.get('/record', function(req, res, next){
      	visitInfo:req.visitInfo
      });
 }) 
-var recordData;
-router.use(function(req, res, next){
-    recordData = {
-        code:0,
-        message:''
-    }
-    next();
-})
 router.post('/record', function(req, res, next){
     var title = req.body.title;
     var mood = req.body.mood;
     var weather = req.body.weather;
     var content = req.body.content;
     if ( title == '' ){
-      recordData.code = 1;
-      recordData.message = '读白标题不能为空';
-      res.json(recordData);
+      responseData.code = 1;
+      responseData.message = '读白标题不能为空';
+      res.json(responseData);
       return;
    } else if ( mood == '' ){
-      recordData.code = 2;
-      recordData.message = '心情不能为空';
-      res.json(recordData);
+      responseData.code = 2;
+      responseData.message = '心情不能为空';
+      res.json(responseData);
       return;
    }  else if ( weather == '' ){
-      recordData.code = 3;
-      recordData.message = '天气不能为空';
-      res.json(recordData);
+      responseData.code = 3;
+      responseData.message = '天气不能为空';
+      res.json(responseData);
       return;
    } else if ( content == '' ){
-      recordData.code = 4;
-      recordData.message = '内容不能为空';
-      res.json(recordData);
+      responseData.code = 4;
+      responseData.message = '内容不能为空';
+      res.json(responseData);
       return;
    } 
    Record.findOne({
       title:title
     }).then(function(recordInfo){
       if (recordInfo) {
-         recordData.code = 5;
-         recordData.message = '此独白已存在';
-         res.json(recordData);
+         responseData.code = 5;
+         responseData.message = '此独白已存在';
+         res.json(responseData);
          return
       } 
       var record = new Record({
@@ -488,8 +425,8 @@ router.post('/record', function(req, res, next){
       })
       return  record.save();
     }).then(function(){
-      recordData.message = '发布成功';
-      res.json(recordData);
+      responseData.message = '发布成功';
+      res.json(responseData);
    })
 })
 //独白列表
@@ -523,14 +460,6 @@ router.get('/record/edit', function(req, res, next){
       })  
    })
 })
-var neweditData;
-router.use(function(req, res, next){
-    neweditData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
 router.post('/record/edit', function(req, res, next){
     var id = req.query.id || '';
     var title = req.body.title;
@@ -549,8 +478,8 @@ router.post('/record/edit', function(req, res, next){
           content:content
       })
     }).then(function(){
-       neweditData.message = '修改成功';
-       res.json(neweditData);
+       responseData.message = '修改成功';
+       res.json(responseData);
        return;
      })
 })
@@ -566,14 +495,6 @@ router.get('/record/delete', function(req, res, next){
       })  
    })
 })
-var newdeleteData;
-router.use(function(req, res, next){
-    newdeleteData = {
-        code:0,
-        message:''
-    } 
-    next();
-})
 router.post('/record/delete', function(req, res, next){
     var id = req.query.id || '';
     Record.findOne({
@@ -583,13 +504,11 @@ router.post('/record/delete', function(req, res, next){
           _id:id
        })
     }).then(function(){
-       newdeleteData.message = '删除成功';
-       res.json(newdeleteData);
+       responseData.message = '删除成功';
+       res.json(responseData);
        return;
      })
 })
-
-
 
 //留言管理
 router.get('/message', function(req, res, next){
