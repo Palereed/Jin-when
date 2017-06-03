@@ -57,7 +57,7 @@
 	                  <pre><code>.Cotain{border:1px solid #313d4b;width:220px;padding:5px;}<br/>.CotainInner1,.CotainInner2{width:100px;height:50px;float:left; border:1px solid  #313d4b;margin-left:5px;}<br/></code></pre>
 	                  <h3>效果图</h3>
 	                  <div class="DemoImg">
-	                      <img src="../../images/article/css/floatdemo1.png">
+	                      <img src="/public/images/article/css/floatdemo1.png">
 	                  </div>
 	                  <p>如上图所示，父层仅拥有自身的padding高度。这是非常令人恼怒的事情，在网站布局中会引起巨大灾难。</p>
 	              </section>
@@ -73,7 +73,7 @@
 	                  <pre><code>.Cotain{border:1px solid #313d4b;width:220px;padding:5px;}<br/>.CotainInner1,.CotainInner2{width:100px;height:50px;float:left; border:1px solid  #313d4b;margin-left:5px;}<br/>.CotainInner3{clear:both;}</code></pre>
 	                  <h3>效果图</h3>
 	                  <div class="DemoImg">
-	                     <img src="../../images/article/css/floatdemo2.png">
+	                     <img src="/public/images/article/css/floatdemo2.png">
 	                  </div>
 	              </section>
 	           </div>
@@ -83,28 +83,28 @@
 	        <div class="TopTab">
 	        	<div class="TabName">评论区</div>
 	        </div>
-	        <!-- 留言 -->
+	        <!-- 评论 -->
+	        {% for comment in comments %}
 	        <div class="LetterModule">
-	           <!-- 原留言 -->
+	           <!-- 原评论 -->
 	           <div class="LetterOri">
 	               <!-- 头像 -->
 	               <div class="ImgContain">
-	                   <img src="/public/images/message/visit1.jpg" class="LetterImg">
+	                   <img src="{{comment.visiterImg}}" class="LetterImg">
 	               </div>
-	               <!-- 留言内容 -->
+	               <!-- 评论内容 -->
 	               <div class="LetterContain">
-	                   <!-- 留言者信息 -->
+	                   <!-- 评论者信息 -->
 	                   <div class="VisitInfo">
 	                      <span class="VisitName">
-	                          <a href="#">蒹葭</a>
+	                          <a href="#">{{decodeURI(comment.visiter)}}</a>
 	                      </span>
 	                      <span class="TimeContain">
-	                          留言于
-	                          <b class="VisitTime">03 April,2017</b>
+	                          评论于<b class="VisitTime">{{comment.postTime|date('Y-m-d')}}</b>
 	                      </span>
 	                   </div>
 	                   <div class="LetterReal">
-	                       <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
+	                       <p>{{comment.content}}</p>
 	                   </div>
 	               </div>
 	               <div class="Answer">
@@ -113,9 +113,9 @@
 	               </div>
 	               <div class="clearfix"></div>
 	           </div>
-	           <!-- 留言回复 -->
+	           <!-- 评论回复 -->
 	           <div class="AllAnswer">
-	               <!-- 留言回复内容 -->
+	               <!-- 评论回复内容 -->
 	               <div class="AnswerContain">
 	                    <div class="ImgContain">
 	                       <img src="/public/images/message/owner.jpg" class="LetterImg">
@@ -126,7 +126,7 @@
 	                            <a href="#">蒹葭</a>
 	                          </span>
 	                          <span class="TimeContain">
-	                             留言于
+	                             评论于
 	                            <b class="VisitTime">03 April,2017</b>
 	                          </span>
 	                        </div>
@@ -136,7 +136,7 @@
 	                    </div>
 	                    <div class="clearfix"></div>
 	               </div>
-	               <!-- 留言回复表单 -->
+	               <!-- 评论回复表单 -->
 	               <div class="AnswerForm">
 	                   {% if visitInfo.visitname %}
 	                   <span class="Answerit">我要回复</span>
@@ -151,23 +151,24 @@
 	               </div>
 	           </div>
 	        </div>
+	        {% endfor %}
 	        <!-- 分页部分 -->
 	        <div class="PageNumber">
 	              {% if page <=1 %}
 	              <a href="javascript:;" class="CantUse">前页</a>
 	              {% else %}
-	              <a href="/message?page={{page-1}}">前页</a>
+	              <a href="/home/read?articleId=5932925171f45f21e8d7940a&&page={{page-1}}">前页</a>
 	              {% endif %}
 	              <a class="Active">{{page}}</a>
 	              {% if page >= pages %}
 	              <a href="javascript:;" class="CantUse">后页</a>
 	              {% else %}
-	              <a href="/message?page={{page+1}}">后页</a>
+	              <a href="/home/read?articleId=5932925171f45f21e8d7940a&&page={{page+1}}">后页</a>
 	              {% endif %}
 	        </div>
-	        <!-- 留言表单 -->
+	        <!-- 评论表单 -->
 	        <div class="TopTab">
-	          <div class="TabName">留言板</div>
+	          <div class="TabName">评论板</div>
 	          <div class="LandInfo">
 	              <!-- 管理员登陆 -->
 	              {% if visitInfo.isAdmin %}
@@ -187,19 +188,20 @@
 	          <div class="clearfix"></div>
 	        </div>
 	        <div class="LeaveContain">
-	          <!-- 留言框 -->
+	          <!-- 评论框 -->
 	          {% if visitInfo.visitname %}
-	          <div class="VisitLeave" id="Leave">
+	          <div class="VisitLeave" id="Comment">
 	              <form>
 	                 <ul class="FormList">
-	                    <li><span>内容：</span><textarea class="form-control"></textarea></li>
-	                    <div class="LeaveBtn">
+	                    <li><span>内容：</span><textarea class="form-control" name="content"></textarea></li>
+	                    <input type='hidden' value="{{article.id}}" name="articleId"></input>
+	                    <div class="CommentBtn">
 	                        <div>
 	                          <i></i>
 	                          <span></span>
 	                        </div>
 	                    </div>
-	                    <li><button type="button" class="btn btn-default">留言</button></li>
+	                    <li><button type="button" class="btn btn-default">评论</button></li>
 	                 </ul>
 	              </form>
 	          </div>
@@ -242,15 +244,15 @@
 	                       <img src="/public/images/message/visit8.jpg">
 	                 </li>
 	                 <li><span>密保：</span><input class="form-control" name="visitsafe"></input></li>
+	                 <div class="RegisterBtn">
+		                <div>
+		                  <i></i>
+		                  <span></span>
+		                </div>
+		             </div>
+		             <li><button type="button" class="btn btn-default">注册</button></li>
 	              </ul>
 	              </form>
-	              <div class="RegisterBtn">
-	                <div>
-	                  <i></i>
-	                  <span></span>
-	                </div>
-	              </div>
-	              <button type="button" class="btn btn-default">注册</button>
 	          </div>
 	          {% endif %}
 	        </div>
@@ -264,96 +266,36 @@
 		</footer>
     </div>
     <script>
-        //注册
-        $('#Register').find('button').click(function(){
-          $.ajax({
+        //评论
+        $('#Comment').find('button').click(function(){
+            $.ajax({
             type: 'post',
-            url: '/api/visiter/register',
+            url: '/api/read/comment',
             data: {
-                  visitname :$('#Register').find('[name="visitname"]').val(),
-                  visitmark :$('#Register').find('[name="visitmark"]').val(),
-                  visitpass :$('#Register').find('[name="visitpass"]').val(),
-                  visitimg  :$('#Register').find('img').attr("src"),
-                  visitsafe :$('#Register').find('[name="visitsafe"]').val()
+                  content :$('#Comment').find('[name="content"]').val(),
+                  articleId :$('#Comment').find('[name="articleId"]').val(),
               },
               dataType: 'json',
               success:function(result){
+              	$('#Comment').find('[name="content"]').val('');
                 var code = result.code;
                 switch (code){
                   case 0:
-                     $('.RegisterBtn').find('i').removeClass().addClass('fa fa-check');
-                     $('.RegisterBtn').find('div').removeClass().addClass('alert alert-success');
-                     setTimeout(function(){
-                        $('#Register').hide();
-                        $('#Land').show();
-                     },1000);
+                     $('.CommentBtn').find('i').removeClass().addClass('fa fa-check');
+                     $('.CommentBtn').find('div').removeClass().addClass('alert alert-success');
+                     window.location.reload();
                   break;
                   default:
-                      $('.RegisterBtn').find('i').removeClass().addClass('fa fa-close');
-                      $('.RegisterBtn').find('div').removeClass().addClass('alert alert-danger');
+                      $('.CommentBtn').find('i').removeClass().addClass('fa fa-close');
+                      $('.CommentBtn').find('div').removeClass().addClass('alert alert-danger');
                   break;
                 }
-                $('.RegisterBtn').find('span').html(result.message);
+                $('.CommentBtn').find('span').html(result.message);
               }
           })
         })
-        //登陆
-        $('#Land').find('button').eq(0).click(function(){
-          $.ajax({
-            type: 'post',
-            url:'/api/visiter/land',
-            data: {
-                    visitname :$('#Land').find('[name="visitname"]').val(),
-                    visitpass :$('#Land').find('[name="visitpass"]').val()
-            },
-                dataType: 'json',
-                success:function(result){
-                var code = result.code;
-                switch (code){
-                case 0:
-                    $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
-	                $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
-	                $('.LandInfo').find('span').html(result.visitInfo.visitmark);
-	                $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
-	                window.location.reload();
-	            break;
-	            default:
-                    $('.LandBtn').find('i').removeClass().addClass('fa fa-close');
-                    $('.LandBtn').find('div').removeClass().addClass('alert alert-danger');
-	            break;
-               }
-              $('.LandBtn').find('span').html(result.message);
-             }
-           })
-        })
-        //进入注册界面
-        $('#Land').find('button').eq(1).click(function(){
-            $('#Land').hide();
-            $('#Register').show();
-        })
-        //进入登陆界面
-        $('#Landout').click(function(){$('.LandInfo').find('.OnLand').click()});
-        $('#Landon').click(function(){$('.LandInfo').find('.OnLand').click()});
-        $('.LandInfo').find('.OnLand').click(function(){
-          var IsLand = $('.LandInfo').find('img').attr('src');
-          // 如果未登陆
-          if( IsLand == '') {
-                 $('#Register').hide();
-                 $('#Land').show();
-            } else {
-               var  IsLandout = confirm('是否注销用户？');
-               if( IsLandout ){
-                $.ajax({
-                url:'/api/visiter/landout',
-                success:function(result){
-                  if(result.code == 0)
-                        window.location.reload();
-                      }
-                  })
-               }
-             }
-        });
     </script>
+    <script src="/public/js/land.js"></script>
     <script src="/public/js/message.js"></script>
 </body>
 </html>

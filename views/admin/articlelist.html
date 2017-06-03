@@ -35,7 +35,7 @@
                         <td>null</td>
                         {% endif %}
                         <td class="views">{{article.views}}</td>
-                        <td class="comments">{{article.comments}}</td>
+                        <td class="comments">{{article.comments.length}}</td>
                         <td class="Options">
                           <a href="/admin/article/edit?id={{article._id.toString()}}">
                              <span class="btn btn-info">

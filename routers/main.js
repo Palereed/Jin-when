@@ -39,6 +39,7 @@ router.get('/home', function(req, res, next){
         res.render('home/home',data);
     })
 })
+
 //文章展示模块
 router.get('/home/read', function(req, res, next){
     var articleId = req.query.articleId || '';
@@ -48,13 +49,24 @@ router.get('/home/read', function(req, res, next){
         //阅读数增加
         article.views++;
         article.save();
+        var comments = article.comments.reverse();
+        var page = Number(req.query.page || 1);
+        var limit = 5;
+        pages = Math.ceil(comments.length / limit);
+        page = Math.min(page, pages);
+        page = Math.max(page, 1);
+        var start = limit*(page-1);
+        var end = start + limit;
+        var newcomment = comments.slice(start,end)
         res.render('home/read',{
         visitInfo:req.visitInfo,
-        article:article
+        article:article,
+        page:page,
+        pages:pages,
+        comments:newcomment
        });
     })
 })
-
 
 //独白模块
 router.get('/record', function(req, res, next){

@@ -109,11 +109,10 @@ router.get('/visiter/landout',function(req, res){
     req.cookies.set('visitInfo',null);
     res.json(responseData);
 })
-//用户评论
+//用户留言
 router.post('/visiter/message', function(req, res, next){
      var visiter = req.visitInfo.visitmark;
      var visiterImg = req.visitInfo.visitimg;
-     console.log(req.cookies);
      var content = req.body.content;
      if (content == ''){
         responseData.code = 1;
@@ -130,6 +129,30 @@ router.post('/visiter/message', function(req, res, next){
       responseData.message = '留言成功';
       res.json( responseData);
 })
- 
-
+//用户评论 
+router.post('/read/comment',function(req,res,next){
+   //文章id
+   var articleId = req.body.articleId || '';
+   var postData = {
+     visiter:req.visitInfo.visitmark,
+     postTime:new Date(),
+     visiterImg:req.visitInfo.visitimg,
+     content:req.body.content
+   }
+   if (postData.content == ''){
+      responseData.code = 1;
+      responseData.message = '评论不能为空';
+      res.json(responseData);
+      return
+   }
+   Article.findOne({
+     _id:articleId
+   }).then(function(article){
+      article.comments.push(postData);
+      article.save();
+   }).then(function(newarticle){
+      responseData.message = '评论成功';
+      res.json(responseData);
+   })
+})
 module.exports = router;
