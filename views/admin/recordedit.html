@@ -5,10 +5,9 @@
     <span><i>/</i>独白修改</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="RecordRelease">
-       <h1>独白修改</h1>
-       <div class="panel">
-    	  <form id="RecordUpdate">
+    <h1>独白修改</h1>
+    <div class="panel">
+  	  <form method="post" id="UpdateIt">
     		  <h2>标题</h2>
     			<input class="form-control" type="text" name="title" value="{{record.title}}"></input>
     			<h2>心情</h2>
@@ -17,7 +16,7 @@
     			<input class="form-control" type="text" name="weather" value="{{record.weather}}"></input>
     			<h2>编辑文本</h2>
     			<textarea class="form-control" name="content">{{record.content}}</textarea>
-          <div class="RecordUpdateBtn">
+          <div class="WarningHold">
               <div>
                  <i></i>
                  <span></span>
@@ -26,8 +25,7 @@
     			<button class="btn btn-success" type="button">修改</button>
     			<button class="btn btn-danger" type="reset">重置</button>
           <a href = '/admin/recordlist'><button class="btn btn-info" type="button">返回查看</button></a>
-    	  </form>
-       </div>
+  	  </form>
     </div>
     <style type="text/css">
        #Record li:last-child{background:#31383e;}
@@ -37,31 +35,31 @@
         $('#Record').addClass('active');
         $('#RecordBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#Record').slideToggle(0);
-        $('#RecordUpdate').find('button').eq(0).click(function(){
+        $('#UpdateIt').find('button').eq(0).click(function(){
             var  IsEditEnd = confirm('是否编辑完成？');
             if (IsEditEnd){
                 $.ajax({
                     type: 'post',
                     data: {
-                          title:$('#RecordUpdate').find('[name="title"]').val(),
-                          mood:$('#RecordUpdate').find('[name="mood"]').val(),
-                          weather:$('#RecordUpdate').find('[name="weather"]').val(),
-                          content:$('#RecordUpdate').find('[name="content"]').val()
+                          title:$('#UpdateIt').find('[name="title"]').val(),
+                          mood:$('#UpdateIt').find('[name="mood"]').val(),
+                          weather:$('#UpdateIt').find('[name="weather"]').val(),
+                          content:$('#UpdateIt').find('[name="content"]').val()
                       },
                     dataType: 'json',
                     success:function(result){
                       var code = result.code;
                       switch (code){
                         case 0:
-                            $('.RecordUpdateBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.RecordUpdateBtn').find('div').removeClass().addClass('alert alert-success')
+                            $('.WarningHold').find('i').removeClass().addClass('fa fa-check');
+                            $('.WarningHold').find('div').removeClass().addClass('alert alert-success')
                         break;
                         default:
-                            $('.RecordUpdateBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.RecordUpdateBtn').find('div').removeClass().addClass('alert alert-danger')
+                            $('.WarningHold').find('i').removeClass().addClass('fa fa-close');
+                            $('.WarningHold').find('div').removeClass().addClass('alert alert-danger')
                         break;
                       }
-                      $('.RecordUpdateBtn').find('span').html(result.message);
+                      $('.WarningHold').find('span').html(result.message);
                    }
               })
           }

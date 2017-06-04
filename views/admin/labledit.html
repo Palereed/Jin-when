@@ -5,23 +5,21 @@
     <span><i>/</i>分类修改</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="LableRelease">
-      <h1>分类修改</h1>
-      <div class="panel">
-         <form method="post" id="LableUpdate">
-		        <h2>标题</h2>
-      			<input class="form-control" type="text" name="title" value="{{lable.title}}"></input>
-      			<div class="LableUpdateBtn">
-                <div>
-                   <i></i>
-                   <span></span>
-                </div>
-            </div>
-      			<button class="btn btn-success" type="button">保存</button>
-      			<button class="btn btn-danger" type="reset">重置</button> 
-            <a href = '/admin/Lablelist'><button class="btn btn-info" type="button">返回查看</button></a>
-		    </form>
-      </div>
+    <h1>分类修改</h1>
+    <div class="panel">
+       <form method="post" id="UpdateIt">
+	        <h2>标题</h2>
+    			<input class="form-control" type="text" name="title" value="{{lable.title}}"></input>
+    			<div class="WarningHold">
+              <div>
+                 <i></i>
+                 <span></span>
+              </div>
+          </div>
+    			<button class="btn btn-success" type="button">保存</button>
+    			<button class="btn btn-danger" type="reset">重置</button> 
+          <a href = '/admin/Lablelist'><button class="btn btn-info" type="button">返回查看</button></a>
+	     </form>
     </div>
     <style type="text/css">
         #WebTatal li:last-child{background:#31383e;}
@@ -31,28 +29,28 @@
         $('#WebTatal').addClass('active');
         $('#WebTatalBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#WebTatal').slideToggle(0);
-        $('#LableUpdate').find('button').eq(0).click(function(){
+        $('#UpdateIt').find('button').eq(0).click(function(){
             var  IsEditEnd = confirm('是否编辑完成？');
             if (IsEditEnd){
                 $.ajax({
                     type: 'post',
                     data: {
-                          title:$('#LableUpdate').find('[name="title"]').val(),
+                          title:$('#UpdateIt').find('[name="title"]').val(),
                        },
                     dataType: 'json',
                     success:function(result){
                       var code = result.code;
                       switch (code){
                         case 0:
-                            $('.LableUpdateBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.LableUpdateBtn').find('div').removeClass().addClass('alert alert-success')
+                            $('.WarningHold').find('i').removeClass().addClass('fa fa-check');
+                            $('.WarningHold').find('div').removeClass().addClass('alert alert-success')
                         break;
                         default:
-                            $('.LableUpdateBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.LableUpdateBtn').find('div').removeClass().addClass('alert alert-danger')
+                            $('.WarningHold').find('i').removeClass().addClass('fa fa-close');
+                            $('.WarningHold').find('div').removeClass().addClass('alert alert-danger')
                         break;
                       }
-                      $('.LableUpdateBtn').find('span').html(result.message);
+                      $('.WarningHold').find('span').html(result.message);
                    }
               })
           }

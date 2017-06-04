@@ -3,11 +3,12 @@ var router = express.Router();
 var Lable = require('../models/lables');
 var Visiter = require('../models/visiter');
 var Article = require('../models/articles');
-var Record = require('../models/records')  
+var Record = require('../models/records');
+var Message = require('../models/messages');
 router.use(function(req, res, next){
 	if (!req.visitInfo.isAdmin) {
-         res.send('warning:请使用管理员身份登陆!');
-         return
+     res.send('warning:请使用管理员身份登陆!');
+     return
 	}
 	next();
 })
@@ -41,6 +42,7 @@ router.get('/lablelist', function(req, res, next){
         })
    })
 }) 
+//Ajax数据保存
 var responseData;
 router.use(function(req, res, next){
   responseData = {
@@ -83,8 +85,8 @@ router.get('/lablelist/edit', function(req, res, next){
      _id: id
    }).then(function(lable){
       res.render('admin/labledit',{
-            visitInfo:req.visitInfo,
-            lable:lable
+          visitInfo:req.visitInfo,
+          lable:lable
       })  
    })
 })
@@ -94,16 +96,28 @@ router.post('/lablelist/edit', function(req, res, next){
     Lable.findOne({
       _id:id
     }).then(function(){
-      return Lable.update({
-          _id:id
-      },{
-          title:title,
-      })
+       return Lable.findOne({
+           _id:{$ne:id},
+           title:title
+       })
+    }).then(function(haslable){
+       if (haslable){
+         responseData.code = 1;
+         responseData.message = '此分类已存在';
+         res.json(responseData);
+         return;
+       } else {
+          return Lable.update({
+                  _id:id
+              },{
+                  title:title,
+              })
+          }
     }).then(function(){
-       responseData.message = '修改成功';
-       res.json(responseData);
-       return;
-     })
+          responseData.message = '修改成功';
+          res.json(responseData);
+          return;
+   })
 })
 //分类删除
 router.get('/lablelist/delete', function(req, res, next){
@@ -121,10 +135,17 @@ router.post('/lablelist/delete', function(req, res, next){
     var id = req.query.id || '';
     Lable.findOne({
       _id:id
-    }).then(function(){
-       return Lable.remove({
+    }).then(function(lable){
+       if (lable.number != 0){
+         responseData.code = 1;
+         responseData.message = '删除失败,该分类下有文章';
+         res.json(responseData);
+         return;
+       } else {
+         return Lable.remove({
           _id:id
-       })
+         })
+       }
     }).then(function(){
        responseData.message = '删除成功';
        res.json(responseData);
@@ -132,13 +153,12 @@ router.post('/lablelist/delete', function(req, res, next){
      })
 })
 
-
 //用户管理
 router.get('/visiter', function(req, res, next){
     // 读取数据条数      跳过数据条数
     // limit(Number)     skip(Number)
     var page = Number(req.query.page || 1);
-    var limit = 8;
+    var limit = 9;
     //数据库中数据条数
     Visiter.count({"isAdmin":"false"}).then(function(count){
         //计算总页数
@@ -182,15 +202,27 @@ router.post('/visiter/edit', function(req, res, next){
     Visiter.findOne({
       _id:id
     }).then(function(){
-      return Visiter.update({
+       return Visiter.findOne({
+         _id:{$ne:id},
+         visitname:visitname
+       })
+    }).then(function(hasvisiter){
+      if (hasvisiter) {
+        responseData.code = 1;
+        responseData.message = '该账户已存在';
+        res.json(responseData);
+        return;
+      } else {
+        return Visiter.update({
           _id:id
-      },{
-          visitmark:visitmark,
-          visitimg:visitimg,
-          visitname:visitname,
-          visitpass:visitpass,
-          visitsafe:visitsafe,
-      })
+        },{
+            visitmark:visitmark,
+            visitimg:visitimg,
+            visitname:visitname,
+            visitpass:visitpass,
+            visitsafe:visitsafe,
+        })
+      }
     }).then(function(){
        responseData.message = '修改成功';
        res.json(responseData);
@@ -281,8 +313,14 @@ router.post('/article', function(req, res, next){
          copyInfo:copyInfo,
          content:content
       })
+      Lable.findOne({
+        _id:article.lableId
+      }).then(function(lable){
+        lable.number ++;
+        lable.save();
+      })
       return  article.save();
-    }).then(function(){
+   }).then(function(){
       responseData.message = '发布成功';
       res.json( responseData);
    })
@@ -290,7 +328,7 @@ router.post('/article', function(req, res, next){
 //文章列表
 router.get('/articlelist', function(req, res, next){
     var page = Number(req.query.page || 1);
-    var limit = 8;
+    var limit = 9;
     Article.count().then(function(count){
         pages = Math.ceil(count / limit);
         page = Math.min(page, pages);
@@ -329,16 +367,28 @@ router.post('/article/edit', function(req, res, next){
     Article.findOne({
       _id:id
     }).then(function(){
-      return Article.update({
+       return Article.findOne({
+          _id:{$ne:id},
+          title:title
+       })
+    }).then(function(hasarticle){
+      if (hasarticle) {
+        responseData.code = 1;
+        responseData.message = '修改失败,此文章已存在';
+        res.json(responseData);
+        return;
+      } else {
+        return Article.update({
           _id:id
-      },{
-          title:title,
-          writer:writer,
-          lable:lable,
-          addInfo:addInfo,
-          copyInfo:copyInfo,
-          content:content
-      })
+        },{
+            title:title,
+            writer:writer,
+            lable:lable,
+            addInfo:addInfo,
+            copyInfo:copyInfo,
+            content:content
+        })
+      }
       //为何用ajax不起作用？必须仔细研究研究
       //原因是传递了id参数admin/article/edit?id=...,但是ajax的url仅为admin/article/edit
       //含参url如何写?还是直接删除url?默认指向当前页,也就解决此问题
@@ -346,7 +396,7 @@ router.post('/article/edit', function(req, res, next){
        responseData.message = '修改成功';
        res.json(responseData);
        return;
-     })
+   })
 })
 // 文章删除
 router.get('/article/delete', function(req, res, next){
@@ -354,6 +404,12 @@ router.get('/article/delete', function(req, res, next){
    Article.findOne({
      _id: id
    }).then(function(article){
+      Lable.findOne({
+        _id:article.lableId
+      }).then(function(lable){
+        lable.number --;
+        lable.save();
+      })
       res.render('admin/articledelete',{
             visitInfo:req.visitInfo,
             article:article
@@ -432,7 +488,7 @@ router.post('/record', function(req, res, next){
 //独白列表
 router.get('/recordlist', function(req, res, next){
     var page = Number(req.query.page || 1);
-    var limit = 8;
+    var limit = 9;
     Record.count().then(function(count){
         pages = Math.ceil(count / limit);
         page = Math.min(page, pages);
@@ -511,9 +567,22 @@ router.post('/record/delete', function(req, res, next){
 })
 
 //留言管理
-router.get('/message', function(req, res, next){
-	res.render('admin/message',{
-     	visitInfo:req.visitInfo
-     });
+router.get('/messagelist', function(req, res, next){
+    var page = Number(req.query.page || 1);
+    var limit = 9;
+    Message.count().then(function(count){
+        pages = Math.ceil(count / limit);
+        page = Math.min(page, pages);
+        page = Math.max(page, 1);
+        var skip = (page - 1) * limit;
+        Message.find().sort({_id:-1}).limit(limit).skip(skip).then(function(messages){
+            res.render('admin/message',{
+            visitInfo:req.visitInfo,
+            messages:messages,
+            page:page,
+            pages:pages
+           });
+        })
+   })
 })   
 module.exports = router;

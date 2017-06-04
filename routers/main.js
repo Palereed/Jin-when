@@ -26,7 +26,7 @@ router.get('/home', function(req, res, next){
     }
     Lable.find().sort().then(function(lables){
         data.lables = lables;
-        return Article.count(); 
+        return Article.count();
     }).then(function(count){
         data.count = count;
         data.pages = Math.ceil( data.count / data.limit);
@@ -81,7 +81,7 @@ router.get('/record', function(req, res, next){
 //信笺模块
 router.get('/message', function(req, res, next){
     var page = Number(req.query.page || 1);
-    var limit = 8;
+    var limit = 9;
     //数据库中数据条数
     Message.count().then(function(count){
         pages = Math.ceil(count / limit);

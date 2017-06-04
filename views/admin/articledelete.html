@@ -5,28 +5,26 @@
     <span><i>/</i>文章删除</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="ArticleRelease">
-      <h1>文章删除</h1>
-      <div class="panel">
-        <form method="post" id="ArticleDelete">
-	        <h2>标题：<span>{{article.title}}</span></h2>
-	        <h2>时间：<span>{{article.addTime|date('Y-m-d')}}</span></h2>
-    			<h2>作者：<span>{{article.writer}}</span></h2>
-    			<h2>标签：<span>{{article.lable}}</span></h2>
-    			<h2>备注：<span>{{article.addInfo}}</span></h2>
-    			<h2>说明：<span>{{article.copyInfo}}</span></h2>
-    			<h2>文章内容：</h2>
-    			<p>{{article.content}}</p>
-          <div class="ArticleDeleteBtn">
-              <div>
-                 <i></i>
-                 <span></span>
-              </div>
-          </div>
-  			  <button class="btn btn-danger" type="button">删除</button>
-  		    <a href = '/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
-		    </form>
-      </div>
+    <h1>文章删除</h1>
+    <div class="panel">
+      <form method="post" id="DeleteIt">
+        <h2>标题：<span>{{article.title}}</span></h2>
+        <h2>时间：<span>{{article.addTime|date('Y-m-d')}}</span></h2>
+  			<h2>作者：<span>{{article.writer}}</span></h2>
+  			<h2>标签：<span>{{article.lable}}</span></h2>
+  			<h2>备注：<span>{{article.addInfo}}</span></h2>
+  			<h2>说明：<span>{{article.copyInfo}}</span></h2>
+  			<h2>文章内容：</h2>
+  			<p>{{article.content}}</p>
+        <div class="WarningHold">
+            <div>
+               <i></i>
+               <span></span>
+            </div>
+        </div>
+			  <button class="btn btn-danger" type="button">删除</button>
+		    <a href = '/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
+	    </form>
     </div>
     <style type="text/css">
        #Article li:last-child{background:#31383e;}
@@ -36,28 +34,6 @@
         $('#Article').addClass('active');
         $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#Article').slideToggle(0);
-        $('#ArticleDelete').find('button').eq(0).click(function(){
-            var  IsEditEnd = confirm('是否确定删除？');
-            if (IsEditEnd){
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    success:function(result){
-                      var code = result.code;
-                      switch (code){
-                        case 0:
-                            $('.ArticleDeleteBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.ArticleDeleteBtn').find('div').removeClass().addClass('alert alert-success')
-                        break;
-                        default:
-                            $('.ArticleDeleteBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.ArticleDeleteBtn').find('div').removeClass().addClass('alert alert-danger')
-                        break;
-                      }
-                      $('.ArticleDeleteBtn').find('span').html(result.message);
-                   }
-              })
-          }
-      })
     </script>
+    <script src="/public/js/delete.js"></script>
 {% endblock %}

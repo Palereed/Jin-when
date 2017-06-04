@@ -4,10 +4,9 @@
     <span><i>/</i>分类管理</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="LableRelease">
-       <h1>分类添加</h1>
-       <div class="panel">
-    	  <form id="LableEdit">
+    <h1>分类添加</h1>
+    <div class="panel">
+    	 <form id="LableEdit">
     		  <h2>分类名称</h2>
     		  <input class="form-control" type="text" name="title"></input>
     	      <div class="LableEditBtn">
@@ -19,8 +18,7 @@
     		  <button class="btn btn-success" type="button">发布</button>
     		  <button class="btn btn-danger" type="reset">重置</button>
           <a href = '/admin/lablelist'><button class="btn btn-info" type="button">返回查看</button></a>
-    	  </form>
-       </div>
+    	 </form>
     </div>
     <div class="LableList">
        <h1>分类列表</h1>
@@ -95,7 +93,10 @@
                       switch (code){
                         case 0:
                             $('.LableEditBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.LableEditBtn').find('div').removeClass().addClass('alert alert-success')
+                            $('.LableEditBtn').find('div').removeClass().addClass('alert alert-success');
+                            setTimeout(function(){
+                                window.location.reload();
+                            },500);
                         break;
                         default:
                             $('.LableEditBtn').find('i').removeClass().addClass('fa fa-close');
@@ -103,7 +104,7 @@
                         break;
                       }
                       $('.LableEditBtn').find('span').html(result.message);
-                   }
+                    }
               })
           }
       })

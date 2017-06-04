@@ -13,7 +13,6 @@ a:hover{text-decoration:none;color:#333;}
 a:focus{outline:none;text-decoration:none;color:#333;}
 aside{position:fixed;top:0;left:0;width:280px;height:100%;background:#4c4c4c;}
 header{height:100px;width:100%;box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);}    
-.fa{vertical-align:top;} 
 .clearfix{clear:both} 
 .TheNav{width:176px;
         margin:0 62px;
@@ -132,7 +131,7 @@ header{height:100px;width:100%;box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);}
           } 
 .MainContain {margin-top:30px;}          
 /* 页码 */
-.PageNumber{margin:0 50px 0 0;padding:10px 0 0 0}     
+.PageNumber{margin:30px 0 0 0;}     
 .PageNumber a{display:inline-block;
               margin-right:5px;
               padding:0 10px;

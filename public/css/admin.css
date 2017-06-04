@@ -7,7 +7,9 @@ h1{font-size:26px;font-weight:700;margin:20px 0;color:#676767;}
 h2{font-size:14px;margin:20px 0;font-weight:700;color:#676767;}
 form>h2:first-child{margin:0 0 20px 0;}
 header{color:#333;font-size:20px;cursor:default;}
+textarea{height:300px !important;}
 .alert{padding:8px 12px;margin:20px 0 0 0;}
+.alert i{margin:0 10px 0 0;}
 .WebTitle{height:60px;width:250px;background:#3d464d;color:#fff;font-weight:700;float:left;}
 .WebTitle span{display:block;padding:15px 15px;height:60px;width:250px;background:rgba(0,0,0,0.2)}
 .WebTitle i{margin:0 12px 0 0;}
@@ -62,7 +64,6 @@ button:focus{outline:none !important;}
 #ImgChoose{display:none;}
 #ImgChoose img{width:80px;height:80px;border-radius:40px;cursor:pointer;}
 /* 文章管理 */
-.ArticleRelease textarea{height:400px;} 
 .KindChoose span,.AddInfo span{display:inline-block;width:40px;}
 /* 表格样式 */
 .table>thead>tr>th{border:none;padding:0 8px 15px 8px;font-size:14px;color:#676767;}
@@ -70,9 +71,9 @@ button:focus{outline:none !important;}
 .table>tbody>tr:nth-child(odd){background:#f3faff}
 .Options{width:120px;text-align:center;}
 td a>.btn{padding:2px 3px !important}
-.TableId{width:200px;}
+.TableId{width:220px;}
 /* 分页 */
-.PageNumber{float:right;margin:0 50px 0 0;padding:20px 0 0 0}     
+.PageNumber{float:right;margin:0 50px 0 0;padding:10px 0 0 0}     
 .PageNumber a{display:inline-block;
                  margin-right:5px;
                  padding:0 10px;
@@ -84,12 +85,10 @@ td a>.btn{padding:2px 3px !important}
 .Active{background:#3d464d;color:#fff !important}
 .CantUse{color:#AAB5BC !important;} 
 /* 列表样式 */
-.VisiterImg img{height:36px;border-radius:18px;}
+.VisiterImg img{height:38px;border-radius:19px;}
 .number,.views,.comments{text-align:center;}
-.RecordRelease textarea{height:200px;}
 .mood,.weather{width:60px;text-align:center;}
 .UserName{width:100px;}
-
 /* 网站管理 */
 .Statistical>.panel{width:22.75%;
 					margin:0 3% 0 0;

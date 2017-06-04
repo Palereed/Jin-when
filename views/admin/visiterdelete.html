@@ -4,53 +4,27 @@
     <span><i>/</i>用户删除</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="VisiterRelease">
-       <h1>用户删除</h1>
-       <div class="panel">
-    	  <form id="VisiterDelete">
-    		<h2>昵称：<span>{{visiter.visitmark}}</span></h2>
-    		<h2>头像：<span><img src={{visiter.visitimg}}></span></h2>
-			<h2>账户：<span>{{visiter.visitname}}</span></h2>
-			<h2>密码：<span>{{visiter.visitpass}}</span></h2>
-			<h2>密保：<span>{{visiter.visitsafe}}</span></h2>
-            <div class="VisiterDeleteBtn">
-              <div>
-                 <i></i>
-                 <span></span>
-              </div>
+    <h1>用户删除</h1>
+    <div class="panel">
+  	   <form method="post" id="DeleteIt">
+  		    <h2>昵称：<span>{{visiter.visitmark}}</span></h2>
+  	    	<h2>头像：<span><img src={{visiter.visitimg}}></span></h2>
+    			<h2>账户：<span>{{visiter.visitname}}</span></h2>
+    			<h2>密码：<span>{{visiter.visitpass}}</span></h2>
+    			<h2>密保：<span>{{visiter.visitsafe}}</span></h2>
+          <div class="WarningHold">
+            <div>
+               <i></i>
+               <span></span>
             </div>
-		    <button class="btn btn-danger" type="button">删除</button>
-		    <a href = '/admin/visiter'><button class="btn btn-info" type="button">返回查看</button></a>
-    	 </form>
-       </div>
+          </div>
+  		    <button class="btn btn-danger" type="button">删除</button>
+  		    <a href = '/admin/visiter'><button class="btn btn-info" type="button">返回查看</button></a>
+  	   </form>
     </div>
     <style type="text/css">
        #VisiterBtn{background:#31383e;}
        #VisiterBtn a,#VisiterBtn span{color:#f2f2f2;}
     </style>
-    <script>
-        $('#VisiterDelete').find('button').eq(0).click(function(){
-            var  IsEditEnd = confirm('是否编辑完成？');
-            if (IsEditEnd){
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    success:function(result){
-                      var code = result.code;
-                      switch (code){
-                        case 0:
-                            $('.VisiterDeleteBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.VisiterDeleteBtn').find('div').removeClass().addClass('alert alert-success')
-                        break;
-                        default:
-                            $('.VisiterDeleteBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.VisiterDeleteBtn').find('div').removeClass().addClass('alert alert-danger')
-                        break;
-                      }
-                      $('.VisiterDeleteBtn').find('span').html(result.message);
-                   }
-              })
-          }
-      })
-    </script>
+    <script src="/public/js/delete.js"></script>
 {% endblock %}

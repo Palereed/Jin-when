@@ -4,69 +4,67 @@
     <span><i>/</i>文章列表</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="ArticleList">
-       <h1>文章列表</h1>
-       <div class="panel">
-          <table class="table">
-             <thead>
-                    <th class="TableId">编号</th>
-                    <th>标题</th>
-                    <th>作者</th>
-                    <th>标签</th>
-                    <th>发布时间</th>
-                    <th>备注</th>
-                    <th>转载信息</th>
-                    <th class="views">浏览量</th>
-                    <th class="comments">评论数</th>
-                    <th class="Options">操作</th>
-            </thead>
-            <tbody>
-                {% for article in articles %}
-                    <tr>
-                        <td class="TableId">{{article._id.toString()}}</td>
-                        <td>{{article.title}}</td>
-                        <td>{{article.writer}}</td>
-                        <td>{{article.lable}}</td>
-                        <td>{{article.addTime|date('Y-m-d')}}</td>
-                        <td>{{article.addInfo}}</td>
-                        {% if article.copyInfo %}
-                        <td>{{article.copyInfo}}</td>
-                        {% else %}
-                        <td>null</td>
-                        {% endif %}
-                        <td class="views">{{article.views}}</td>
-                        <td class="comments">{{article.comments.length}}</td>
-                        <td class="Options">
-                          <a href="/admin/article/edit?id={{article._id.toString()}}">
-                             <span class="btn btn-info">
-                                 <i class="fa fa-edit fa-fw"></i>
-                             </span>
-                          </a>
-                          <a href="/admin/article/delete?id={{article._id.toString()}}">
-                             <span class="btn btn-danger">
-                                 <i class="fa fa-trash-o fa-fw"></i>
-                             </span>
-                          </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-             </tbody>
-          </table>
-          <div class="PageNumber">
-              {% if page <=1 %}
-              <a href="javascript:;" class="CantUse">前页</a>
-              {% else %}
-              <a href="/admin/articlelist?page={{page-1}}">前页</a>
-              {% endif %}
-              <a class="Active">{{page}}</a>
-              {% if page >= pages %}
-              <a href="javascript:;" class="CantUse">后页</a>
-              {% else %}
-              <a href="/admin/articlelist?page={{page+1}}">后页</a>
-              {% endif %}
-          </div>
-          <div class="clearfix"></div>
-       </div>
+    <h1>文章列表</h1>
+    <div class="panel">
+      <table class="table">
+        <thead>
+                <th class="TableId">编号</th>
+                <th>标题</th>
+                <th>作者</th>
+                <th>标签</th>
+                <th>发布时间</th>
+                <th>备注</th>
+                <th>转载信息</th>
+                <th class="views">浏览量</th>
+                <th class="comments">评论数</th>
+                <th class="Options">操作</th>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td class="TableId">{{article._id.toString()}}</td>
+                    <td>{{article.title}}</td>
+                    <td>{{article.writer}}</td>
+                    <td>{{article.lable}}</td>
+                    <td>{{article.addTime|date('Y-m-d')}}</td>
+                    <td>{{article.addInfo}}</td>
+                    {% if article.copyInfo %}
+                    <td>{{article.copyInfo}}</td>
+                    {% else %}
+                    <td>null</td>
+                    {% endif %}
+                    <td class="views">{{article.views}}</td>
+                    <td class="comments">{{article.comments.length}}</td>
+                    <td class="Options">
+                      <a href="/admin/article/edit?id={{article._id.toString()}}">
+                         <span class="btn btn-info">
+                             <i class="fa fa-edit fa-fw"></i>
+                         </span>
+                      </a>
+                      <a href="/admin/article/delete?id={{article._id.toString()}}">
+                         <span class="btn btn-danger">
+                             <i class="fa fa-trash-o fa-fw"></i>
+                         </span>
+                      </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      <div class="PageNumber">
+          {% if page <=1 %}
+          <a href="javascript:;" class="CantUse">前页</a>
+          {% else %}
+          <a href="/admin/articlelist?page={{page-1}}">前页</a>
+          {% endif %}
+          <a class="Active">{{page}}</a>
+          {% if page >= pages %}
+          <a href="javascript:;" class="CantUse">后页</a>
+          {% else %}
+          <a href="/admin/articlelist?page={{page+1}}">后页</a>
+          {% endif %}
+      </div>
+      <div class="clearfix"></div>
     </div>
     <style type="text/css">
        #Article li:last-child{background:#31383e;}

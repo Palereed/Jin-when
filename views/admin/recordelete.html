@@ -5,26 +5,24 @@
     <span><i>/</i>独白删除</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="ArticleRelease">
-      <h1>独白删除</h1>
-      <div class="panel">
-        <form method="post" id="RecorDelete">
-	        <h2>标题：<span>{{record.title}}</span></h2>
-	        <h2>时间：<span>{{record.addTime|date('Y-m-d')}}</span></h2>
-          <h2>心情：<span>{{record.mood}}</span></h2>
-    			<h2>天气：<span>{{record.weather}}</span></h2>
-    			<h2>文章内容：</h2>
-    			<p>{{record.content}}</p>
-          <div class="RecorDeleteBtn">
-              <div>
-                 <i></i>
-                 <span></span>
-              </div>
-          </div>
-  			  <button class="btn btn-danger" type="button">删除</button>
-  		    <a href = '/admin/recordlist'><button class="btn btn-info" type="button">返回查看</button></a>
-		    </form>
-      </div>
+    <h1>独白删除</h1>
+    <div class="panel">
+      <form method="post" id="DeleteIt">
+        <h2>标题：<span>{{record.title}}</span></h2>
+        <h2>时间：<span>{{record.addTime|date('Y-m-d')}}</span></h2>
+        <h2>心情：<span>{{record.mood}}</span></h2>
+  			<h2>天气：<span>{{record.weather}}</span></h2>
+  			<h2>文章内容：</h2>
+  			<p>{{record.content}}</p>
+        <div class="WarningHold">
+            <div>
+               <i></i>
+               <span></span>
+            </div>
+        </div>
+			  <button class="btn btn-danger" type="button">删除</button>
+		    <a href = '/admin/recordlist'><button class="btn btn-info" type="button">返回查看</button></a>
+	    </form>
     </div>
     <style type="text/css">
        #Record li:last-child{background:#31383e;}
@@ -34,28 +32,6 @@
         $('#Record').addClass('active');
         $('#RecordBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#Record').slideToggle(0);
-        $('#RecorDelete').find('button').eq(0).click(function(){
-            var  IsEditEnd = confirm('是否确定删除？');
-            if (IsEditEnd){
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    success:function(result){
-                      var code = result.code;
-                      switch (code){
-                        case 0:
-                            $('.RecorDeleteBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.RecorDeleteBtn').find('div').removeClass().addClass('alert alert-success')
-                        break;
-                        default:
-                            $('.RecorDeleteBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.RecorDeleteBtn').find('div').removeClass().addClass('alert alert-danger')
-                        break;
-                      }
-                      $('.RecorDeleteBtn').find('span').html(result.message);
-                   }
-              })
-          }
-      })
     </script>
+    <script src="/public/js/delete.js"></script>
 {% endblock %}

@@ -39,7 +39,6 @@ for( var i = 0;i<Answer.length;i++){
 	    }
 	}
 }
-
 // 头像选择  
 var ShowImg = document.getElementById('ShowImg'),
     ImgChoose = document.getElementById('ImgChoose'),

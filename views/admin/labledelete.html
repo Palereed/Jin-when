@@ -5,23 +5,21 @@
     <span><i>/</i>分类删除</span>
 {% endblock %}
 {% block MainBody %}
-    <div class="LableRelease">
-      <h1>分类删除</h1>
-      <div class="panel">
-         <form method="post" id="LableDelete">
-		        <h2>分类名称：<span>{{lable.title}}</span></h2>
-            <h2>发布时间：<span>{{lable.addTime|date('Y-m-d')}}</span></h2>
-            <h2>分类包含：<span>{{lable.number}} 篇文章</span></h2>
-            <div class="LableDeleteBtn">
-                <div>
-                   <i></i>
-                   <span></span>
-                </div>
-            </div>
-      			<button class="btn btn-danger" type="button">删除</button>
-      			<a href = '/admin/lablelist'><button class="btn btn-info" type="button">返回查看</button></a>
-		    </form>
-      </div>
+    <h1>分类删除</h1>
+    <div class="panel">
+       <form method="post" id="DeleteIt">
+	        <h2>分类名称：<span>{{lable.title}}</span></h2>
+          <h2>发布时间：<span>{{lable.addTime|date('Y-m-d')}}</span></h2>
+          <h2>分类包含：<span>{{lable.number}} 篇文章</span></h2>
+          <div class="WarningHold">
+              <div>
+                 <i></i>
+                 <span></span>
+              </div>
+          </div>
+    			<button class="btn btn-danger" type="button">删除</button>
+    			<a href = '/admin/lablelist'><button class="btn btn-info" type="button">返回查看</button></a>
+	     </form>
     </div>
     <style type="text/css">
         #WebTatal li:last-child{background:#31383e;}
@@ -31,28 +29,6 @@
         $('#WebTatal').addClass('active');
         $('#WebTatalBtn i').addClass('SlideDown').removeClass('SlideUp');
         $('#WebTatal').slideToggle(0);
-        $('#LableDelete').find('button').eq(0).click(function(){
-            var  IsEditEnd = confirm('是否确定删除？');
-            if (IsEditEnd){
-                $.ajax({
-                    type: 'post',
-                    dataType: 'json',
-                    success:function(result){
-                      var code = result.code;
-                      switch (code){
-                        case 0:
-                            $('.LableDeleteBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.LableDeleteBtn').find('div').removeClass().addClass('alert alert-success')
-                        break;
-                        default:
-                            $('.LableDeleteBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.LableDeleteBtn').find('div').removeClass().addClass('alert alert-danger')
-                        break;
-                      }
-                      $('.LableDeleteBtn').find('span').html(result.message);
-                   }
-              })
-          }
-      })
     </script>
+    <script src="/public/js/delete.js"></script>
 {% endblock %}
