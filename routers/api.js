@@ -3,6 +3,7 @@ var router = express.Router();
 var Visiter = require('../models/visiter');
 var Article = require('../models/articles');
 var Message = require('../models/messages');
+var Answer = require('../models/answers');
 //统一返回格式
 var responseData;
 router.use(function(req, res, next){
@@ -154,5 +155,38 @@ router.post('/read/comment',function(req,res,next){
       responseData.message = '评论成功';
       res.json(responseData);
    })
+})
+//留言回复
+router.post('/message/answer',function(req,res,next){
+    var message = req.body.messageId;
+    var visiter = req.visitInfo.visitmark;
+    var visiterImg = req.visitInfo.visitimg;
+    var content = req.body.content;
+    if ( content == '' ){
+      responseData.code = 1;
+      responseData.message = '回复内容不能为空';
+      res.json(responseData);
+      return;
+    } else {
+      var answer = new Answer({
+        message:message,
+        visiter:visiter,
+        answerTime:new Date(),
+        visiterImg:visiterImg,
+        content:content
+      })
+     answer.save();
+     Message.findOne({
+        _id:answer.message
+     }).then(function(message){
+        message.answer.push(answer._id);
+        message.save();
+     }).then(function(){
+        responseData.message = '回复成功';
+        responseData.data = answer;
+        res.json(responseData);
+        return;
+     })
+   }
 })
 module.exports = router;

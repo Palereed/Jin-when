@@ -3,7 +3,8 @@ var router = express.Router();
 var Lable = require('../models/lables');
 var Article = require('../models/articles');
 var Record = require('../models/records');
-var Message = require('../models/messages')
+var Message = require('../models/messages');
+var Answer = require('../models/answers')
 router.get('/', function(req, res, next){
    res.render('home/curtain');
 })
@@ -88,7 +89,7 @@ router.get('/message', function(req, res, next){
         page = Math.min(page, pages);
         page = Math.max(page, 1);
         var skip = (page - 1) * limit;
-        Message.find().sort({_id:-1}).limit(limit).skip(skip).then(function(messages){
+        Message.find().sort({_id:-1}).limit(limit).skip(skip).populate('answer').then(function(messages){
             res.render('home/message',{
             visitInfo:req.visitInfo,
             messages:messages,
@@ -98,4 +99,5 @@ router.get('/message', function(req, res, next){
         })
     })
 })
+
 module.exports = router;

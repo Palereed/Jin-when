@@ -37,7 +37,7 @@
                           <a href="#">{{decodeURI(message.visiter)}}</a>
                       </span>
                       <span class="TimeContain">
-                          留言于<b class="VisitTime">{{message.leaveTime|date('Y-m-d')}}</b>
+                          留言于<b class="VisitTime">{{message.leaveTime|date('F jS, Y')}}</b>
                       </span>
                    </div>
                    <div class="LetterReal">
@@ -46,32 +46,36 @@
                </div>
                <div class="Answer">
                    <span class="fa fa-comment-o fa-lg"></span>
-                   <i>0</i>
+                   <i>{{message.answer.length}}</i>
                </div>
                <div class="clearfix"></div>
            </div>
            <!-- 留言回复 -->
            <div class="AllAnswer">
-               <!-- 留言回复内容 -->
-               <div class="AnswerContain">
-                    <div class="ImgContain">
-                       <img src="/public/images/message/owner.jpg" class="LetterImg">
-                    </div>
-                    <div class="LetterContain">
-                        <div class="VisitInfo">
-                          <span class="VisitName">
-                            <a href="#">蒹葭</a>
-                          </span>
-                          <span class="TimeContain">
-                             留言于
-                            <b class="VisitTime">03 April,2017</b>
-                          </span>
-                        </div>
-                        <div class="LetterReal">
-                          <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
+               <div class="AnswerHold">
+                 <!-- 留言回复内容 -->
+                 {% for answer in message.answer %}
+                 <div class="AnswerContain">
+                      <div class="ImgContain">
+                         <img src="{{answer.visiterImg}}" class="LetterImg">
+                      </div>
+                      <div class="LetterContain">
+                          <div class="VisitInfo">
+                            <span class="VisitName">
+                              <a href="#">{{decodeURI(answer.visiter)}}</a>
+                            </span>
+                            <span class="TimeContain">
+                               留言于
+                              <b class="VisitTime">{{answer.answerTime|date('F jS, Y')}}</b>
+                            </span>
+                          </div>
+                          <div class="LetterReal">
+                            <p>{{answer.content}}</p>
+                          </div>
+                      </div>
+                      <div class="clearfix"></div>
+                 </div>
+                 {% endfor %}
                </div>
                <!-- 留言回复表单 -->
                <div class="AnswerForm">
@@ -81,8 +85,15 @@
                    {% endif %}
                    <form>
                      <ul class="FormList">
-                       <li><span>内容：</span><textarea class="form-control"></textarea></li>
-                       <li><button type="submit" class="btn btn-default">回复</button></li>
+                       <input type='hidden' value="{{message.id}}" name="messageId"></input>
+                       <li><span>内容：</span><textarea class="form-control" name="content"></textarea></li>
+                       <div class="WarningHold">
+                          <div>
+                            <i></i>
+                            <span></span>
+                          </div>
+                       </div>
+                       <li><button type="button" class="btn btn-default">回复</button></li>
                      </ul>
                    </form> 
                </div>
@@ -219,6 +230,46 @@
               }
           })
         })
+        //留言回复
+        $('.AnswerForm').find('button').click(function(){
+            $(this).parents('form').addClass('WarnWhich');
+            $.ajax({
+            type: 'post',
+            url: '/api/message/answer',
+            data: {
+                  content :$(this).parents('form').find('[name="content"]').val(),
+                  messageId :$(this).parents('form').find('[name="messageId"]').val(),
+              },
+            dataType: 'json',
+            success:function(result){
+                var code = result.code;
+                switch (code){
+                  case 0:
+                      $('.WarnWhich').find('.WarningHold').find('i').removeClass().addClass('fa fa-check');
+                      $('.WarnWhich').find('.WarningHold').find('div').removeClass().addClass('alert alert-success');
+                  break;
+                  default:
+                      $('.WarnWhich').find('.WarningHold').find('i').removeClass().addClass('fa fa-close');
+                      $('.WarnWhich').find('.WarningHold').find('div').removeClass().addClass('alert alert-danger');
+                  break;
+                }
+                $('.WarnWhich').find('.WarningHold').find('span').html(result.message);
+                $('.WarnWhich').find('textarea').val('');
+                // renderAnswer(result.data)
+                setTimeout(function(){
+                    $('.WarnWhich').find('.WarningHold').find('i').removeClass();
+                    $('.WarnWhich').find('.WarningHold').find('div').removeClass();
+                    $('.WarnWhich').find('.WarningHold').find('span').html('');
+                    $('.WarnWhich').removeClass();
+                 }, 1000);
+             }
+          })
+        })
+        // function renderAnswer(answer){
+        //     var html = '';
+        //     html += '<div class="AnswerContain"><div class="ImgContain"><img src="'+answer.visiterImg+'" class="LetterImg"></div><div class="LetterContain"><div class="VisitInfo"><span class="VisitName"><a href="#">'+decodeURI(answer.visiter)+'</a></span> <span class="TimeContain">留言于 <b class="VisitTime">'+answer.answerTime+'</b></span></div><div class="LetterReal"><p>'+answer.content+'</p></div></div><div class="clearfix"></div></div>'
+        //     $('.WarnWhich').parents('.AllAnswer').children('.AnswerHold').html(html)
+        // }
     </script>
     <script src="/public/js/land.js"></script>
     <script src="/public/js/message.js"></script>

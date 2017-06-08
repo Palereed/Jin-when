@@ -12,6 +12,7 @@
          	 	<th>留言日期</th>
          	 	<th>用户名</th>
          	 	<th>留言内容</th>
+            <th class="answers">回复数</th>
          	 	<th class="Options">操作</th>
          	 </thead>
          	 <tbody>
@@ -21,6 +22,7 @@
          	 		<td>{{message.leaveTime|date('Y-m-d')}}</td>
          	 		<td>{{decodeURI(message.visiter)}}</td>
          	 		<td>{{message.content.slice(0,25)}}..</td>
+              <td class="answers">{{message.answer.length}}</td>
          	 		<td class="Options">
                 <a href="/admin/message/edit?id={{message._id.toString()}}">
                   <span class="btn btn-info">

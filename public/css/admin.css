@@ -86,7 +86,7 @@ td a>.btn{padding:2px 3px !important}
 .CantUse{color:#AAB5BC !important;} 
 /* 列表样式 */
 .VisiterImg img{height:38px;border-radius:19px;}
-.number,.views,.comments{text-align:center;}
+.number,.views,.comments,.answers{text-align:center;}
 .mood,.weather{width:60px;text-align:center;}
 .UserName{width:100px;}
 /* 网站管理 */

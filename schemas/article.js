@@ -26,7 +26,7 @@ module.exports = new mongoose.Schema({
         default:0
     },
     //评论,条数很多,使用空数组存储
-   comments:{
+    comments:{
         type:Array,
         default:[]
    }

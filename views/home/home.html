@@ -30,7 +30,7 @@
            </div>
            <div class="ArclTop">
                <span class="ArclKind">标签：{{article.lable}}</span>
-               <span class="ArclTime">时间：{{article.addTime|date('Y-m-d')}}</span>
+               <span class="ArclTime">时间：{{article.addTime|date('F jS, Y')}}</span>
                <span class="ArclWrite">作者：{{article.writer}}</span>
                {% if article.copyInfo %}
                <span class="ArclMark">备注：{{article.addInfo}}自<i>{{article.copyInfo}}</i></span>
