@@ -37,7 +37,7 @@
                           <a href="#">{{decodeURI(message.visiter)}}</a>
                       </span>
                       <span class="TimeContain">
-                          留言于<b class="VisitTime">{{message.leaveTime|date('F jS, Y')}}</b>
+                          留言于<b class="VisitTime">{{message.leaveTime|date('Y-m-d  H:i:s',-8*60)}}</b>
                       </span>
                    </div>
                    <div class="LetterReal">
@@ -66,7 +66,7 @@
                             </span>
                             <span class="TimeContain">
                                留言于
-                              <b class="VisitTime">{{answer.answerTime|date('F jS, Y')}}</b>
+                              <b class="VisitTime">{{answer.answerTime|date('Y-m-d  H:i:s',-8*60)}}</b>
                             </span>
                           </div>
                           <div class="LetterReal">
@@ -202,75 +202,6 @@
        </div>
     </div>
     <link rel="stylesheet" type="text/css" href="/public/css/message.css">
-    <script>
-        //留言
-        $('#Leave').find('button').click(function(){
-          $.ajax({
-            type: 'post',
-            url: '/api/visiter/message',
-            data: {
-                  content :$('#Leave').find('[name="content"]').val(),
-              },
-              dataType: 'json',
-              success:function(result){
-                var code = result.code;
-                $('#Leave').find('[name="content"]').val('');
-                switch (code){
-                  case 0:
-                     $('.LeaveBtn').find('i').removeClass().addClass('fa fa-check');
-                     $('.LeaveBtn').find('div').removeClass().addClass('alert alert-success');
-                     window.location.reload();
-                  break;
-                  default:
-                      $('.LeaveBtn').find('i').removeClass().addClass('fa fa-close');
-                      $('.LeaveBtn').find('div').removeClass().addClass('alert alert-danger');
-                  break;
-                }
-                $('.LeaveBtn').find('span').html(result.message);
-              }
-          })
-        })
-        //留言回复
-        $('.AnswerForm').find('button').click(function(){
-            $(this).parents('form').addClass('WarnWhich');
-            $.ajax({
-            type: 'post',
-            url: '/api/message/answer',
-            data: {
-                  content :$(this).parents('form').find('[name="content"]').val(),
-                  messageId :$(this).parents('form').find('[name="messageId"]').val(),
-              },
-            dataType: 'json',
-            success:function(result){
-                var code = result.code;
-                switch (code){
-                  case 0:
-                      $('.WarnWhich').find('.WarningHold').find('i').removeClass().addClass('fa fa-check');
-                      $('.WarnWhich').find('.WarningHold').find('div').removeClass().addClass('alert alert-success');
-                  break;
-                  default:
-                      $('.WarnWhich').find('.WarningHold').find('i').removeClass().addClass('fa fa-close');
-                      $('.WarnWhich').find('.WarningHold').find('div').removeClass().addClass('alert alert-danger');
-                  break;
-                }
-                $('.WarnWhich').find('.WarningHold').find('span').html(result.message);
-                $('.WarnWhich').find('textarea').val('');
-                // renderAnswer(result.data)
-                setTimeout(function(){
-                    $('.WarnWhich').find('.WarningHold').find('i').removeClass();
-                    $('.WarnWhich').find('.WarningHold').find('div').removeClass();
-                    $('.WarnWhich').find('.WarningHold').find('span').html('');
-                    $('.WarnWhich').removeClass();
-                 }, 1000);
-             }
-          })
-        })
-        // function renderAnswer(answer){
-        //     var html = '';
-        //     html += '<div class="AnswerContain"><div class="ImgContain"><img src="'+answer.visiterImg+'" class="LetterImg"></div><div class="LetterContain"><div class="VisitInfo"><span class="VisitName"><a href="#">'+decodeURI(answer.visiter)+'</a></span> <span class="TimeContain">留言于 <b class="VisitTime">'+answer.answerTime+'</b></span></div><div class="LetterReal"><p>'+answer.content+'</p></div></div><div class="clearfix"></div></div>'
-        //     $('.WarnWhich').parents('.AllAnswer').children('.AnswerHold').html(html)
-        // }
-    </script>
     <script src="/public/js/land.js"></script>
     <script src="/public/js/message.js"></script>
     <style type="text/css">

@@ -21,8 +21,12 @@
          	 		<td class="TableId">{{message._id.toString()}}</td>
          	 		<td>{{message.leaveTime|date('Y-m-d')}}</td>
          	 		<td>{{decodeURI(message.visiter)}}</td>
-         	 		<td>{{message.content.slice(0,25)}}..</td>
-              <td class="answers">{{message.answer.length}}</td>
+              {% if message.content.length < 25 %}
+              <td>{{message.content}}</td>
+              {% else %}
+              <td>{{message.content.slice(0,25)}}..</td>
+              {% endif %}
+         	 		<td class="answers">{{message.answer.length}}</td>
          	 		<td class="Options">
                 <a href="/admin/message/edit?id={{message._id.toString()}}">
                   <span class="btn btn-info">

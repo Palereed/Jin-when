@@ -24,8 +24,12 @@
          	 		<td>{{record.title}}</td>
          	 		<td class='mood'>{{record.mood}}</td>
               <td class='weather'>{{record.weather}}</td>
+              {% if record.content.length < 25 %}
+              <td>{{record.content}}</td>
+              {% else %}
               <td>{{record.content.slice(0,25)}}..</td>
-         	 		<td class="Options">
+              {% endif %}
+              <td class="Options">
          	 		  <a href="/admin/record/edit?id={{record._id.toString()}}">
                   <span class="btn btn-info">
                     <i class="fa fa-edit fa-fw"></i>
