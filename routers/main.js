@@ -1,4 +1,5 @@
 var express = require('express');
+var markdown = require('markdown').markdown;
 var router = express.Router();
 var Lable = require('../models/lables');
 var Article = require('../models/articles');
@@ -50,6 +51,7 @@ router.get('/home/read', function(req, res, next){
         //阅读数增加
         article.views++;
         article.save();
+        article.marked = markdown.toHTML(article.content)
         var comments = article.comments.reverse();
         var page = Number(req.query.page || 1);
         var limit = 5;
@@ -58,7 +60,7 @@ router.get('/home/read', function(req, res, next){
         page = Math.max(page, 1);
         var start = limit*(page-1);
         var end = start + limit;
-        var newcomment = comments.slice(start,end)
+        var newcomment = comments.slice(start,end);
         res.render('home/read',{
         visitInfo:req.visitInfo,
         article:article,

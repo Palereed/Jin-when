@@ -65,7 +65,7 @@
                               <a href="#">{{decodeURI(answer.visiter)}}</a>
                             </span>
                             <span class="TimeContain">
-                               留言于
+                               回复于
                               <b class="VisitTime">{{answer.answerTime|date('Y-m-d  H:i:s',-8*60)}}</b>
                             </span>
                           </div>
@@ -129,9 +129,13 @@
               {% else %}
               <span><b id="Landon"><i class="fa fa-sign-in"></i>登录后留言</b></span>
               {% endif %}
+              {% if visitInfo.visitname %}
               <div class="OnLand">
                   <img src={{visitInfo.visitimg}}>
               </div>
+              {% else %}
+              <div class="OnLand"></div>
+              {% endif %}
           </div>
           <div class="clearfix"></div>
        </div>

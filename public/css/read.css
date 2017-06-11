@@ -1,28 +1,34 @@
-article{width:100%;position:relative}
+article{width:100%;position:relative;}
 article h2{font-weight:700;font-size:20px;margin:30px 0;}
 article h2 span{margin:0 20px 0 0}
 article h3{font-weight:700;font-size:18px;margin:30px 0;}
-pre{border:none;background:#3f3f3f;color:#dcdcdc;}
-.MainContain{width:870px;margin:auto;}
+pre{padding:10px;border:none;background:#3f3f3f;line-height:25px; 
+     -webkit-user-select:text;
+     -moz-user-select:text;
+     -ms-user-select:text;
+     user-select:text;
+    }
+code{font-family:"Microsoft Jhenghei" !important;letter-spacing:2px}
+.fa-lg{float:left;}
+.MainContain{width:870px;margin:auto;margin-top:20px;}
 .ArclTitle,.ArclTop{text-align:left;}
-.ArclTopline{width:100%;height:1px;background:#3f3f3f;margin:10px 0 0 0;}
+.ArclTopline{width:100%;height:1px;background:#999;margin:10px 0 0 0;}
 .ArclTitle h1{font-weight:700;
               font-size:28px;
               position:relative;
               display:inline-block;
               }
-.ArclTop{padding:10px 0 10px 0;font-size:13px;}
+.ArclTop{padding:10px 0 10px 0;font-size:13px;color:#999;}
 .ArclTop span{margin:0 10px 0 0;}
 .ArclTop span:nth-child(4){margin-right:0;}  
-.ArclSection {margin:30px 0 0 0;} 
-.ArclSection section{line-height:26px;
-                     font-size:16px;
-                     text-align:justify;
-                     letter-spacing:1.5px;}
+.ArclSection {line-height:26px;
+              font-size:16px;
+              text-align:justify;
+              letter-spacing:1.5px;}
 .DemoImg{padding-left:40px;} 
-.ArclReturn{margin:20px 0 40px 0;height:18px;}
+.ArclReturn{height:18px;float:left;margin:0 0 0 20px;}
 .ArclReturn a{display:inline-block;line-height:18px;}
-.ArclReturn a span{font-size:18px;margin:0 15px 0 0;}
+.ArclReturn a span{font-size:25px;margin:10px 0 0 15px;}
 .Letter{width:100%;}
 .Answer{width:3%;}
 .LetterContain{width:89.5%;}
