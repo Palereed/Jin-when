@@ -30,7 +30,7 @@
            </div>
            <div class="ArclTop">
                <span class="ArclKind">标签：{{article.lable}}</span>
-               <span class="ArclTime">时间：{{article.addTime|date('F jS, Y')}}</span>
+               <span class="ArclTime">时间：{{article.addTime|date('Y-m-d')}}</span>
                <span class="ArclWrite">作者：{{article.writer}}</span>
                {% if article.copyInfo %}
                <span class="ArclMark">备注：{{article.addInfo}}自<i>{{article.copyInfo}}</i></span>
@@ -41,25 +41,14 @@
            <div class="ArcComment">
                 <span class="fa fa-eye fa-lg"></span>
                 <i>{{article.views}}</i>
-                <span class="fa fa-comment-o fa-lg"></span>
-                <i>{{article.comments.length}}</i>
            </div>
            <div class="ArclMain">
                <div class="ArclSection">
-                  <section>
-                     <h2><span class="fa fa-pencil fa-lg"></span>float的历史</h2>
-                      <p>float属性定义元素在哪个方向浮动。在最开始，float用于实现文字环绕图片效果。</p> 
-                      <p>随着html的发展，网站的布局愈来愈多样化，float渐渐被用来实现横向排版，灵活的浮动给开发员带来了更多的布局灵感，它越来越受到青睐。</p>   
-                  </section>
-               </div>
-               <div class="ArclSection">
-                  <section>
-                      <h2><span class="fa fa-pencil fa-lg"></span>float应用中的一些琐碎问题</h2>
-                      <p>事物的发展总有其两面性，float在方便排版的同时也带来了一系列各种各样的问题。</p>
-                      <p>其一，块级元素如果不设置float，它默认会撑满整个屏幕，而如果设置了float，则只会包裹住其内容。</p>
-                      <p>其二，其中一个子元素使用float，其余也必须使用float，否则就会出现遮盖问题。</p>
-                      <p>其三，若子元素全部使用float，而父元素没有设置高度，那么此时父元素高度会坍塌。这个问题也是float最令人烦恼的问题。</p>
-                  </section>
+                   <section>
+                      {% autoescape %}
+                          {{article.content.slice(0,320)}}..
+                      {% endautoescape %}
+                   </section>
                </div>
            </div>
            <div class="ArclBttom">
@@ -82,9 +71,26 @@
               {% endif %}
        </div>
 	</div>
+  <script>
+       var h2 = document.getElementsByTagName('h2');
+       var tips = new Array();
+       for (var i=0;i<h2.length;i++){
+          var tip=document.createElement("span");
+          tip.setAttribute("class","fa fa-pencil fa-lg")
+          tips.push(tip)
+       }
+       for (var i=0;i<h2.length;i++){
+          h2[i].appendChild(tips[i]);
+       }
+  </script>
   <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+  <link href="/public/css/highlight.css" rel="stylesheet">  
+  <link rel="stylesheet" type="text/css" href="/public/css/read.css">
+  <script src="/public/js/highlight.pack.js"></script> 
+  <script>hljs.initHighlightingOnLoad();</script>
   <style type="text/css">
         footer{margin:20px 0 0 0;}
+        .nofloat{float:none;}
         .TheNav a:first-child .MenuAdd::before{opacity:1;left:-7px;} 
         .TheNav a:first-child .MenuAdd::after{opacity:1;right:-7px;} 
 	</style>

@@ -67,6 +67,7 @@ header{height:100px;width:100%;box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);}
              }
 .SelfIntrdct span{margin-right:10px;color:#fff;}                  
 .SelfIntrdct li{line-height:40px;color:#aaaaaa}
+.SelfIntrdct a{color:#aaaaaa;}
 .SelfIntrdct img{float:right;cursor:pointer;}   
 .TitleLogn{height:40px;
   	       margin:31px 60px 0 60px;
@@ -100,7 +101,7 @@ header{height:100px;width:100%;box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);}
             background:url("../images/nav/maomi.jpg") no-repeat center;
             background-size:180px;
             border:8px solid rgba(10,10,10,0.2);
-            margin:60px 50px;
+            margin:60px 50px 30px 50px;
             } 
 #IsFixBar{width:26px;
 	        height:26px;
@@ -129,6 +130,7 @@ header{height:100px;width:100%;box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);}
           -moz-transform:translateX(140px);
           -o-transform:translateX(140px);
           } 
+.MainBody a{margin-right:10px}          
 .MainContain {margin-top:30px;}          
 /* 页码 */
 .PageNumber{margin:30px 0 0 0;}     

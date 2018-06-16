@@ -2,24 +2,25 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>关于float引起父层元素坍塌</title>
+	<link rel="icon" type="image/x-icon" href="/public/images/icon.ico" /> 
+	<title>{{article.title}}</title>
 	<link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/public/css/public.css">
 	<link rel="stylesheet" type="text/css" href="/public/css/message.css">
 	<link href="/public/css/highlight.css" rel="stylesheet">  
 	<link rel="stylesheet" type="text/css" href="/public/css/read.css">
 	<script src="/public/js/jquery.min.js"></script>
-    <script src="/public/js/highlight.pack.js"></script> 
-    <script>hljs.initHighlightingOnLoad();</script>
+  <script src="/public/js/highlight.pack.js"></script> 
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <div class="ArclReturn">
 		<a href="/home"><span class="fa fa-home"></span></a>
 	</div>
     <div class="MainContain">
-		<article class="WebLearn">
-		   <div class="ArclTitle">
+		  <article class="WebLearn">
+		     <div class="ArclTitle">
 	       	  <h1>{{article.title}}</h1>
 	       </div>
 	       <div class="ArclTop">
@@ -37,196 +38,18 @@
 	       <div class="ArclMain">
 	           <div class="ArclSection">
 	              {% autoescape %}
-				      {{article.marked}}
-				  {% endautoescape %}
-			   </div>
-           </div>
+				        {{article.marked}}
+				        {% endautoescape %}
+			       </div>
+         </div>
 	    </article>
-	    <div class="Letter">
-	        <div class="TopTab">
-	        	<div class="TabName">评论区</div>
-	        </div>
-	        <!-- 评论 -->
-	        {% for comment in comments %}
-	        <div class="LetterModule">
-	           <!-- 原评论 -->
-	           <div class="LetterOri">
-	               <!-- 头像 -->
-	               <div class="ImgContain">
-	                   <img src="{{comment.visiterImg}}" class="LetterImg">
-	               </div>
-	               <!-- 评论内容 -->
-	               <div class="LetterContain">
-	                   <!-- 评论者信息 -->
-	                   <div class="VisitInfo">
-	                      <span class="VisitName">
-	                          <a href="#">{{decodeURI(comment.visiter)}}</a>
-	                      </span>
-	                      <span class="TimeContain">
-	                          评论于<b class="VisitTime">{{comment.postTime|date('Y-m-d')}}</b>
-	                      </span>
-	                   </div>
-	                   <div class="LetterReal">
-	                       <p>{{comment.content}}</p>
-	                   </div>
-	               </div>
-	               <div class="Answer">
-	                   <span class="fa fa-comment-o fa-lg"></span>
-	                   <i>0</i>
-	               </div>
-	               <div class="clearfix"></div>
-	           </div>
-	           <!-- 评论回复 -->
-	           <div class="AllAnswer">
-	               <!-- 评论回复内容 -->
-	               <div class="AnswerContain">
-	                    <div class="ImgContain">
-	                       <img src="/public/images/message/owner.jpg" class="LetterImg">
-	                    </div>
-	                    <div class="LetterContain">
-	                        <div class="VisitInfo">
-	                          <span class="VisitName">
-	                            <a href="#">蒹葭</a>
-	                          </span>
-	                          <span class="TimeContain">
-	                             评论于
-	                            <b class="VisitTime">03 April,2017</b>
-	                          </span>
-	                        </div>
-	                        <div class="LetterReal">
-	                          <p>两只黄鹂鸣翠柳，一行白鹭上青天。窗含西岭千秋雪，门泊东吴万里船。</p>
-	                        </div>
-	                    </div>
-	                    <div class="clearfix"></div>
-	               </div>
-	               <!-- 评论回复表单 -->
-	               <div class="AnswerForm">
-	                   {% if visitInfo.visitname %}
-	                   <span class="Answerit">我要回复</span>
-	                   {% else %}
-	                   {% endif %}
-	                   <form>
-	                     <ul class="FormList">
-	                       <li><span>内容：</span><textarea class="form-control"></textarea></li>
-	                       <li><button type="submit" class="btn btn-default">回复</button></li>
-	                     </ul>
-	                   </form> 
-	               </div>
-	           </div>
-	        </div>
-	        {% endfor %}
-	        <!-- 分页部分 -->
-	        <div class="PageNumber">
-	              {% if page <=1 %}
-	              <a href="javascript:;" class="CantUse">前页</a>
-	              {% else %}
-	              <a href="/home/read?articleId=5932925171f45f21e8d7940a&&page={{page-1}}">前页</a>
-	              {% endif %}
-	              <a class="Active">{{page}}</a>
-	              {% if page >= pages %}
-	              <a href="javascript:;" class="CantUse">后页</a>
-	              {% else %}
-	              <a href="/home/read?articleId=5932925171f45f21e8d7940a&&page={{page+1}}">后页</a>
-	              {% endif %}
-	        </div>
-	        <!-- 评论表单 -->
-	        <div class="TopTab">
-	          <div class="TabName">评论板</div>
-	          <div class="LandInfo">
-	              <!-- 管理员登陆 -->
-	              {% if visitInfo.isAdmin %}
-	              <span>
-	              {{decodeURI(visitInfo.visitmark)}}<i>/</i><a href="/admin/home"><i class="fa fa-sign-in"></i>后台</a></span>
-	              <!-- 普通访问者 -->
-	              {% elseif visitInfo.visitname %}
-	              <span>{{decodeURI(visitInfo.visitmark)}}<i>/</i><b id="Landout"><i class="fa fa-sign-out"></i>退出</b></span>
-	              <!-- 未登录状态 -->
-	              {% else %}
-	              <span><b id="Landon"><i class="fa fa-sign-in"></i>登录后评论</b></span>
-	              {% endif %}
-	              <div class="OnLand">
-	                  <img src={{visitInfo.visitimg}}>
-	              </div>
-	          </div>
-	          <div class="clearfix"></div>
-	        </div>
-	        <div class="LeaveContain">
-	          <!-- 评论框 -->
-	          {% if visitInfo.visitname %}
-	          <div class="VisitLeave" id="Comment">
-	              <form>
-	                 <ul class="FormList">
-	                    <li><span>内容：</span><textarea class="form-control" name="content"></textarea></li>
-	                    <input type='hidden' value="{{article.id}}" name="articleId"></input>
-	                    <div class="CommentBtn">
-	                        <div>
-	                          <i></i>
-	                          <span></span>
-	                        </div>
-	                    </div>
-	                    <li><button type="button" class="btn btn-default">评论</button></li>
-	                 </ul>
-	              </form>
-	          </div>
-	          {% else %}
-	          <!-- 访客登陆 -->
-	          <div class="VisitLand" id="Land">
-	              <form>
-	                 <ul class="FormList">
-	                    <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
-	                    <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
-	                    <div class="LandBtn">
-	                        <div>
-	                          <i></i>
-	                          <span></span>
-	                        </div>
-	                    </div>
-	                    <li><button type="button" class="btn btn-default">登录</button>
-	                        <button type="button" class="btn btn-default">注册</button>
-	                    </li>
-	                 </ul>
-	              </form>
-	          </div>
-	          <!-- 访客注册 -->
-	          <div class="VisitRegister" id="Register">
-	              <form>
-	              <ul class="FormList">
-	                 <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
-	                 <li><span>昵称：</span><input class="form-control" name="visitmark"></input></li>
-	                 <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
-	                 <li><span>头像：</span><img src="/public/images/message/visit4.jpg" id="ShowImg"></li>
-	                 <li id="ImgChoose">
-	                       <span>选择：</span>
-	                       <img src="/public/images/message/visit1.jpg">
-	                       <img src="/public/images/message/visit2.jpg">
-	                       <img src="/public/images/message/visit3.jpg">
-	                       <img src="/public/images/message/visit4.jpg">
-	                       <img src="/public/images/message/visit5.jpg">
-	                       <img src="/public/images/message/visit6.jpg">
-	                       <img src="/public/images/message/visit7.jpg">
-	                       <img src="/public/images/message/visit8.jpg">
-	                 </li>
-	                 <li><span>密保：</span><input class="form-control" name="visitsafe"></input></li>
-	                 <div class="RegisterBtn">
-		                <div>
-		                  <i></i>
-		                  <span></span>
-		                </div>
-		             </div>
-		             <li><button type="button" class="btn btn-default">注册</button></li>
-	              </ul>
-	              </form>
-	          </div>
-	          {% endif %}
-	        </div>
-		</div>
-        <footer>
-		   <div class="FootContain">
-		      <span>© 2017</span>
-		      <span>锦时</span>
-		      <span class="Touchme"><i class="fa fa-send"></i>联系作者</span><br/>
-		   </div>
-		</footer>
+	    <footer>
+		    <div class="FootContain">
+		      <a href="http://www.miitbeian.gov.cn">豫ICP备18022003号</a>
+		      <span>Simple is beauty</span>
+          <span><i class="fa fa-send"></i>蒹葭</span>
+		    </div>
+		  </footer>
     </div>
     <script>
        var h2 = document.getElementsByTagName('h2');
@@ -239,36 +62,6 @@
        for (var i=0;i<h2.length;i++){
        	  h2[i].appendChild(tips[i]);
        }
-		//评论
-        $('#Comment').find('button').click(function(){
-            $.ajax({
-            type: 'post',
-            url: '/api/read/comment',
-            data: {
-                  content :$('#Comment').find('[name="content"]').val(),
-                  articleId :$('#Comment').find('[name="articleId"]').val(),
-              },
-              dataType: 'json',
-              success:function(result){
-              	$('#Comment').find('[name="content"]').val('');
-                var code = result.code;
-                switch (code){
-                  case 0:
-                     $('.CommentBtn').find('i').removeClass().addClass('fa fa-check');
-                     $('.CommentBtn').find('div').removeClass().addClass('alert alert-success');
-                     window.location.reload();
-                  break;
-                  default:
-                      $('.CommentBtn').find('i').removeClass().addClass('fa fa-close');
-                      $('.CommentBtn').find('div').removeClass().addClass('alert alert-danger');
-                  break;
-                }
-                $('.CommentBtn').find('span').html(result.message);
-              }
-          })
-        })
-    </script>
-    <script src="/public/js/land.js"></script>
-    <script src="/public/js/message.js"></script>
+		</script>
 </body>
 </html>

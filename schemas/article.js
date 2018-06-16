@@ -24,10 +24,5 @@ module.exports = new mongoose.Schema({
     views:{
         type:Number,
         default:0
-    },
-    //评论,条数很多,使用空数组存储
-    comments:{
-        type:Array,
-        default:[]
-   }
+    }
 });

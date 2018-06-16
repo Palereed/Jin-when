@@ -245,18 +245,28 @@ router.post('/visiter/delete', function(req, res, next){
     var id = req.query.id || '';
     Visiter.findOne({
       _id:id
-    }).then(function(){
-       return Visiter.remove({
-          _id:id
+    }).then(function(target){
+       var visitname = target.visitname
+       return Message.findOne({
+          visitname:visitname
        })
-    }).then(function(){
-       responseData.message = '删除成功';
-       res.json(responseData);
-       return;
-     })
+     }).then(function(hasmessage){
+       if (hasmessage) {
+          responseData.code = 1;
+          responseData.message = '删除失败,此用户有留言';
+          res.json(responseData);
+          return;
+       } else {
+        return Visiter.remove({
+           _id:id
+         }).then(function(){
+           responseData.message = '删除成功';
+           res.json(responseData);
+           return;
+        })
+       }
+   })
 })
-
-
 //文章发布
 router.get('/article', function(req, res, next){
   Lable.find().then(function(lables){
@@ -585,4 +595,30 @@ router.get('/messagelist', function(req, res, next){
         })
    })
 })   
+//留言删除
+router.get('/message/delete', function(req, res, next){
+   var id = req.query.id || '';
+   Message.findOne({
+     _id: id
+   }).then(function(message){
+      res.render('admin/messagedelete',{
+            visitInfo:req.visitInfo,
+            message:message
+      })  
+   })
+})
+router.post('/message/delete', function(req, res, next){
+    var id = req.query.id || '';
+    Message.findOne({
+      _id:id
+    }).then(function(){
+       return Message.remove({
+          _id:id
+       })
+    }).then(function(){
+       responseData.message = '删除成功';
+       res.json(responseData);
+       return;
+     })
+})
 module.exports = router;

@@ -12,7 +12,7 @@ code{font-family:"Microsoft Jhenghei" !important;letter-spacing:2px}
 .fa-lg{float:left;}
 .MainContain{width:870px;margin:auto;margin-top:20px;}
 .ArclTitle,.ArclTop{text-align:left;}
-.ArclTopline{width:100%;height:1px;background:#999;margin:10px 0 0 0;}
+.ArclTopline{width:100%;height:1px;background:#edf1f1;margin:10px 0 0 0;}
 .ArclTitle h1{font-weight:700;
               font-size:28px;
               position:relative;

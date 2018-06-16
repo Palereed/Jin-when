@@ -37,6 +37,9 @@ router.get('/home', function(req, res, next){
         var skip = (data.page - 1) * data.limit;
         return Article.where(where).find().sort({_id:-1}).limit(data.limit).skip(skip)
     }).then(function(articles){
+        for (var i=0; i<articles.length; i++){
+            articles[i].content = markdown.toHTML(articles[i].content)
+        }
         data.articles = articles;
         res.render('home/home',data);
     })
@@ -52,21 +55,9 @@ router.get('/home/read', function(req, res, next){
         article.views++;
         article.save();
         article.marked = markdown.toHTML(article.content)
-        var comments = article.comments.reverse();
-        var page = Number(req.query.page || 1);
-        var limit = 5;
-        pages = Math.ceil(comments.length / limit);
-        page = Math.min(page, pages);
-        page = Math.max(page, 1);
-        var start = limit*(page-1);
-        var end = start + limit;
-        var newcomment = comments.slice(start,end);
         res.render('home/read',{
         visitInfo:req.visitInfo,
         article:article,
-        page:page,
-        pages:pages,
-        comments:newcomment
        });
     })
 })

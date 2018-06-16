@@ -5,7 +5,7 @@ module.exports = new mongoose.Schema({
     visitname:String,
     //密码
     visitpass:String,
-     //昵称
+    //昵称
     visitmark:String,
     //头像
     visitimg:String,

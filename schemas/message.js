@@ -5,6 +5,8 @@ module.exports = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'answers'
     }],
+    //用户名
+    visitname:String,
     //用户
     visiter:String,
     //用户头像

@@ -25,19 +25,19 @@ for( var i = 0;i<Answer.length;i++){
 	     }
         //留言回复展示
 	    if ( MessageNow.className.indexOf('active') > 0){
-	    	MessageNow.className = 'AllAnswer';
-	    	MessageNow.style.display = 'none';
-	    	PickUp.innerHTML = Num;
-	    	//关闭回复表单
-	    	if (ShowForm.className.indexOf('active') > 0){
-	    		ShowForm.onclick();}
+  	    	 MessageNow.className = 'AllAnswer';
+  	    	 MessageNow.style.display = 'none';
+  	    	 PickUp.innerHTML = Num;
+  	    	 //关闭回复表单
+  	    	 if (ShowForm.className.indexOf('active') > 0){
+  	    		   ShowForm.onclick();}
 	    } else {
 	    	MessageNow.className += ' active';
 	    	MessageNow.style.display = 'block';
 	    	Num = PickUp.innerHTML;  //保存回复数量值
 	    	PickUp.innerHTML = '收起';
 	    }
-	}
+	 }
 }
 // 头像选择  
 if (document.getElementById('ShowImg')){

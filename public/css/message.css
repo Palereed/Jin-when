@@ -5,7 +5,7 @@
 .TopLine{border-bottom: 1px solid #e0e0e0;
         margin:10px 0 20px 0;
         padding: 10px 0;}
-.LetterModule{border-bottom:1px solid #e0e0e0;
+.LetterModule{border-bottom:1px solid #edf1f1;
               margin-bottom:20px;}        
 /* 头像 */            
 .ImgContain{width:7.5%;float:left;}  

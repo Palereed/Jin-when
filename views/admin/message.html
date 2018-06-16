@@ -11,6 +11,7 @@
          	 	<th class="TableId">编号</th>
          	 	<th>留言日期</th>
          	 	<th>用户名</th>
+            <th>用户昵称</th>
          	 	<th>留言内容</th>
             <th class="answers">回复数</th>
          	 	<th class="Options">操作</th>
@@ -20,6 +21,7 @@
          	 	<tr>
          	 		<td class="TableId">{{message._id.toString()}}</td>
          	 		<td>{{message.leaveTime|date('Y-m-d')}}</td>
+              <td>{{message.visitname}}</td>
          	 		<td>{{decodeURI(message.visiter)}}</td>
               {% if message.content.length < 25 %}
               <td>{{message.content}}</td>
@@ -28,11 +30,6 @@
               {% endif %}
          	 		<td class="answers">{{message.answer.length}}</td>
          	 		<td class="Options">
-                <a href="/admin/message/edit?id={{message._id.toString()}}">
-                  <span class="btn btn-info">
-                    <i class="fa fa-edit fa-fw"></i>
-                  </span>
-                </a>
                 <a href="/admin/message/delete?id={{message._id.toString()}}">
                   <span class="btn btn-danger">
                     <i class="fa fa-trash-o fa-fw"></i>

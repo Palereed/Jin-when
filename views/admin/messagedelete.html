@@ -1,0 +1,36 @@
+{% extends 'nav.html' %}
+{% block index %}
+    <span><i>/</i>留言管理</span>
+    <span><i>/</i>留言列表</span>
+    <span><i>/</i>留言删除</span>
+{% endblock %}
+{% block MainBody %}
+    <h1>留言删除</h1>
+    <div class="panel">
+      <form method="post" id="DeleteIt">
+        <h2>用户名：<span>{{message.visitname}}</span></h2>
+        <h2>昵称：<span>{{decodeURI(message.visiter)}}</span></h2>
+        <h2>时间：<span>{{message.leaveTime|date('Y-m-d')}}</span></h2>
+        <h2>留言内容：</h2>
+  			<p>{{message.content}}</p>
+        <div class="WarningHold">
+            <div>
+               <i></i>
+               <span></span>
+            </div>
+        </div>
+			  <button class="btn btn-danger" type="button">删除</button>
+		    <a href = '/admin/messagelist'><button class="btn btn-info" type="button">返回查看</button></a>
+	    </form>
+    </div>
+    <style type="text/css">
+       #Message li{background:#31383e;}
+       #Message li a{color:#f2f2f2;}
+    </style>
+    <script>
+        $('#Message').addClass('active');
+        $('#MessageBtn i').addClass('SlideDown').removeClass('SlideUp');
+        $('#Message').slideToggle(0);
+    </script>
+    <script src="/public/js/delete.js"></script>
+{% endblock %}

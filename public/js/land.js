@@ -46,7 +46,7 @@ $(function(){
             var code = result.code;
             switch (code){
             case 0:
-                $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
+              $('.LandBtn').find('i').removeClass().addClass('fa fa-check');
               $('.LandBtn').find('div').removeClass().addClass('alert alert-success');
               $('.LandInfo').find('span').html(result.visitInfo.visitmark);
               $('.LandInfo').find('img').attr('src',result.visitInfo.visitimg);
@@ -70,9 +70,9 @@ $(function(){
     $('#Landout').click(function(){$('.LandInfo').find('.OnLand').click()});
     $('#Landon').click(function(){$('.LandInfo').find('.OnLand').click()});
     $('.LandInfo').find('.OnLand').click(function(){
-      var IsLand = $('.LandInfo').find('img').attr('src');
+      var IsLand = $('.OnLand').find('img').attr('src');
       // 如果未登陆
-      if( IsLand == '') {
+      if( IsLand == null) {
              $('#Register').hide();
              $('#Land').show();
         } else {

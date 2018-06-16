@@ -112,9 +112,11 @@ router.get('/visiter/landout',function(req, res){
 })
 //用户留言
 router.post('/visiter/message', function(req, res, next){
+     var visitname = req.visitInfo.visitname;
      var visiter = req.visitInfo.visitmark;
      var visiterImg = req.visitInfo.visitimg;
      var content = req.body.content;
+     console.log(req.visitInfo)
      if (content == ''){
         responseData.code = 1;
         responseData.message = '内容不能为空';
@@ -122,6 +124,7 @@ router.post('/visiter/message', function(req, res, next){
         return;
      }
      var message = new Message({
+        visitname:visitname,
         visiter:visiter,
         visiterImg:visiterImg,
         content:content,
@@ -129,32 +132,6 @@ router.post('/visiter/message', function(req, res, next){
       message.save();
       responseData.message = '留言成功';
       res.json( responseData);
-})
-//用户评论 
-router.post('/read/comment',function(req,res,next){
-   //文章id
-   var articleId = req.body.articleId || '';
-   var postData = {
-     visiter:req.visitInfo.visitmark,
-     postTime:new Date(),
-     visiterImg:req.visitInfo.visitimg,
-     content:req.body.content
-   }
-   if (postData.content == ''){
-      responseData.code = 1;
-      responseData.message = '评论不能为空';
-      res.json(responseData);
-      return
-   }
-   Article.findOne({
-     _id:articleId
-   }).then(function(article){
-      article.comments.push(postData);
-      article.save();
-   }).then(function(newarticle){
-      responseData.message = '评论成功';
-      res.json(responseData);
-   })
 })
 //留言回复
 router.post('/message/answer',function(req,res,next){
