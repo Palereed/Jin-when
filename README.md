@@ -29,9 +29,9 @@
 
 界面如下：
 
-![Alt text](https://github.com/Palereed/Jin-when/tree/master/introduction/1.jpg)
-![Alt text](https://github.com/Palereed/Jin-when/tree/master/introduction/2.jpg)
-![Alt text](https://github.com/Palereed/Jin-when/tree/master/introduction/3.jpg)
+![Alt text](https://github.com/Palereed/Jin-when/blob/master/introduction/1.JPG)
+![Alt text](https://github.com/Palereed/Jin-when/blob/master/introduction/2.JPG)
+![Alt text](https://github.com/Palereed/Jin-when/blob/master/introduction/3.JPG)
 
 ## 瑕疵，待完善
 1. 无文章评论功能
