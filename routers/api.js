@@ -116,7 +116,6 @@ router.post('/visiter/message', function(req, res, next){
      var visiter = req.visitInfo.visitmark;
      var visiterImg = req.visitInfo.visitimg;
      var content = req.body.content;
-     console.log(req.visitInfo)
      if (content == ''){
         responseData.code = 1;
         responseData.message = '内容不能为空';
@@ -128,6 +127,7 @@ router.post('/visiter/message', function(req, res, next){
         visiter:visiter,
         visiterImg:visiterImg,
         content:content,
+        leaveTime:new Date(),
       });
       message.save();
       responseData.message = '留言成功';

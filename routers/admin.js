@@ -321,7 +321,8 @@ router.post('/article', function(req, res, next){
          lableId:lableId,
          addInfo:addInfo,
          copyInfo:copyInfo,
-         content:content
+         content:content,
+         addTime:new Date(),
       })
       Lable.findOne({
         _id:article.lableId
@@ -487,7 +488,8 @@ router.post('/record', function(req, res, next){
          title:title,
          mood:mood,
          weather:weather,
-         content:content
+         content:content,
+         addTime:new Date()
       })
       return  record.save();
     }).then(function(){
