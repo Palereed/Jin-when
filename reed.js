@@ -49,11 +49,11 @@ app.use('/', require('./routers/main'))
 
 // 监听http请求
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27018/Jin-when', function(err){
+mongoose.connect('mongodb://127.0.0.1:27018/Jin-when', function(err){
 	if(err){
         console.log('数据库连接失败');
 	} else {
        console.log('数据库连接成功');
-       app.listen(8080);
+       app.listen(9000);
 	}
 });
