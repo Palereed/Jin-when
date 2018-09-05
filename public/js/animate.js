@@ -1,15 +1,14 @@
-particlesJS('AnimateContain',
-  { 
+particlesJS('AnimateContain', {
     "particles": {
       "number": {
         "value": 20,
-        "density": {     //密度
+        "density": { //密度
           "enable": false,
           "value_area": 300
         }
       },
       "color": {
-        "value": "#d2d8da"  //球颜色。
+        "value": "#d2d8da" //球颜色。
       },
       "shape": {
         "type": "circle",
@@ -37,7 +36,7 @@ particlesJS('AnimateContain',
         }
       },
       "size": {
-        "value": 12,   //球大小
+        "value": 12, //球大小
         "random": true,
         "anim": {
           "enable": false,
@@ -49,13 +48,13 @@ particlesJS('AnimateContain',
       "line_linked": {
         "enable": true,
         "distance": 500,
-        "color": "#e0e5e7",  //线条颜色
-        "opacity": 1,     //线条透明度
-        "width": 1        //线条宽度
+        "color": "#e0e5e7", //线条颜色
+        "opacity": 1, //线条透明度
+        "width": 1 //线条宽度
       },
       "move": {
         "enable": true,
-        "speed": 2,      //移动速度
+        "speed": 2, //移动速度
         "direction": "none",
         "random": true,
         "straight": false,
@@ -71,11 +70,11 @@ particlesJS('AnimateContain',
       "detect_on": "canvas",
       "events": {
         "onhover": {
-          "enable": false,   //鼠标移动动画
+          "enable": false, //鼠标移动动画
           "mode": "grab"
         },
         "onclick": {
-          "enable": false,  //鼠标点击动画
+          "enable": false, //鼠标点击动画
           "mode": "push"
         },
         "resize": true
@@ -96,7 +95,7 @@ particlesJS('AnimateContain',
           "speed": 3
         },
         "repulse": {
-          "distance": 100 
+          "distance": 100
         },
         "push": {
           "particles_nb": 3

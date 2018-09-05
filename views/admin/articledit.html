@@ -1,74 +1,81 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span><i>/</i>文章管理</span>
-    <span><i>/</i><a href='/admin/articlelist'>文章列表</a></span>
-    <span><i>/</i>文章修改</span>
+<span><i>/</i>文章管理</span>
+<span><i>/</i><a href='/admin/articlelist'>文章列表</a></span>
+<span><i>/</i>文章修改</span>
 {% endblock %}
 {% block MainBody %}
-    <h1>文章修改</h1>
-    <div class="panel">
-       <form method="post" id="UpdateIt">
-	        <h2>标题</h2>
-    			<input class="form-control" type="text" name="title" value="{{article.title}}"></input>
-    			<h2>作者</h2>
-    			<input class="form-control" type="text" name="writer" value="{{article.writer}}"></input>
-    			<h2>标签</h2>
-    			<input class="form-control" type="text" name="lable" value="{{article.lable}}"></input>
-		      <h2>备注</h2>
-    			<input class="form-control" type="text" name="addInfo" value="{{article.addInfo}}"></input>
-    			<h2>转载说明</h2>
-          <input class="form-control" type="text" name="copyInfo" value="{{article.copyInfo}}"></input>
-          <h2>编辑文本</h2>
-    			<textarea class="form-control" name="content">{{article.content}}</textarea>
-          <div class="WarningHold">
-              <div>
-                 <i></i>
-                 <span></span>
-              </div>
-          </div>
-    			<button class="btn btn-success" type="button">保存</button>
-    			<button class="btn btn-danger" type="reset">重置</button> 
-          <a href = '/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
-	     </form>
-    </div>
-    <style type="text/css">
-       #Article li:last-child{background:#31383e;}
-       #Article li:last-child a{color:#f2f2f2;}
-    </style>
-    <script>
-        $('#Article').addClass('active');
-        $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
-        $('#Article').slideToggle(0);
-        $('#UpdateIt').find('button').eq(0).click(function(){
-            var  IsEditEnd = confirm('是否编辑完成？');
-            if (IsEditEnd){
-                $.ajax({
-                    type: 'post',
-                    data: {
-                          title:$('#UpdateIt').find('[name="title"]').val(),
-                          writer:$('#UpdateIt').find('[name="writer"]').val(),
-                          lable:$('#UpdateIt').find('[name="lable"]').val(),
-                          addInfo:$('#UpdateIt').find('[name="addInfo"]').val(),
-                          copyInfo:$('#UpdateIt').find('[name="copyInfo"]').val(),
-                          content:$('#UpdateIt').find('[name="content"]').val()
-                      },
-                    dataType: 'json',
-                    success:function(result){
-                      var code = result.code;
-                      switch (code){
+<h1>文章修改</h1>
+<div class="panel">
+    <form method="post" id="UpdateIt">
+        <h2>标题</h2>
+        <input class="form-control" type="text" name="title" value="{{article.title}}"></input>
+        <h2>作者</h2>
+        <input class="form-control" type="text" name="writer" value="{{article.writer}}"></input>
+        <h2>标签</h2>
+        <input class="form-control" type="text" name="lable" value="{{article.lable}}"></input>
+        <h2>备注</h2>
+        <input class="form-control" type="text" name="addInfo" value="{{article.addInfo}}"></input>
+        <h2>转载说明</h2>
+        <input class="form-control" type="text" name="copyInfo" value="{{article.copyInfo}}"></input>
+        <h2>编辑文本</h2>
+        <textarea class="form-control" name="content">{{article.content}}</textarea>
+        <div class="WarningHold">
+            <div>
+                <i></i>
+                <span></span>
+            </div>
+        </div>
+        <button class="btn btn-success" type="button">保存</button>
+        <button class="btn btn-danger" type="reset">重置</button>
+        <a href='/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
+    </form>
+</div>
+<style type="text/css">
+    #Article li:last-child {
+        background: #31383e;
+    }
+
+    #Article li:last-child a {
+        color: #f2f2f2;
+    }
+</style>
+<script>
+    $('#Article').addClass('active');
+    $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
+    $('#Article').slideToggle(0);
+    $('#UpdateIt').find('button').eq(0).click(function () {
+        var IsEditEnd = confirm('是否编辑完成？');
+        if (IsEditEnd) {
+            $.ajax({
+                type: 'post',
+                data: {
+                    title: $('#UpdateIt').find('[name="title"]').val(),
+                    writer: $('#UpdateIt').find('[name="writer"]').val(),
+                    lable: $('#UpdateIt').find('[name="lable"]').val(),
+                    addInfo: $('#UpdateIt').find('[name="addInfo"]').val(),
+                    copyInfo: $('#UpdateIt').find('[name="copyInfo"]').val(),
+                    content: $('#UpdateIt').find('[name="content"]').val()
+                },
+                dataType: 'json',
+                success: function (result) {
+                    var code = result.code;
+                    switch (code) {
                         case 0:
                             $('.WarningHold').find('i').removeClass().addClass('fa fa-check');
-                            $('.WarningHold').find('div').removeClass().addClass('alert alert-success')
-                        break;
+                            $('.WarningHold').find('div').removeClass().addClass(
+                                'alert alert-success')
+                            break;
                         default:
                             $('.WarningHold').find('i').removeClass().addClass('fa fa-close');
-                            $('.WarningHold').find('div').removeClass().addClass('alert alert-danger')
-                        break;
-                      }
-                      $('.WarningHold').find('span').html(result.message);
-                   }
-              })
-          }
-      })
-    </script>
+                            $('.WarningHold').find('div').removeClass().addClass(
+                                'alert alert-danger')
+                            break;
+                    }
+                    $('.WarningHold').find('span').html(result.message);
+                }
+            })
+        }
+    })
+</script>
 {% endblock %}

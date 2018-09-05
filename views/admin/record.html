@@ -1,69 +1,76 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span><i>/</i>独白管理</span>
-    <span><i>/</i>独白发布</span>
+<span><i>/</i>独白管理</span>
+<span><i>/</i>独白发布</span>
 {% endblock %}
 {% block MainBody %}
-    <h1>独白发布</h1>
-    <div class="panel">
-  	  <form id="RecordEdit">
-  		  <h2>标题</h2>
-  			<input class="form-control" type="text" name="title"></input>
-  			<h2>心情</h2>
-  			<input class="form-control" type="text" name="mood"></input>
-  			<h2>天气</h2>
-  			<input class="form-control" type="text" name="weather"></input>
-  			<h2>编辑文本</h2>
-  			<textarea class="form-control" name="content"></textarea>
+<h1>独白发布</h1>
+<div class="panel">
+    <form id="RecordEdit">
+        <h2>标题</h2>
+        <input class="form-control" type="text" name="title"></input>
+        <h2>心情</h2>
+        <input class="form-control" type="text" name="mood"></input>
+        <h2>天气</h2>
+        <input class="form-control" type="text" name="weather"></input>
+        <h2>编辑文本</h2>
+        <textarea class="form-control" name="content"></textarea>
         <div class="RecordEditBtn">
             <div>
-               <i></i>
-               <span></span>
+                <i></i>
+                <span></span>
             </div>
         </div>
-  			<button class="btn btn-success" type="button">发布</button>
-  			<button class="btn btn-danger" type="reset">重置</button>
-        <a href = '/admin/recordlist'><button class="btn btn-info" type="button">返回查看</button></a>
-  	  </form>
-    </div>
-    <style type="text/css">
-       #Record li:first-child{background:#31383e;}
-       #Record li:first-child a{color:#f2f2f2;}
-    </style>
-    <script>
-        $('#Record').addClass('active');
-        $('#RecordBtn i').addClass('SlideDown').removeClass('SlideUp');
-        $('#Record').slideToggle(0);
-        $('#RecordEdit').find('button').eq(0).click(function(){
-            var  IsEditEnd = confirm('是否编辑完成？');
-            if (IsEditEnd){
-                $.ajax({
-                    type: 'post',
-                    url: '/admin/record',
-                    data: {
-                          title:$('#RecordEdit').find('[name="title"]').val(),
-                          mood:$('#RecordEdit').find('[name="mood"]').val(),
-                          weather:$('#RecordEdit').find('[name="weather"]').val(),
-                          content:$('#RecordEdit').find('[name="content"]').val()
-                      },
-                    dataType: 'json',
-                    success:function(result){
-                      var code = result.code;
-                      switch (code){
+        <button class="btn btn-success" type="button">发布</button>
+        <button class="btn btn-danger" type="reset">重置</button>
+        <a href='/admin/recordlist'><button class="btn btn-info" type="button">返回查看</button></a>
+    </form>
+</div>
+<style type="text/css">
+    #Record li:first-child {
+        background: #31383e;
+    }
+
+    #Record li:first-child a {
+        color: #f2f2f2;
+    }
+</style>
+<script>
+    $('#Record').addClass('active');
+    $('#RecordBtn i').addClass('SlideDown').removeClass('SlideUp');
+    $('#Record').slideToggle(0);
+    $('#RecordEdit').find('button').eq(0).click(function () {
+        var IsEditEnd = confirm('是否编辑完成？');
+        if (IsEditEnd) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/record',
+                data: {
+                    title: $('#RecordEdit').find('[name="title"]').val(),
+                    mood: $('#RecordEdit').find('[name="mood"]').val(),
+                    weather: $('#RecordEdit').find('[name="weather"]').val(),
+                    content: $('#RecordEdit').find('[name="content"]').val()
+                },
+                dataType: 'json',
+                success: function (result) {
+                    var code = result.code;
+                    switch (code) {
                         case 0:
                             $('.RecordEditBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.RecordEditBtn').find('div').removeClass().addClass('alert alert-success')
-                        break;
+                            $('.RecordEditBtn').find('div').removeClass().addClass(
+                                'alert alert-success')
+                            break;
                         default:
                             $('.RecordEditBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.RecordEditBtn').find('div').removeClass().addClass('alert alert-danger')
-                        break;
-                      }
-                      $('.RecordEditBtn').find('span').html(result.message);
-                   }
-              })
-          }
+                            $('.RecordEditBtn').find('div').removeClass().addClass(
+                                'alert alert-danger')
+                            break;
+                    }
+                    $('.RecordEditBtn').find('span').html(result.message);
+                }
+            })
+        }
         $('#ArticleEdit').find('button').eq(1).click();
-      })
-    </script>
+    })
+</script>
 {% endblock %}

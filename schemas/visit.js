@@ -2,19 +2,18 @@
 var mongoose = require('mongoose');
 module.exports = new mongoose.Schema({
     //账户
-    visitname:String,
+    visitname: String,
     //密码
-    visitpass:String,
+    visitpass: String,
     //昵称
-    visitmark:String,
+    visitmark: String,
     //头像
-    visitimg:String,
+    visitimg: String,
     //密保
-    visitsafe:String,
+    visitsafe: String,
     //权限
-    isAdmin:{
-        type:Boolean,
-        default:false
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
-

@@ -2,66 +2,68 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" type="image/x-icon" href="/public/images/icon.ico" /> 
+	<link rel="icon" type="image/x-icon" href="/public/images/icon.ico" />
 	<title>{{article.title}}</title>
 	<link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/public/css/public.css">
 	<link rel="stylesheet" type="text/css" href="/public/css/message.css">
-	<link href="/public/css/highlight.css" rel="stylesheet">  
+	<link href="/public/css/highlight.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/public/css/read.css">
 	<script src="/public/js/jquery.min.js"></script>
-  <script src="/public/js/highlight.pack.js"></script> 
-  <script>hljs.initHighlightingOnLoad();</script>
+	<script src="/public/js/highlight.pack.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
 </head>
 <body>
-    <div class="ArclReturn">
+	<div class="ArclReturn">
 		<a href="/home"><span class="fa fa-home"></span></a>
 	</div>
-    <div class="MainContain">
-		  <article class="WebLearn">
-		     <div class="ArclTitle">
-	       	  <h1>{{article.title}}</h1>
-	       </div>
-	       <div class="ArclTop">
-	           <span class="ArclKind">标签：{{article.lable}}类</span>
-	           <span class="ArclTime">时间：{{article.addTime|date('Y-m-d')}}</span>
-	           <span class="ArclWrite">作者：{{article.writer}}</span>
-	           {% if article.copyInfo %}
-               <span class="ArclMark">备注：{{article.addInfo}}自<i>{{article.copyInfo}}</i></span>
-               {% else %}
-               <span>备注：{{article.addInfo}}</span>
-               {% endif %}
-	       </div>
-	       <div class="ArclTopline"></div>
-	       <!-- 文章内容 -->
-	       <div class="ArclMain">
-	           <div class="ArclSection">
-	              {% autoescape %}
-				        {{article.marked}}
-				        {% endautoescape %}
-			       </div>
-         </div>
-	    </article>
-	    <footer>
-		    <div class="FootContain">
-		      <a href="http://www.miitbeian.gov.cn" style="margin-right:10px">豫ICP备18022003号</a>
-		      <span>Simple is beauty</span>
-          <span>Design by : 蒹葭</span>
-		    </div>
-		  </footer>
-    </div>
-    <script>
-       var h2 = document.getElementsByTagName('h2');
-       var tips = new Array();
-       for (var i=0;i<h2.length;i++){
-       	  var tip=document.createElement("span");
-          tip.setAttribute("class","fa fa-pencil fa-lg")
-          tips.push(tip)
-       }
-       for (var i=0;i<h2.length;i++){
-       	  h2[i].appendChild(tips[i]);
-       }
-		</script>
+	<div class="MainContain">
+		<article class="WebLearn">
+			<div class="ArclTitle">
+				<h1>{{article.title}}</h1>
+			</div>
+			<div class="ArclTop">
+				<span class="ArclKind">标签：{{article.lable}}类</span>
+				<span class="ArclTime">时间：{{article.addTime|date('Y-m-d')}}</span>
+				<span class="ArclWrite">作者：{{article.writer}}</span>
+				{% if article.copyInfo %}
+				<span class="ArclMark">备注：{{article.addInfo}}自<i>{{article.copyInfo}}</i></span>
+				{% else %}
+				<span>备注：{{article.addInfo}}</span>
+				{% endif %}
+			</div>
+			<div class="ArclTopline"></div>
+			<!-- 文章内容 -->
+			<div class="ArclMain">
+				<div class="ArclSection">
+					{% autoescape %}
+					{{article.marked}}
+					{% endautoescape %}
+				</div>
+			</div>
+		</article>
+		<footer>
+			<div class="FootContain">
+				<a href="http://www.miitbeian.gov.cn" style="margin-right:10px">豫ICP备18022003号</a>
+				<span>Simple is beauty</span>
+				<span>Design by : 蒹葭</span>
+			</div>
+		</footer>
+	</div>
+	<script>
+		var h2 = document.getElementsByTagName('h2');
+		var tips = new Array();
+		for (var i = 0; i < h2.length; i++) {
+			var tip = document.createElement("span");
+			tip.setAttribute("class", "fa fa-pencil fa-lg")
+			tips.push(tip)
+		}
+		for (var i = 0; i < h2.length; i++) {
+			h2[i].appendChild(tips[i]);
+		}
+	</script>
 </body>
 </html>

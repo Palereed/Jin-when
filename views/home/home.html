@@ -1,97 +1,109 @@
 {% extends 'nav.html' %}
 {% block MainBody %}
-    <div class="MainContain">
-       <div class="KindContain">
-           <div class="ChecKind">
-                <a href="/home">
-                  <span>全部</span>
-                  <span>全部</span>
-                </a>
-           </div>
-           {% for lable in lables %}
-	         <div class="ChecKind">
-                <a href="?lableId={{lable.id}}">
+<div class="MainContain">
+    <div class="KindContain">
+        <div class="ChecKind">
+            <a href="/home">
+                <span>全部</span>
+                <span>全部</span>
+            </a>
+        </div>
+        {% for lable in lables %}
+        <div class="ChecKind">
+            <a href="?lableId={{lable.id}}">
                 <span>{{lable.title}}</span>
                 <!-- style="transform:translateX(100%);" -->
                 <span>{{lable.title}}</span>
-                </a>
-           </div>
-           {% endfor %}
-       </div>	           
-       <!-- 文章部分 -->
-       {% for article in articles %}
-       <article class="WebLearn">
-           <div class="ArclTitle">
-           	  <h1>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- 文章部分 -->
+    {% for article in articles %}
+    <article class="WebLearn">
+        <div class="ArclTitle">
+            <h1>
                 <a href="/home/read?articleId={{article.id}}" class="ArclLink">
-                  {{article.title}}
+                    {{article.title}}
                 </a>
-              </h1>
-           </div>
-           <div class="ArclTop">
-               <span class="ArclKind">标签：{{article.lable}}</span>
-               <span class="ArclTime">时间：{{article.addTime|date('Y-m-d')}}</span>
-               <span class="ArclWrite">作者：{{article.writer}}</span>
-               {% if article.copyInfo %}
-               <span class="ArclMark">备注：{{article.addInfo}}自<i>{{article.copyInfo}}</i></span>
-               {% else %}
-               <span>备注：{{article.addInfo}}</span>
-               {% endif %}
-           </div>
-           <div class="ArcComment">
-                <span class="fa fa-eye fa-lg"></span>
-                <i>{{article.views}}</i>
-           </div>
-           <div class="ArclMain">
-               <div class="ArclSection">
-                   <section>
-                      {% autoescape %}
-                          {{article.content.slice(0,100)}}..
-                      {% endautoescape %}
-                   </section>
-               </div>
-           </div>
-           <div class="ArclBttom">
-               <a href="/home/read?articleId={{article.id}}" class="ArclShow">展开全文</a>
-           </div>
-       </article>
-       {% endfor %}
-       <!-- 分页部分 -->
-       <div class="PageNumber">
-              {% if page <=1 %}
-              <a href="javascript:;" class="CantUse">前页</a>
-              {% else %}
-              <a href="/home?page={{page-1}}">前页</a>
-              {% endif %}
-              <a class="Active">{{page}}</a>
-              {% if page >= pages %}
-              <a href="javascript:;" class="CantUse">后页</a>
-              {% else %}
-              <a href="/home?page={{page+1}}">后页</a>
-              {% endif %}
-       </div>
-	</div>
-  <script>
-       var h2 = document.getElementsByTagName('h2');
-       var tips = new Array();
-       for (var i=0;i<h2.length;i++){
-          var tip=document.createElement("span");
-          tip.setAttribute("class","fa fa-pencil fa-lg")
-          tips.push(tip)
-       }
-       for (var i=0;i<h2.length;i++){
-          h2[i].appendChild(tips[i]);
-       }
+            </h1>
+        </div>
+        <div class="ArclTop">
+            <span class="ArclKind">标签：{{article.lable}}</span>
+            <span class="ArclTime">时间：{{article.addTime|date('Y-m-d')}}</span>
+            <span class="ArclWrite">作者：{{article.writer}}</span>
+            {% if article.copyInfo %}
+            <span class="ArclMark">备注：{{article.addInfo}}自<i>{{article.copyInfo}}</i></span>
+            {% else %}
+            <span>备注：{{article.addInfo}}</span>
+            {% endif %}
+        </div>
+        <div class="ArcComment">
+            <span class="fa fa-eye fa-lg"></span>
+            <i>{{article.views}}</i>
+        </div>
+        <div class="ArclMain">
+            <div class="ArclSection">
+                <section>
+                    {% autoescape %}
+                    {{article.content.slice(0,100)}}..
+                    {% endautoescape %}
+                </section>
+            </div>
+        </div>
+        <div class="ArclBttom">
+            <a href="/home/read?articleId={{article.id}}" class="ArclShow">展开全文</a>
+        </div>
+    </article>
+    {% endfor %}
+    <!-- 分页部分 -->
+    <div class="PageNumber">
+        {% if page <=1 %} <a href="javascript:;" class="CantUse">前页</a>
+            {% else %}
+            <a href="/home?page={{page-1}}">前页</a>
+            {% endif %}
+            <a class="Active">{{page}}</a>
+            {% if page >= pages %}
+            <a href="javascript:;" class="CantUse">后页</a>
+            {% else %}
+            <a href="/home?page={{page+1}}">后页</a>
+            {% endif %}
+    </div>
+</div>
+<script>
+    var h2 = document.getElementsByTagName('h2');
+    var tips = new Array();
+    for (var i=0;i<h2.length;i++){
+        var tip=document.createElement("span");
+        tip.setAttribute("class","fa fa-pencil fa-lg")
+        tips.push(tip)
+    }
+    for (var i=0;i<h2.length;i++){
+        h2[i].appendChild(tips[i]);
+    }
   </script>
-  <link rel="stylesheet" type="text/css" href="/public/css/home.css">
-  <link href="/public/css/highlight.css" rel="stylesheet">  
-  <link rel="stylesheet" type="text/css" href="/public/css/read.css">
-  <script src="/public/js/highlight.pack.js"></script> 
-  <script>hljs.initHighlightingOnLoad();</script>
-  <style type="text/css">
-        footer{margin:20px 0 0 0;}
-        .nofloat{float:none;}
-        .TheNav a:first-child .MenuAdd::before{opacity:1;left:-7px;} 
-        .TheNav a:first-child .MenuAdd::after{opacity:1;right:-7px;} 
-	</style>
+<link rel="stylesheet" type="text/css" href="/public/css/home.css">
+<link href="/public/css/highlight.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/public/css/read.css">
+<script src="/public/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<style type="text/css">
+    footer {
+        margin: 20px 0 0 0;
+    }
+
+    .nofloat {
+        float: none;
+    }
+
+    .TheNav a:first-child .MenuAdd::before {
+        opacity: 1;
+        left: -7px;
+    }
+
+    .TheNav a:first-child .MenuAdd::after {
+        opacity: 1;
+        right: -7px;
+    }
+</style>
 {% endblock %}

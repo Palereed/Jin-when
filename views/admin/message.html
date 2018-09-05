@@ -1,67 +1,70 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span><i>/</i>留言管理</span>
-    <span><i>/</i>留言列表</span>
+<span><i>/</i>留言管理</span>
+<span><i>/</i>留言列表</span>
 {% endblock %}
 {% block MainBody %}
-    <h1>留言列表</h1>
-    <div class="panel">
-	  <table class="table table-hover">
-         	 <thead>
-         	 	<th class="TableId">编号</th>
-         	 	<th>留言日期</th>
-         	 	<th>用户名</th>
+<h1>留言列表</h1>
+<div class="panel">
+    <table class="table table-hover">
+        <thead>
+            <th class="TableId">编号</th>
+            <th>留言日期</th>
+            <th>用户名</th>
             <th>用户昵称</th>
-         	 	<th>留言内容</th>
+            <th>留言内容</th>
             <th class="answers">回复数</th>
-         	 	<th class="Options">操作</th>
-         	 </thead>
-         	 <tbody>
-             {% for message in messages %}
-         	 	<tr>
-         	 		<td class="TableId">{{message._id.toString()}}</td>
-         	 		<td>{{message.leaveTime|date('Y-m-d')}}</td>
-              <td>{{message.visitname}}</td>
-         	 		<td>{{decodeURI(message.visiter)}}</td>
-              {% if message.content.length < 25 %}
-              <td>{{message.content}}</td>
-              {% else %}
-              <td>{{message.content.slice(0,25)}}..</td>
-              {% endif %}
-         	 		<td class="answers">{{message.answer.length}}</td>
-         	 		<td class="Options">
-                <a href="/admin/message/delete?id={{message._id.toString()}}">
-                  <span class="btn btn-danger">
-                    <i class="fa fa-trash-o fa-fw"></i>
-                  </span>
-                </a>
-              </td>
-         	 	</tr>
-             {% endfor %}
-         	 </tbody>
-      </table>
-      <div class="PageNumber">
-          {% if page <=1 %}
-          <a href="javascript:;" class="CantUse">前页</a>
-          {% else %}
-          <a href="/admin/messagelist?page={{page-1}}">前页</a>
-          {% endif %}
-          <a class="Active">{{page}}</a>
-          {% if page >= pages %}
-          <a href="javascript:;" class="CantUse">后页</a>
-          {% else %}
-          <a href="/admin/messagelist?page={{page+1}}">后页</a>
-          {% endif %}
-       </div>
-       <div class="clearfix"></div>
+            <th class="Options">操作</th>
+        </thead>
+        <tbody>
+            {% for message in messages %}
+            <tr>
+                <td class="TableId">{{message._id.toString()}}</td>
+                <td>{{message.leaveTime|date('Y-m-d')}}</td>
+                <td>{{message.visitname}}</td>
+                <td>{{decodeURI(message.visiter)}}</td>
+                {% if message.content.length < 25 %} <td>{{message.content}}</td>
+                    {% else %}
+                    <td>{{message.content.slice(0,25)}}..</td>
+                    {% endif %}
+                    <td class="answers">{{message.answer.length}}</td>
+                    <td class="Options">
+                        <a href="/admin/message/delete?id={{message._id.toString()}}">
+                            <span class="btn btn-danger">
+                                <i class="fa fa-trash-o fa-fw"></i>
+                            </span>
+                        </a>
+                    </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="PageNumber">
+        {% if page <=1 %} <a href="javascript:;" class="CantUse">前页</a>
+            {% else %}
+            <a href="/admin/messagelist?page={{page-1}}">前页</a>
+            {% endif %}
+            <a class="Active">{{page}}</a>
+            {% if page >= pages %}
+            <a href="javascript:;" class="CantUse">后页</a>
+            {% else %}
+            <a href="/admin/messagelist?page={{page+1}}">后页</a>
+            {% endif %}
     </div>
-    <style type="text/css">
-       #Message li{background:#31383e;}
-       #Message li a{color:#f2f2f2;}
-    </style>
-    <script>
-        $('#Message').addClass('active');
-        $('#MessageBtn i').addClass('SlideDown').removeClass('SlideUp');
-        $('#Message').slideToggle(0);
-    </script>
+    <div class="clearfix"></div>
+</div>
+<style type="text/css">
+    #Message li {
+        background: #31383e;
+    }
+
+    #Message li a {
+        color: #f2f2f2;
+    }
+</style>
+<script>
+    $('#Message').addClass('active');
+    $('#MessageBtn i').addClass('SlideDown').removeClass('SlideUp');
+    $('#Message').slideToggle(0);
+</script>
 {% endblock %}

@@ -1,86 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" type="image/x-icon" href="/public/images/icon.ico" /> 
+	<link rel="icon" type="image/x-icon" href="/public/images/icon.ico" />
 	<title>锦时后台管理</title>
 	<link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/public/css/admin.css">
 	<script src="/public/js/jquery.min.js"></script>
 </head>
+
 <body>
-    <header>
-        <div class="WebTitle">
-            <span><i class="fa fa-paper-plane"></i>锦时后台管理</span>
-        </div>
-        <div class="TopFind">
-            <span><a href='/admin/home'>锦时</a></span>
-            {% block index %}{% endblock %}
-        </div>
-        <div class="Manager">
-        	<img src={{visitInfo.visitimg}}>
-        </div>
-        <div class="clearfix"></div>
-    </header>
-    <div class="Wrapage">
+	<header>
+		<div class="WebTitle">
+			<span><i class="fa fa-paper-plane"></i>锦时后台管理</span>
+		</div>
+		<div class="TopFind">
+			<span><a href='/admin/home'>锦时</a></span>
+			{% block index %}{% endblock %}
+		</div>
+		<div class="Manager">
+			<img src={{visitInfo.visitimg}}>
+		</div>
+		<div class="clearfix"></div>
+	</header>
+	<div class="Wrapage">
 		<div class="Leftnav">
 			<ul class="NavContain">
-			    <li><a href='/home'><span class="fa fa-home fa-fw"></span>锦时</a></li>
+				<li><a href='/home'><span class="fa fa-home fa-fw"></span>锦时</a></li>
 				<li class='FormBtn' id="WebTatalBtn">
-				   <a href='#'>
-				      <span class="fa fa-bar-chart fa-fw"></span>网站管理
-				      <i class="fa fa-chevron-up"></i>
-			       </a>
+					<a href='#'>
+						<span class="fa fa-bar-chart fa-fw"></span>网站管理
+						<i class="fa fa-chevron-up"></i>
+					</a>
 				</li>
 				<!-- 网站管理 -->
 				<div class="DownMenu" id="WebTatal">
-			       <li class='FormBtn'><a href='/admin/home'>网站统计</a></li>
-			       <li class='FormBtn'><a href='/admin/lablelist'>分类管理</a></li>
-			    </div>
+					<li class='FormBtn'><a href='/admin/home'>网站统计</a></li>
+					<li class='FormBtn'><a href='/admin/lablelist'>分类管理</a></li>
+				</div>
 				<li id="VisiterBtn">
-			       <a href='/admin/visiter'>
-			           <span class="fa fa-user-o fa-fw"></span>用户管理
-			       </a>
-			    </li>
-			    <li id="ArticleBtn">
-			       <a href='#'> 
-			           <span class="fa fa-book fa-fw"></span>文章管理
-			           <i class="fa fa-chevron-up"></i>
-			       </a>
-			    </li>
-			    <!-- 文章管理 -->
-			    <div class="DownMenu" id="Article">
-			       <li class='FormBtn'><a href='/admin/article'>文章发布</a></li>
-			       <li class='FormBtn'><a href='/admin/articlelist'>文章列表</a></li>
-			    </div>
-			    <li id="RecordBtn">
-				   <a href='#'>
-					  <span class="fa fa-star-o fa-fw"></span>独白管理
-					  <i class="fa fa-chevron-up"></i>
-				   </a>
+					<a href='/admin/visiter'>
+						<span class="fa fa-user-o fa-fw"></span>用户管理
+					</a>
+				</li>
+				<li id="ArticleBtn">
+					<a href='#'>
+						<span class="fa fa-book fa-fw"></span>文章管理
+						<i class="fa fa-chevron-up"></i>
+					</a>
+				</li>
+				<!-- 文章管理 -->
+				<div class="DownMenu" id="Article">
+					<li class='FormBtn'><a href='/admin/article'>文章发布</a></li>
+					<li class='FormBtn'><a href='/admin/articlelist'>文章列表</a></li>
+				</div>
+				<li id="RecordBtn">
+					<a href='#'>
+						<span class="fa fa-star-o fa-fw"></span>独白管理
+						<i class="fa fa-chevron-up"></i>
+					</a>
 				</li>
 				<!-- 独白管理 -->
 				<div class="DownMenu" id="Record">
-			       <li class='FormBtn'><a href='/admin/record'>独白发布</a></li>
-			       <li class='FormBtn'><a href='/admin/recordlist'>独白列表</a></li>
-			    </div>
+					<li class='FormBtn'><a href='/admin/record'>独白发布</a></li>
+					<li class='FormBtn'><a href='/admin/recordlist'>独白列表</a></li>
+				</div>
 				<li id="MessageBtn">
-				   <a href='#'>
-				      <span class="fa fa-envelope-o fa-fw"></span>留言管理
-			          <i class="fa fa-chevron-up"></i>
-				   </a>
+					<a href='#'>
+						<span class="fa fa-envelope-o fa-fw"></span>留言管理
+						<i class="fa fa-chevron-up"></i>
+					</a>
 				</li>
 				<!-- 留言管理 -->
 				<div class="DownMenu" id="Message">
-			       <li class='FormBtn'><a href='/admin/messagelist'>留言列表</a></li>
-			    </div>
+					<li class='FormBtn'><a href='/admin/messagelist'>留言列表</a></li>
+				</div>
 			</ul>
 		</div>
 		<div class="MainContain">
-		    {% block MainBody %}{% endblock %}
+			{% block MainBody %}{% endblock %}
 		</div>
 	</div>
 	<script src="/public/js/admin.js"></script>
 </body>
+
 </html>

@@ -1,55 +1,142 @@
-article{width:100%;position:relative;line-height:30px}
-article h2{font-weight:700;font-size:20px;margin:30px 0;}
-article h2 span{margin:0 20px 0 0}
-article h3{font-weight:700;font-size:18px;margin:30px 0;}
-.ArclSection ul{margin-bottom:10px}
-.ArclSection li{list-style-type:disc;
-   list-style-position:inside;
-   line-height: 30px;
-   margin-bottom:10px;}
+article {
+  width: 100%;
+  position: relative;
+  line-height: 30px
+}
+
+article h2 {
+  font-weight: 700;
+  font-size: 20px;
+  margin: 30px 0;
+}
+
+article h2 span {
+  margin: 0 20px 0 0
+}
+
+article h3 {
+  font-weight: 700;
+  font-size: 18px;
+  margin: 30px 0;
+}
+
+.ArclSection ul {
+  margin-bottom: 10px
+}
+
+.ArclSection li {
+  list-style-type: disc;
+  list-style-position: inside;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+
 pre {
   margin-bottom: 20px;
   padding: 15px;
   font-size: 13px;
   word-wrap: normal;
-  word-break: break-word!important;
+  word-break: break-word !important;
   word-break: break-all;
   white-space: pre;
   overflow: auto;
   background-color: #282c34;
   border-radius: 4px;
 }
+
 pre code {
-  line-height:25px;
-  font-size:13px;
+  line-height: 25px;
+  font-size: 13px;
   font-family: "consolas" !important;
   white-space: pre-wrap;
   background-color: transparent;
   border-radius: 0
 }
-.fa-lg{float:left;}
-.MainContain{width:870px;margin:auto;margin-top:20px;}
-.ArclTitle,.ArclTop{text-align:left;}
-.ArclTopline{width:100%;height:1px;background:#edf1f1;margin:10px 0 0 0;}
-.ArclTitle h1{font-weight:700;
-              font-size:28px;
-              position:relative;
-              display:inline-block;
-              }
-.ArclTop{padding:10px 0 10px 0;font-size:13px;color:#999;}
-.ArclTop span{margin:0 10px 0 0;}
-.ArclTop span:nth-child(4){margin-right:0;}  
-.ArclSection {line-height:26px;
-              font-size:16px;
-              text-align:justify;
-              letter-spacing:1.5px;}
-.DemoImg{padding-left:40px;} 
-.ArclReturn{height:18px;float:left;margin:0 0 0 20px;}
-.ArclReturn a{display:inline-block;line-height:18px;}
-.ArclReturn a span{font-size:25px;margin:10px 0 0 15px;}
-.Letter{width:100%;}
-.Answer{width:3%;}
-.LetterContain{width:89.5%;}
-@media screen and (max-width:800px){
-   .MainContain{width:auto}
+
+.fa-lg {
+  float: left;
+}
+
+.MainContain {
+  width: 870px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.ArclTitle,
+.ArclTop {
+  text-align: left;
+}
+
+.ArclTopline {
+  width: 100%;
+  height: 1px;
+  background: #edf1f1;
+  margin: 10px 0 0 0;
+}
+
+.ArclTitle h1 {
+  font-weight: 700;
+  font-size: 28px;
+  position: relative;
+  display: inline-block;
+}
+
+.ArclTop {
+  padding: 10px 0 10px 0;
+  font-size: 13px;
+  color: #999;
+}
+
+.ArclTop span {
+  margin: 0 10px 0 0;
+}
+
+.ArclTop span:nth-child(4) {
+  margin-right: 0;
+}
+
+.ArclSection {
+  line-height: 26px;
+  font-size: 16px;
+  text-align: justify;
+  letter-spacing: 1.5px;
+}
+
+.DemoImg {
+  padding-left: 40px;
+}
+
+.ArclReturn {
+  height: 18px;
+  float: left;
+  margin: 0 0 0 20px;
+}
+
+.ArclReturn a {
+  display: inline-block;
+  line-height: 18px;
+}
+
+.ArclReturn a span {
+  font-size: 25px;
+  margin: 10px 0 0 15px;
+}
+
+.Letter {
+  width: 100%;
+}
+
+.Answer {
+  width: 3%;
+}
+
+.LetterContain {
+  width: 89.5%;
+}
+
+@media screen and (max-width:800px) {
+  .MainContain {
+    width: auto
+  }
 }

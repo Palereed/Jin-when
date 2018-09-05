@@ -1,21 +1,21 @@
 var mongoose = require('mongoose');
 module.exports = new mongoose.Schema({
-    message:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'messages'
+    message: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'messages'
     },
     //用户
-    visiter:String,
+    visiter: String,
     //用户头像
-    visiterImg:String,
+    visiterImg: String,
     //回复时间
-    answerTime:{
-    	type:Date,
-    	default:new Date()
+    answerTime: {
+        type: Date,
+        default: new Date()
     },
     //内容
-    content:{
-        type:String,
-        dafault:''
+    content: {
+        type: String,
+        dafault: ''
     },
 });

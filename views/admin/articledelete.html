@@ -1,39 +1,44 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span><i>/</i>文章管理</span>
-    <span><i>/</i><a href='/admin/articlelist'>文章列表</a></span>
-    <span><i>/</i>文章删除</span>
+<span><i>/</i>文章管理</span>
+<span><i>/</i><a href='/admin/articlelist'>文章列表</a></span>
+<span><i>/</i>文章删除</span>
 {% endblock %}
 {% block MainBody %}
-    <h1>文章删除</h1>
-    <div class="panel">
-      <form method="post" id="DeleteIt">
+<h1>文章删除</h1>
+<div class="panel">
+    <form method="post" id="DeleteIt">
         <h2>标题：<span>{{article.title}}</span></h2>
         <h2>时间：<span>{{article.addTime|date('Y-m-d')}}</span></h2>
-  			<h2>作者：<span>{{article.writer}}</span></h2>
-  			<h2>标签：<span>{{article.lable}}</span></h2>
-  			<h2>备注：<span>{{article.addInfo}}</span></h2>
-  			<h2>说明：<span>{{article.copyInfo}}</span></h2>
-  			<h2>文章内容：</h2>
-  			<p>{{article.content}}</p>
+        <h2>作者：<span>{{article.writer}}</span></h2>
+        <h2>标签：<span>{{article.lable}}</span></h2>
+        <h2>备注：<span>{{article.addInfo}}</span></h2>
+        <h2>说明：<span>{{article.copyInfo}}</span></h2>
+        <h2>文章内容：</h2>
+        <p>{{article.content}}</p>
         <div class="WarningHold">
             <div>
-               <i></i>
-               <span></span>
+                <i></i>
+                <span></span>
             </div>
         </div>
-			  <button class="btn btn-danger" type="button">删除</button>
-		    <a href = '/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
-	    </form>
-    </div>
-    <style type="text/css">
-       #Article li:last-child{background:#31383e;}
-       #Article li:last-child a{color:#f2f2f2;}
-    </style>
-    <script>
-        $('#Article').addClass('active');
-        $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
-        $('#Article').slideToggle(0);
-    </script>
-    <script src="/public/js/delete.js"></script>
+        <button class="btn btn-danger" type="button">删除</button>
+        <a href='/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
+    </form>
+</div>
+<style type="text/css">
+    #Article li:last-child {
+        background: #31383e;
+    }
+
+    #Article li:last-child a {
+        color: #f2f2f2;
+    }
+</style>
+<script>
+    $('#Article').addClass('active');
+    $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
+    $('#Article').slideToggle(0);
+</script>
+<script src="/public/js/delete.js"></script>
 {% endblock %}

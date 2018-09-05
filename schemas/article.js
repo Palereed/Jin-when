@@ -2,27 +2,27 @@
 var mongoose = require('mongoose');
 module.exports = new mongoose.Schema({
     //标题
-    title:String,
+    title: String,
     //作者
-    writer:String,
+    writer: String,
     //发布时间
-    addTime:{
-        type:Date,
-        default:new Date()
+    addTime: {
+        type: Date,
+        default: new Date()
     },
     //标签
-    lable:String,
+    lable: String,
     //分类
-    lableId:String,
+    lableId: String,
     //备注
-    addInfo:String,
+    addInfo: String,
     //转载信息
-    copyInfo:String,
+    copyInfo: String,
     //内容
-    content:String,
+    content: String,
     //阅读量
-    views:{
-        type:Number,
-        default:0
+    views: {
+        type: Number,
+        default: 0
     }
 });

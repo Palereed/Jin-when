@@ -1,112 +1,118 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span><i>/</i>网站管理</span>
-    <span><i>/</i>分类管理</span>
+<span><i>/</i>网站管理</span>
+<span><i>/</i>分类管理</span>
 {% endblock %}
 {% block MainBody %}
-    <h1>分类添加</h1>
+<h1>分类添加</h1>
+<div class="panel">
+    <form id="LableEdit">
+        <h2>分类名称</h2>
+        <input class="form-control" type="text" name="title"></input>
+        <div class="LableEditBtn">
+            <div>
+                <i></i>
+                <span></span>
+            </div>
+        </div>
+        <button class="btn btn-success" type="button">发布</button>
+        <button class="btn btn-danger" type="reset">重置</button>
+        <a href='/admin/lablelist'><button class="btn btn-info" type="button">返回查看</button></a>
+    </form>
+</div>
+<div class="LableList">
+    <h1>分类列表</h1>
     <div class="panel">
-    	 <form id="LableEdit">
-    		  <h2>分类名称</h2>
-    		  <input class="form-control" type="text" name="title"></input>
-    	      <div class="LableEditBtn">
-	              <div>
-	                 <i></i>
-	                 <span></span>
-	              </div>
-              </div>
-    		  <button class="btn btn-success" type="button">发布</button>
-    		  <button class="btn btn-danger" type="reset">重置</button>
-          <a href = '/admin/lablelist'><button class="btn btn-info" type="button">返回查看</button></a>
-    	 </form>
-    </div>
-    <div class="LableList">
-       <h1>分类列表</h1>
-       <div class="panel">
-          <table class="table">
-             <thead>
-                    <th class="TableId">编号</th>
-                    <th>分类名称</th>
-                    <th>发布时间</th>
-                    <th class="number">文章数</th>
-                    <th class="Options">操作</th>
+        <table class="table">
+            <thead>
+                <th class="TableId">编号</th>
+                <th>分类名称</th>
+                <th>发布时间</th>
+                <th class="number">文章数</th>
+                <th class="Options">操作</th>
             </thead>
             <tbody>
                 {% for lable in lables %}
-                    <tr>
-                        <td class="TableId">{{lable._id.toString()}}</td>
-                        <td>{{lable.title}}</td>
-                        <td>{{lable.addTime|date('Y-m-d')}}</td>
-                        <td class="number">{{lable.number}}</td>
-                        <td class="Options">
-                          <a href="/admin/lablelist/edit?id={{lable._id.toString()}}">
-                             <span class="btn btn-info">
-                                 <i class="fa fa-edit fa-fw"></i>
-                             </span>
-                          </a>
-                          <a href="/admin/lablelist/delete?id={{lable._id.toString()}}">
-                             <span class="btn btn-danger">
-                                 <i class="fa fa-trash-o fa-fw"></i>
-                             </span>
-                          </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="TableId">{{lable._id.toString()}}</td>
+                    <td>{{lable.title}}</td>
+                    <td>{{lable.addTime|date('Y-m-d')}}</td>
+                    <td class="number">{{lable.number}}</td>
+                    <td class="Options">
+                        <a href="/admin/lablelist/edit?id={{lable._id.toString()}}">
+                            <span class="btn btn-info">
+                                <i class="fa fa-edit fa-fw"></i>
+                            </span>
+                        </a>
+                        <a href="/admin/lablelist/delete?id={{lable._id.toString()}}">
+                            <span class="btn btn-danger">
+                                <i class="fa fa-trash-o fa-fw"></i>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
                 {% endfor %}
-             </tbody>
-          </table>
-          <div class="PageNumber">
-              {% if page <=1 %}
-              <a href="javascript:;" class="CantUse">前页</a>
-              {% else %}
-              <a href="/admin/lablelist?page={{page-1}}">前页</a>
-              {% endif %}
-              <a class="Active">{{page}}</a>
-              {% if page >= pages %}
-              <a href="javascript:;" class="CantUse">后页</a>
-              {% else %}
-              <a href="/admin/lablelist?page={{page+1}}">后页</a>
-              {% endif %}
-          </div>
-          <div class="clearfix"></div>
-       </div>
+            </tbody>
+        </table>
+        <div class="PageNumber">
+            {% if page <=1 %} <a href="javascript:;" class="CantUse">前页</a>
+                {% else %}
+                <a href="/admin/lablelist?page={{page-1}}">前页</a>
+                {% endif %}
+                <a class="Active">{{page}}</a>
+                {% if page >= pages %}
+                <a href="javascript:;" class="CantUse">后页</a>
+                {% else %}
+                <a href="/admin/lablelist?page={{page+1}}">后页</a>
+                {% endif %}
+        </div>
+        <div class="clearfix"></div>
     </div>
-    <style type="text/css">
-       #WebTatal li:last-child{background:#31383e;}
-       #WebTatal li:last-child a{color:#f2f2f2;}
-    </style>
-    <script type="text/javascript">
-       $('#WebTatal').addClass('active');
-       $('#WebTatalBtn i').addClass('SlideDown').removeClass('SlideUp');
-       $('#WebTatal').slideToggle(0);
-       $('#LableEdit').find('button').eq(0).click(function(){
-            var  IsEditEnd = confirm('是否编辑完成？');
-            if (IsEditEnd){
-                $.ajax({
-                    type: 'post',
-                    url: '/admin/lablelist',
-                    data: {
-                          title:$('#LableEdit').find('[name="title"]').val(),
-                      },
-                    dataType: 'json',
-                    success:function(result){
-                      var code = result.code;
-                      switch (code){
+</div>
+<style type="text/css">
+    #WebTatal li:last-child {
+        background: #31383e;
+    }
+
+    #WebTatal li:last-child a {
+        color: #f2f2f2;
+    }
+</style>
+<script type="text/javascript">
+    $('#WebTatal').addClass('active');
+    $('#WebTatalBtn i').addClass('SlideDown').removeClass('SlideUp');
+    $('#WebTatal').slideToggle(0);
+    $('#LableEdit').find('button').eq(0).click(function () {
+        var IsEditEnd = confirm('是否编辑完成？');
+        if (IsEditEnd) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/lablelist',
+                data: {
+                    title: $('#LableEdit').find('[name="title"]').val(),
+                },
+                dataType: 'json',
+                success: function (result) {
+                    var code = result.code;
+                    switch (code) {
                         case 0:
                             $('.LableEditBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.LableEditBtn').find('div').removeClass().addClass('alert alert-success');
-                            setTimeout(function(){
+                            $('.LableEditBtn').find('div').removeClass().addClass(
+                                'alert alert-success');
+                            setTimeout(function () {
                                 window.location.reload();
-                            },500);
-                        break;
+                            }, 500);
+                            break;
                         default:
                             $('.LableEditBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.LableEditBtn').find('div').removeClass().addClass('alert alert-danger')
-                        break;
-                      }
-                      $('.LableEditBtn').find('span').html(result.message);
+                            $('.LableEditBtn').find('div').removeClass().addClass(
+                                'alert alert-danger')
+                            break;
                     }
-              })
-          }
-      })
-    </script>
+                    $('.LableEditBtn').find('span').html(result.message);
+                }
+            })
+        }
+    })
+</script>
 {% endblock %}

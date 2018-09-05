@@ -1,86 +1,93 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span><i>/</i>文章管理</span>
-    <span><i>/</i>文章发布</span>
+<span><i>/</i>文章管理</span>
+<span><i>/</i>文章发布</span>
 {% endblock %}
 {% block MainBody %}
-    <h1>文章发布</h1>
-    <div class="panel">
-       <form id="ArticleEdit">
-	        <h2>标题</h2>
-    			<input class="form-control" type="text" name="title"></input>
-    			<h2>作者</h2>
-    			<input class="form-control" type="text" name="writer"></input>
-    			<h2>标签</h2>
-    			<div class="form-group KindChoose">
-             {% for lable in lables %}
-    				 <input name="lable"  id='{{lable.title}}' type="radio" value="{{lable.id}}">
-             <label for="{{lable.title}}">{{lable.title}}</label>
-    				 {% endfor %}
-    			</div>
-		      <h2>备注</h2>
-    			<div class="form-group AddInfo">
-    				 <input name="addInfo" id='OwnWrite' type="radio" value="1" checked="true"><label for="OwnWrite">原创</label>
-    				 <input name="addInfo" id="Reprint"  type="radio" value="2"><label for="Reprint">转载</label>
-    				 <div class="ReprintInfo">
-          	   <h2>转载说明</h2>
-          	   <input class="form-control" type="text" name="copyInfo"></input>
-             </div>  
-          </div>		
-          <h2>编辑文本</h2>
-    			<textarea class="form-control" name="content"></textarea>
-          <div class="ArticleEditBtn">
-              <div>
-                 <i></i>
-                 <span></span>
-              </div>
-          </div>
-    			<button class="btn btn-success" type="button">发布</button>
-    			<button class="btn btn-danger" type="reset">重置</button> 
-          <a href = '/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
-	     </form>
-    </div>
-    <style type="text/css">
-       #Article li:first-child{background:#31383e;}
-       #Article li:first-child a{color:#f2f2f2}
-    </style>
-    <script>
-        $("input[name='lable']:eq(0)").attr("checked",'checked'); 
-        $('#Article').addClass('active');
-        $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
-        $('#Article').slideToggle(0);
-        $('#ArticleEdit').find('button').eq(0).click(function(){
-            var  IsEditEnd = confirm('是否编辑完成？');
-            if (IsEditEnd){
-                $.ajax({
-                    type: 'post',
-                    url: '/admin/article',
-                    data: {
-                          title:$('#ArticleEdit').find('[name="title"]').val(),
-                          writer:$('#ArticleEdit').find('[name="writer"]').val(),
-                          lable:$('#ArticleEdit').find('[name="lable"]:checked').next('label').html(),
-                          lableId:$('#ArticleEdit').find('[name="lable"]:checked').val(),
-                          addInfo:$('#ArticleEdit').find('[name="addInfo"]:checked').next('label').html(),
-                          copyInfo:$('#ArticleEdit').find('[name="copyInfo"]').val(),
-                          content:$('#ArticleEdit').find('[name="content"]').val()
-                      },
-                    dataType: 'json',
-                    success:function(result){
-                      var code = result.code;
-                      switch (code){
+<h1>文章发布</h1>
+<div class="panel">
+    <form id="ArticleEdit">
+        <h2>标题</h2>
+        <input class="form-control" type="text" name="title"></input>
+        <h2>作者</h2>
+        <input class="form-control" type="text" name="writer"></input>
+        <h2>标签</h2>
+        <div class="form-group KindChoose">
+            {% for lable in lables %}
+            <input name="lable" id='{{lable.title}}' type="radio" value="{{lable.id}}">
+            <label for="{{lable.title}}">{{lable.title}}</label>
+            {% endfor %}
+        </div>
+        <h2>备注</h2>
+        <div class="form-group AddInfo">
+            <input name="addInfo" id='OwnWrite' type="radio" value="1" checked="true"><label for="OwnWrite">原创</label>
+            <input name="addInfo" id="Reprint" type="radio" value="2"><label for="Reprint">转载</label>
+            <div class="ReprintInfo">
+                <h2>转载说明</h2>
+                <input class="form-control" type="text" name="copyInfo"></input>
+            </div>
+        </div>
+        <h2>编辑文本</h2>
+        <textarea class="form-control" name="content"></textarea>
+        <div class="ArticleEditBtn">
+            <div>
+                <i></i>
+                <span></span>
+            </div>
+        </div>
+        <button class="btn btn-success" type="button">发布</button>
+        <button class="btn btn-danger" type="reset">重置</button>
+        <a href='/admin/articlelist'><button class="btn btn-info" type="button">返回查看</button></a>
+    </form>
+</div>
+<style type="text/css">
+    #Article li:first-child {
+        background: #31383e;
+    }
+
+    #Article li:first-child a {
+        color: #f2f2f2
+    }
+</style>
+<script>
+    $("input[name='lable']:eq(0)").attr("checked", 'checked');
+    $('#Article').addClass('active');
+    $('#ArticleBtn i').addClass('SlideDown').removeClass('SlideUp');
+    $('#Article').slideToggle(0);
+    $('#ArticleEdit').find('button').eq(0).click(function () {
+        var IsEditEnd = confirm('是否编辑完成？');
+        if (IsEditEnd) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/article',
+                data: {
+                    title: $('#ArticleEdit').find('[name="title"]').val(),
+                    writer: $('#ArticleEdit').find('[name="writer"]').val(),
+                    lable: $('#ArticleEdit').find('[name="lable"]:checked').next('label').html(),
+                    lableId: $('#ArticleEdit').find('[name="lable"]:checked').val(),
+                    addInfo: $('#ArticleEdit').find('[name="addInfo"]:checked').next('label').html(),
+                    copyInfo: $('#ArticleEdit').find('[name="copyInfo"]').val(),
+                    content: $('#ArticleEdit').find('[name="content"]').val()
+                },
+                dataType: 'json',
+                success: function (result) {
+                    var code = result.code;
+                    switch (code) {
                         case 0:
                             $('.ArticleEditBtn').find('i').removeClass().addClass('fa fa-check');
-                            $('.ArticleEditBtn').find('div').removeClass().addClass('alert alert-success')
-                        break;
+                            $('.ArticleEditBtn').find('div').removeClass().addClass(
+                                'alert alert-success')
+                            break;
                         default:
                             $('.ArticleEditBtn').find('i').removeClass().addClass('fa fa-close');
-                            $('.ArticleEditBtn').find('div').removeClass().addClass('alert alert-danger')
-                        break;
-                      }
-                      $('.ArticleEditBtn').find('span').html(result.message);
-                   }
-              })
-          }
-      })
-    </script>
+                            $('.ArticleEditBtn').find('div').removeClass().addClass(
+                                'alert alert-danger')
+                            break;
+                    }
+                    $('.ArticleEditBtn').find('span').html(result.message);
+                }
+            })
+        }
+    })
+</script>
 {% endblock %}

@@ -1,30 +1,36 @@
 {% extends 'nav.html' %}
 {% block index %}
-    <span><i>/</i><a href='/admin/visiter'>用户管理</a></span>
-    <span><i>/</i>用户删除</span>
+<span><i>/</i><a href='/admin/visiter'>用户管理</a></span>
+<span><i>/</i>用户删除</span>
 {% endblock %}
 {% block MainBody %}
-    <h1>用户删除</h1>
-    <div class="panel">
-  	   <form method="post" id="DeleteIt">
-  		    <h2>昵称：<span>{{visiter.visitmark}}</span></h2>
-  	    	<h2>头像：<span><img src={{visiter.visitimg}}></span></h2>
-    			<h2>账户：<span>{{visiter.visitname}}</span></h2>
-    			<h2>密码：<span>{{visiter.visitpass}}</span></h2>
-    			<h2>密保：<span>{{visiter.visitsafe}}</span></h2>
-          <div class="WarningHold">
+<h1>用户删除</h1>
+<div class="panel">
+    <form method="post" id="DeleteIt">
+        <h2>昵称：<span>{{visiter.visitmark}}</span></h2>
+        <h2>头像：<span><img src={{visiter.visitimg}}></span></h2>
+        <h2>账户：<span>{{visiter.visitname}}</span></h2>
+        <h2>密码：<span>{{visiter.visitpass}}</span></h2>
+        <h2>密保：<span>{{visiter.visitsafe}}</span></h2>
+        <div class="WarningHold">
             <div>
-               <i></i>
-               <span></span>
+                <i></i>
+                <span></span>
             </div>
-          </div>
-  		    <button class="btn btn-danger" type="button">删除</button>
-  		    <a href = '/admin/visiter'><button class="btn btn-info" type="button">返回查看</button></a>
-  	   </form>
-    </div>
-    <style type="text/css">
-       #VisiterBtn{background:#31383e;}
-       #VisiterBtn a,#VisiterBtn span{color:#f2f2f2;}
-    </style>
-    <script src="/public/js/delete.js"></script>
+        </div>
+        <button class="btn btn-danger" type="button">删除</button>
+        <a href='/admin/visiter'><button class="btn btn-info" type="button">返回查看</button></a>
+    </form>
+</div>
+<style type="text/css">
+    #VisiterBtn {
+        background: #31383e;
+    }
+
+    #VisiterBtn a,
+    #VisiterBtn span {
+        color: #f2f2f2;
+    }
+</style>
+<script src="/public/js/delete.js"></script>
 {% endblock %}

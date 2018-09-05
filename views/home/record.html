@@ -1,46 +1,53 @@
 {% extends 'nav.html' %}
 {% block MainBody %}
-    <div class="MainTop">
-      <h3>人生不如意之事七八九，苦事；终归还能与人言一二三，幸事。</h3>
-      <span class="fa fa-quote-left"></span>
-      <span class="fa fa-quote-right"></span>
-    </div>
-    <div class="MainContain">
-        <div class="TimeEvent">
-          <div class="Middle">
-          	<div class="TimeLine"></div>
-          </div>
-          {% for record in records %}
-          <div class="RecordModule">
-          	<div class="RecordTime">
-          	    <span class="anchor"></span>
-          	    <span class="line"></span>
-          	    <span class="weather">{{record.weather}}</span>
-          	    <span class="separated">|</span>
-          	    <span class="spirit">{{record.mood}}</span>
-          	    <span class="separated">|</span>
-          		<span class="time">{{record.addTime|date('F jS, Y')}}</span>
-          	</div>
-          	<div class="RecordBody">
-          		<h3>{{record.title}}</h3>
-              <p>{{record.content}}</p>
+<div class="MainTop">
+    <h3>人生不如意之事七八九，苦事；终归还能与人言一二三，幸事。</h3>
+    <span class="fa fa-quote-left"></span>
+    <span class="fa fa-quote-right"></span>
+</div>
+<div class="MainContain">
+    <div class="TimeEvent">
+        <div class="Middle">
+            <div class="TimeLine"></div>
+        </div>
+        {% for record in records %}
+        <div class="RecordModule">
+            <div class="RecordTime">
+                <span class="anchor"></span>
+                <span class="line"></span>
+                <span class="weather">{{record.weather}}</span>
+                <span class="separated">|</span>
+                <span class="spirit">{{record.mood}}</span>
+                <span class="separated">|</span>
+                <span class="time">{{record.addTime|date('F jS, Y')}}</span>
             </div>
-          </div>
-          {% endfor %}
-          <!--  未完待续 -->
-          <div class="RecordModule">
+            <div class="RecordBody">
+                <h3>{{record.title}}</h3>
+                <p>{{record.content}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <!--  未完待续 -->
+        <div class="RecordModule">
             <div class="RecordTime">
                 <span class="anchor"></span>
                 <span class="line"></span>
                 <span class="weather loading"><i>Loading...(未完待续)</i></span>
             </div>
-          </div>
         </div>
     </div>
-    <link rel="stylesheet" type="text/css" href="/public/css/record.css">
-    <script src="/public/js/record.js"></script>
-    <style type="text/css">
-        .TheNav a:nth-child(3) .MenuAdd::before{opacity:1;left:-7px;} 
-        .TheNav a:nth-child(3) .MenuAdd::after{opacity:1;right:-7px;} 
-    </style>
+</div>
+<link rel="stylesheet" type="text/css" href="/public/css/record.css">
+<script src="/public/js/record.js"></script>
+<style type="text/css">
+    .TheNav a:nth-child(3) .MenuAdd::before {
+        opacity: 1;
+        left: -7px;
+    }
+
+    .TheNav a:nth-child(3) .MenuAdd::after {
+        opacity: 1;
+        right: -7px;
+    }
+</style>
 {% endblock %}

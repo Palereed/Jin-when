@@ -1,215 +1,221 @@
 {% extends 'nav.html' %}
 {% block MainBody %}
-    <div class="MessageContain">
-       <div class="MessageTop">
-           <!-- 原留言 -->
-           <div class="ImgContain">
-              <img src="/public/images/message/owner.jpg" class="LetterImg">
-           </div>
-           <div class="LetterContain">
-                   <!-- 留言者信息 -->
-                   <div class="VisitInfo">
-                      <span class="VisitName">
-                          <a href="#">少年锦时</a>
-                      </span>
-                   </div>
-                   <div class="LetterReal">
-                       <p>吾之素年，汝与锦时。与你相见，不甚欣喜。留笔墨一二，互通有无。或有指点，愿闻其详。</p>
-                   </div>
-           </div>
-           <div class="clearfix"></div>
-       </div>
-       <div class="TopLine"></div>
-       <!-- 留言 -->
-       {% for message in messages %}
-       <div class="LetterModule">
-           <!-- 原留言 -->
-           <div class="LetterOri">
-               <!-- 头像 -->
-               <div class="ImgContain">
-                   <img src="{{message.visiterImg}}" class="LetterImg">
-               </div>
-               <!-- 留言内容 -->
-               <div class="LetterContain">
-                   <!-- 留言者信息 -->
-                   <div class="VisitInfo">
-                      <span class="VisitName">
-                          <a href="#">{{decodeURI(message.visiter)}}</a>
-                      </span>
-                      <span class="TimeContain">
-                          留言于<b class="VisitTime">{{message.leaveTime|date('Y-m-d  H:i:s',-8*60)}}</b>
-                      </span>
-                   </div>
-                   <div class="LetterReal">
-                       <p>{{message.content}}</p>
-                   </div>
-               </div>
-               <div class="Answer">
-                   <span class="fa fa-comment-o fa-lg"></span>
-                   <i>{{message.answer.length}}</i>
-               </div>
-               <div class="clearfix"></div>
-           </div>
-           <!-- 留言回复 -->
-           <div class="AllAnswer">
-               <div class="AnswerHold">
-                 <!-- 留言回复内容 -->
-                 {% for answer in message.answer %}
-                 <div class="AnswerContain">
-                      <div class="ImgContain">
-                         <img src="{{answer.visiterImg}}" class="LetterImg">
-                      </div>
-                      <div class="LetterContain">
-                          <div class="VisitInfo">
+<div class="MessageContain">
+    <div class="MessageTop">
+        <!-- 原留言 -->
+        <div class="ImgContain">
+            <img src="/public/images/message/owner.jpg" class="LetterImg">
+        </div>
+        <div class="LetterContain">
+            <!-- 留言者信息 -->
+            <div class="VisitInfo">
+                <span class="VisitName">
+                    <a href="#">少年锦时</a>
+                </span>
+            </div>
+            <div class="LetterReal">
+                <p>吾之素年，汝与锦时。与你相见，不甚欣喜。留笔墨一二，互通有无。或有指点，愿闻其详。</p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="TopLine"></div>
+    <!-- 留言 -->
+    {% for message in messages %}
+    <div class="LetterModule">
+        <!-- 原留言 -->
+        <div class="LetterOri">
+            <!-- 头像 -->
+            <div class="ImgContain">
+                <img src="{{message.visiterImg}}" class="LetterImg">
+            </div>
+            <!-- 留言内容 -->
+            <div class="LetterContain">
+                <!-- 留言者信息 -->
+                <div class="VisitInfo">
+                    <span class="VisitName">
+                        <a href="#">{{decodeURI(message.visiter)}}</a>
+                    </span>
+                    <span class="TimeContain">
+                        留言于<b class="VisitTime">{{message.leaveTime|date('Y-m-d H:i:s',-8*60)}}</b>
+                    </span>
+                </div>
+                <div class="LetterReal">
+                    <p>{{message.content}}</p>
+                </div>
+            </div>
+            <div class="Answer">
+                <span class="fa fa-comment-o fa-lg"></span>
+                <i>{{message.answer.length}}</i>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- 留言回复 -->
+        <div class="AllAnswer">
+            <div class="AnswerHold">
+                <!-- 留言回复内容 -->
+                {% for answer in message.answer %}
+                <div class="AnswerContain">
+                    <div class="ImgContain">
+                        <img src="{{answer.visiterImg}}" class="LetterImg">
+                    </div>
+                    <div class="LetterContain">
+                        <div class="VisitInfo">
                             <span class="VisitName">
-                              <a href="#">{{decodeURI(answer.visiter)}}</a>
+                                <a href="#">{{decodeURI(answer.visiter)}}</a>
                             </span>
                             <span class="TimeContain">
-                               回复于
-                              <b class="VisitTime">{{answer.answerTime|date('Y-m-d  H:i:s',-8*60)}}</b>
+                                回复于
+                                <b class="VisitTime">{{answer.answerTime|date('Y-m-d H:i:s',-8*60)}}</b>
                             </span>
-                          </div>
-                          <div class="LetterReal">
+                        </div>
+                        <div class="LetterReal">
                             <p>{{answer.content}}</p>
-                          </div>
-                      </div>
-                      <div class="clearfix"></div>
-                 </div>
-                 {% endfor %}
-               </div>
-               <!-- 留言回复表单 -->
-               <div class="AnswerForm">
-                   {% if visitInfo.visitname %}
-                   <span class="Answerit">我要回复</span>
-                   {% else %}
-                   {% endif %}
-                   <form>
-                     <ul class="FormList">
-                       <input type='hidden' value="{{message.id}}" name="messageId"></input>
-                       <li><span>内容：</span><textarea class="form-control" name="content"></textarea></li>
-                       <div class="WarningHold">
-                          <div>
-                            <i></i>
-                            <span></span>
-                          </div>
-                       </div>
-                       <li><button type="button" class="btn btn-default">回复</button></li>
-                     </ul>
-                   </form> 
-               </div>
-           </div>
-       </div>
-       {% endfor %}
-       <!-- 分页部分 -->
-       <div class="PageNumber">
-              {% if page <=1 %}
-              <a href="javascript:;" class="CantUse">前页</a>
-              {% else %}
-              <a href="/message?page={{page-1}}">前页</a>
-              {% endif %}
-              <a class="Active">{{page}}</a>
-              {% if page >= pages %}
-              <a href="javascript:;" class="CantUse">后页</a>
-              {% else %}
-              <a href="/message?page={{page+1}}">后页</a>
-              {% endif %}
-       </div>
-       <!-- 留言表单 -->
-       <div class="TopTab">
-          <div class="TabName">留言板</div>
-          <div class="LandInfo">
-              <!-- 管理员登陆 -->
-              {% if visitInfo.isAdmin %}
-              <span>
-              {{decodeURI(visitInfo.visitmark)}}<i>/</i><a href="admin/home"><i class="fa fa-sign-in"></i>后台</a></span>
-              <!-- 普通访问者 -->
-              {% elseif visitInfo.visitname %}
-              <span>{{decodeURI(visitInfo.visitmark)}}<i>/</i><b id="Landout"><i class="fa fa-sign-out"></i>退出</b></span>
-              <!-- 未登录状态 -->
-              {% else %}
-              <span><b id="Landon"><i class="fa fa-sign-in"></i>登录后留言</b></span>
-              {% endif %}
-              {% if visitInfo.visitname %}
-              <div class="OnLand">
-                  <img src={{visitInfo.visitimg}}>
-              </div>
-              {% else %}
-              <div class="OnLand"></div>
-              {% endif %}
-          </div>
-          <div class="clearfix"></div>
-       </div>
-       <div class="LeaveContain">
-          {% if visitInfo.visitname %}
-          <div class="VisitLeave">
-              <form id="Leave">
-                 <ul class="FormList">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- 留言回复表单 -->
+            <div class="AnswerForm">
+                {% if visitInfo.visitname %}
+                <span class="Answerit">我要回复</span>
+                {% else %}
+                {% endif %}
+                <form>
+                    <ul class="FormList">
+                        <input type='hidden' value="{{message.id}}" name="messageId"></input>
+                        <li><span>内容：</span><textarea class="form-control" name="content"></textarea></li>
+                        <div class="WarningHold">
+                            <div>
+                                <i></i>
+                                <span></span>
+                            </div>
+                        </div>
+                        <li><button type="button" class="btn btn-default">回复</button></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- 分页部分 -->
+    <div class="PageNumber">
+        {% if page <=1 %} <a href="javascript:;" class="CantUse">前页</a>
+            {% else %}
+            <a href="/message?page={{page-1}}">前页</a>
+            {% endif %}
+            <a class="Active">{{page}}</a>
+            {% if page >= pages %}
+            <a href="javascript:;" class="CantUse">后页</a>
+            {% else %}
+            <a href="/message?page={{page+1}}">后页</a>
+            {% endif %}
+    </div>
+    <!-- 留言表单 -->
+    <div class="TopTab">
+        <div class="TabName">留言板</div>
+        <div class="LandInfo">
+            <!-- 管理员登陆 -->
+            {% if visitInfo.isAdmin %}
+            <span>
+                {{decodeURI(visitInfo.visitmark)}}<i>/</i><a href="admin/home"><i class="fa fa-sign-in"></i>后台</a></span>
+            <!-- 普通访问者 -->
+            {% elseif visitInfo.visitname %}
+            <span>{{decodeURI(visitInfo.visitmark)}}<i>/</i><b id="Landout"><i class="fa fa-sign-out"></i>退出</b></span>
+            <!-- 未登录状态 -->
+            {% else %}
+            <span><b id="Landon"><i class="fa fa-sign-in"></i>登录后留言</b></span>
+            {% endif %}
+            {% if visitInfo.visitname %}
+            <div class="OnLand">
+                <img src={{visitInfo.visitimg}}>
+            </div>
+            {% else %}
+            <div class="OnLand"></div>
+            {% endif %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="LeaveContain">
+        {% if visitInfo.visitname %}
+        <div class="VisitLeave">
+            <form id="Leave">
+                <ul class="FormList">
                     <li><span>内容：</span><textarea class="form-control" name="content"></textarea></li>
                     <div class="LeaveBtn">
                         <div>
-                          <i></i>
-                          <span></span>
+                            <i></i>
+                            <span></span>
                         </div>
                     </div>
                     <li><button type="button" class="btn btn-default">留言</button></li>
-                 </ul>
-              </form>
-          </div>
-          {% else %}
-          <div class="VisitLand" id="Land">
-              <form>
-                 <ul class="FormList">
+                </ul>
+            </form>
+        </div>
+        {% else %}
+        <div class="VisitLand" id="Land">
+            <form>
+                <ul class="FormList">
                     <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
                     <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
                     <div class="LandBtn">
                         <div>
-                          <i></i>
-                          <span></span>
+                            <i></i>
+                            <span></span>
                         </div>
                     </div>
                     <li><button type="button" class="btn btn-default">登陆</button>
                         <button type="button" class="btn btn-default">注册</button>
                     </li>
-                 </ul>
-              </form>
-          </div>
-          <div class="VisitRegister" id="Register">
-              <form>
-              <ul class="FormList">
-                 <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
-                 <li><span>昵称：</span><input class="form-control" name="visitmark"></input></li>
-                 <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
-                 <li><span>头像：</span><img src="/public/images/message/visit4.jpg" id="ShowImg"></li>
-                 <li id="ImgChoose">
-                       <span>选择：</span>
-                       <img src="/public/images/message/visit1.jpg">
-                       <img src="/public/images/message/visit2.jpg">
-                       <img src="/public/images/message/visit3.jpg">
-                       <img src="/public/images/message/visit4.jpg">
-                       <img src="/public/images/message/visit5.jpg">
-                       <img src="/public/images/message/visit6.jpg">
-                       <img src="/public/images/message/visit7.jpg">
-                       <img src="/public/images/message/visit8.jpg">
-                 </li>
-                 <li><span>密保：</span><input class="form-control" name="visitsafe"></input></li>
-                 <div class="RegisterBtn">
-                    <div>
-                      <i></i>
-                      <span></span>
+                </ul>
+            </form>
+        </div>
+        <div class="VisitRegister" id="Register">
+            <form>
+                <ul class="FormList">
+                    <li><span>账号：</span><input class="form-control" name="visitname"></input></li>
+                    <li><span>昵称：</span><input class="form-control" name="visitmark"></input></li>
+                    <li><span>密码：</span><input type="password" class="form-control" name="visitpass"></input></li>
+                    <li><span>头像：</span><img src="/public/images/message/visit4.jpg" id="ShowImg"></li>
+                    <li id="ImgChoose">
+                        <span>选择：</span>
+                        <img src="/public/images/message/visit1.jpg">
+                        <img src="/public/images/message/visit2.jpg">
+                        <img src="/public/images/message/visit3.jpg">
+                        <img src="/public/images/message/visit4.jpg">
+                        <img src="/public/images/message/visit5.jpg">
+                        <img src="/public/images/message/visit6.jpg">
+                        <img src="/public/images/message/visit7.jpg">
+                        <img src="/public/images/message/visit8.jpg">
+                    </li>
+                    <li><span>密保：</span><input class="form-control" name="visitsafe"></input></li>
+                    <div class="RegisterBtn">
+                        <div>
+                            <i></i>
+                            <span></span>
+                        </div>
                     </div>
-                 </div>
-                 <li><button type="button" class="btn btn-default">注册</button></li>
-              </ul>
-              </form>
-          </div>
-          {% endif %}
-       </div>
+                    <li><button type="button" class="btn btn-default">注册</button></li>
+                </ul>
+            </form>
+        </div>
+        {% endif %}
     </div>
-    <link rel="stylesheet" type="text/css" href="/public/css/message.css">
-    <script src="/public/js/land.js"></script>
-    <script src="/public/js/message.js"></script>
-    <style type="text/css">
-        .TheNav a:nth-child(2) .MenuAdd::before{opacity:1;left:-7px;} 
-        .TheNav a:nth-child(2) .MenuAdd::after{opacity:1;right:-7px;} 
-    </style>
+</div>
+<link rel="stylesheet" type="text/css" href="/public/css/message.css">
+<script src="/public/js/land.js"></script>
+<script src="/public/js/message.js"></script>
+<style type="text/css">
+    .TheNav a:nth-child(2) .MenuAdd::before {
+        opacity: 1;
+        left: -7px;
+    }
+
+    .TheNav a:nth-child(2) .MenuAdd::after {
+        opacity: 1;
+        right: -7px;
+    }
+</style>
 {% endblock %}

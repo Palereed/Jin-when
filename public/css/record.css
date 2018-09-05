@@ -1,113 +1,268 @@
-.TopSquare{position:relative;width:100%;margin:50px 0;}               
-/* 时间轴 */
-.MainTop{height:100px;
-  width:100%;
-  padding:20px;
-  position:relative;
-  text-align:center;}
-.MainTop > .fa{display:block;position:absolute;font-size:16px;}
-.fa-quote-left{top:20px;left:0;}
-.fa-quote-right{bottom:20px;right:0;}
-.MainTop h3{font-size:18px;font-weight:700;line-height:60px;margin:0;}
-.MainContain{margin-top:30px;}
-.TimeEvent{position:relative;overflow:hidden}
-.Middle{width:40px;
-        height:100%;
-        position:absolute;
-        left:50%;
-        margin-left:-20px;
-        }
-.TimeLine{width:4px;
-          height:100%;
-          background:#313d4b;
-          margin:3px 0 0 18px;
-         }
-.RecordModule{position:absolute;
-              width:415px;} 
-.loading{color:#333;font-weight:700;margin-top:-2px}              
-.RecordModule:nth-child(odd){right:0;}
-.RecordModule:nth-child(even){left:0;} 
-.RecordTime{height:20px;
-	        line-height:20px;
-	        position:relative;
-	        font-weight:300;
-	        color:#666;}
-.RecordTime span{display:inline-block}
-.anchor{background:#fff;
-        width:16px;
-        height:16px;
-        border-radius:10px;
-        position:absolute;
-       }
-.RecordModule:nth-child(odd)>.RecordTime>.anchor
-              {top:2px;
-               left: -28px;}
-.RecordModule:nth-child(even)>.RecordTime>.anchor
-              {top:2px;
-               right: -28px;}                                 
-.anchor::after{
-        content:'';
-        display:block;
-        background:#313d4b;
-        width:10px;
-        height:10px;
-        border-radius:5px;
-        position:absolute;
-        top:3px;
-        left:3px;
-} 
-.line{position:absolute;
-      border-radius:2px;
-      top:8px;
-      width:30px;
-      height:4px;
-      background:#313d4b;}
-.RecordModule:nth-child(odd)>.RecordTime>.line{left:-8px;} 
-.RecordModule:nth-child(even)>.RecordTime>.line{right:-8px;}        
-.RecordModule:nth-child(odd)>.RecordTime>.weather{margin-left:35px;} 
-@media screen and (min-width: 901px){
-.RecordModule:nth-child(even)>.RecordTime>.weather{margin-right:35px;} 
-.RecordModule:nth-child(even)>.RecordBody{padding-right:35px;text-align:right} 
-}   
-.separated{margin:0 10px;color:#ccc}        
-
-.RecordModule:nth-child(odd)>.RecordTime span{float:left;}
-.RecordModule:nth-child(even)>.RecordTime span{float:right;}
-.RecordModule:nth-child(odd)>.RecordBody{padding-left:35px;text-align:left} 
-.RecordBody{letter-spacing:1px}
-.RecordBody h3{font-size:18px;font-weight:700} 
-.RecordBody p{color:#666;}
-.RecordBody img{width:100%;margin:0 0 10px 0;}
-@media screen and (max-width: 900px){
-   .MainContain{padding:0 12%}
-   .RecordModule{width:auto;}
-   .RecordModule:nth-child(odd){left:0;}
-   .RecordModule:nth-child(even){left:0;}
-   .RecordModule:nth-child(even)>.RecordTime span{float:left;}
-   .RecordModule:nth-child(odd)>.RecordBody{padding-left:53px;text-align:left} 
-   .RecordModule:nth-child(even)>.RecordBody{padding-left:53px;text-align:left}
-   .RecordModule:nth-child(odd)>.RecordTime>.line{left:18px;} 
-   .RecordModule:nth-child(even)>.RecordTime>.line{left:18px;}
-   .RecordModule:nth-child(odd)>.RecordTime>.weather{margin-left:53px;} 
-   .RecordModule:nth-child(even)>.RecordTime>.weather{margin-left:53px;} 
-   .RecordModule:nth-child(odd)>.RecordTime>.anchor
-              {top:2px;
-               left: -1px;}
-   .RecordModule:nth-child(even)>.RecordTime>.anchor
-              {top:2px;
-               left:-1px;}
-   .Middle{width:40px;
-           height:100%;
-           position:absolute;
-           left:0;
-           margin-left:-20px;
-        }
-   .TimeLine{width:4px;
-             height:100%;
-             background:#313d4b;
-             margin:3px 0 0 25px;
-            }
+.TopSquare {
+        position: relative;
+        width: 100%;
+        margin: 50px 0;
 }
-@media screen and (max-width: 600px){
-   .MainContain{padding:0}
+
+.MainTop {
+        height: 100px;
+        width: 100%;
+        padding: 20px;
+        position: relative;
+        text-align: center;
+}
+
+.MainTop>.fa {
+        display: block;
+        position: absolute;
+        font-size: 16px;
+}
+
+.fa-quote-left {
+        top: 20px;
+        left: 0;
+}
+
+.fa-quote-right {
+        bottom: 20px;
+        right: 0;
+}
+
+.MainTop h3 {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 60px;
+        margin: 0;
+}
+
+.MainContain {
+        margin-top: 30px;
+}
+
+.TimeEvent {
+        position: relative;
+        overflow: hidden
+}
+
+.Middle {
+        width: 40px;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        margin-left: -20px;
+}
+
+.TimeLine {
+        width: 4px;
+        height: 100%;
+        background: #313d4b;
+        margin: 3px 0 0 18px;
+}
+
+.RecordModule {
+        position: absolute;
+        width: 415px;
+}
+
+.loading {
+        color: #333;
+        font-weight: 700;
+        margin-top: -2px
+}
+
+.RecordModule:nth-child(odd) {
+        right: 0;
+}
+
+.RecordModule:nth-child(even) {
+        left: 0;
+}
+
+.RecordTime {
+        height: 20px;
+        line-height: 20px;
+        position: relative;
+        font-weight: 300;
+        color: #666;
+}
+
+.RecordTime span {
+        display: inline-block
+}
+
+.anchor {
+        background: #fff;
+        width: 16px;
+        height: 16px;
+        border-radius: 10px;
+        position: absolute;
+}
+
+.RecordModule:nth-child(odd)>.RecordTime>.anchor {
+        top: 2px;
+        left: -28px;
+}
+
+.RecordModule:nth-child(even)>.RecordTime>.anchor {
+        top: 2px;
+        right: -28px;
+}
+
+.anchor::after {
+        content: '';
+        display: block;
+        background: #313d4b;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+}
+
+.line {
+        position: absolute;
+        border-radius: 2px;
+        top: 8px;
+        width: 30px;
+        height: 4px;
+        background: #313d4b;
+}
+
+.RecordModule:nth-child(odd)>.RecordTime>.line {
+        left: -8px;
+}
+
+.RecordModule:nth-child(even)>.RecordTime>.line {
+        right: -8px;
+}
+
+.RecordModule:nth-child(odd)>.RecordTime>.weather {
+        margin-left: 35px;
+}
+
+@media screen and (min-width: 901px) {
+        .RecordModule:nth-child(even)>.RecordTime>.weather {
+                margin-right: 35px;
+        }
+
+        .RecordModule:nth-child(even)>.RecordBody {
+                padding-right: 35px;
+                text-align: right
+        }
+}
+
+.separated {
+        margin: 0 10px;
+        color: #ccc
+}
+
+.RecordModule:nth-child(odd)>.RecordTime span {
+        float: left;
+}
+
+.RecordModule:nth-child(even)>.RecordTime span {
+        float: right;
+}
+
+.RecordModule:nth-child(odd)>.RecordBody {
+        padding-left: 35px;
+        text-align: left
+}
+
+.RecordBody {
+        letter-spacing: 1px
+}
+
+.RecordBody h3 {
+        font-size: 18px;
+        font-weight: 700
+}
+
+.RecordBody p {
+        color: #666;
+}
+
+.RecordBody img {
+        width: 100%;
+        margin: 0 0 10px 0;
+}
+
+@media screen and (max-width: 900px) {
+        .MainContain {
+                padding: 0 12%
+        }
+
+        .RecordModule {
+                width: auto;
+        }
+
+        .RecordModule:nth-child(odd) {
+                left: 0;
+        }
+
+        .RecordModule:nth-child(even) {
+                left: 0;
+        }
+
+        .RecordModule:nth-child(even)>.RecordTime span {
+                float: left;
+        }
+
+        .RecordModule:nth-child(odd)>.RecordBody {
+                padding-left: 53px;
+                text-align: left
+        }
+
+        .RecordModule:nth-child(even)>.RecordBody {
+                padding-left: 53px;
+                text-align: left
+        }
+
+        .RecordModule:nth-child(odd)>.RecordTime>.line {
+                left: 18px;
+        }
+
+        .RecordModule:nth-child(even)>.RecordTime>.line {
+                left: 18px;
+        }
+
+        .RecordModule:nth-child(odd)>.RecordTime>.weather {
+                margin-left: 53px;
+        }
+
+        .RecordModule:nth-child(even)>.RecordTime>.weather {
+                margin-left: 53px;
+        }
+
+        .RecordModule:nth-child(odd)>.RecordTime>.anchor {
+                top: 2px;
+                left: -1px;
+        }
+
+        .RecordModule:nth-child(even)>.RecordTime>.anchor {
+                top: 2px;
+                left: -1px;
+        }
+
+        .Middle {
+                width: 40px;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                margin-left: -20px;
+        }
+
+        .TimeLine {
+                width: 4px;
+                height: 100%;
+                background: #313d4b;
+                margin: 3px 0 0 25px;
+        }
+}
+
+@media screen and (max-width: 600px) {
+        .MainContain {
+                padding: 0
+        }
 }
